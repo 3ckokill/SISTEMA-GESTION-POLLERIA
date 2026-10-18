@@ -45,7 +45,7 @@ PolleriaLovely/
 
 ## Estado actual (actualizar cada vez que se modifique el proyecto)
 
-- **Rama de trabajo:** `sprint1-seguridad`.
+- **Rama de trabajo:** `RamaMac`, fusionada en `main` con merge directo (fast-forward) el 18/10/2026. La publicación en `origin` queda pendiente de decisión del usuario. El PR [#1 — Sprint 1](https://github.com/3ckokill/PaginaWeb---GestionPolleria/pull/1) (`sprint1-seguridad`) no se tocó.
 - **Pull Request:** [#1 — Sprint 1: seguridad y autorización por roles](https://github.com/3ckokill/PaginaWeb---GestionPolleria/pull/1). No fusionar hasta completar las pruebas.
 - **Autenticación:** `UsuarioController` verifica la contraseña con `PasswordHasher<Usuario>`, genera claims de nombre y rol y crea una cookie de autenticación. `Program.cs` configura `LoginPath = /Usuario/Login`, `AccessDeniedPath = /Usuario/AccesoDenegado` y el middleware de autenticación/autorización.
 - **Protección por rol:** `ProductosController`, `CategoriasController` y `AdministradorController` requieren `Administrador`; `CajeroController` requiere `Cajero`; `MozoController` requiere `Mozo`.
