@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PolleriaLovely.Models;
@@ -5,6 +6,7 @@ using PolleriaLovely.Data;
 
 namespace PolleriaLovely.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class CategoriasController : Controller
     {
         private readonly BibliotecaDbContext _context;
@@ -14,41 +16,26 @@ namespace PolleriaLovely.Controllers
             _context = context;
         }
 
-        // GET: CATEGORIAS
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categorias.ToListAsync());
+            return View(await _context.Categorias.Include(c => c.Productos).AsNoTracking().OrderBy(c => c.NombreCategoria).ToListAsync());
         }
 
-        // GET: CATEGORIAS/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(m => m.IdCategoria == id);
-            if (categoria == null)
-            {
-                return NotFound();
-            }
-
+            if (id == null) return NotFound();
+            var categoria = await _context.Categorias.FirstOrDefaultAsync(m => m.IdCategoria == id);
+            if (categoria == null) return NotFound();
             return View(categoria);
         }
 
-        // GET: CATEGORIAS/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => View(new Categoria { Estado = true });
 
-        // POST: CATEGORIAS/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCategoria,NombreCategoria,Descripcion,Estado")] Categoria categoria)
+        public async Task<IActionResult> Create([Bind("NombreCategoria,Descripcion,Estado")] Categoria categoria)
         {
+            NormalizarErroresCategoria();
             if (ModelState.IsValid)
             {
                 _context.Add(categoria);
@@ -58,32 +45,20 @@ namespace PolleriaLovely.Controllers
             return View(categoria);
         }
 
-        // GET: CATEGORIAS/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
+            if (id == null) return NotFound();
             var categoria = await _context.Categorias.FindAsync(id);
-            if (categoria == null)
-            {
-                return NotFound();
-            }
+            if (categoria == null) return NotFound();
             return View(categoria);
         }
 
-        // POST: CATEGORIAS/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, [Bind("IdCategoria,NombreCategoria,Descripcion,Estado,Productos")] Categoria categoria)
+        public async Task<IActionResult> Edit(int? id, [Bind("IdCategoria,NombreCategoria,Descripcion,Estado")] Categoria categoria)
         {
-            if (id != categoria.IdCategoria)
-            {
-                return NotFound();
-            }
-
+            if (id != categoria.IdCategoria) return NotFound();
+            NormalizarErroresCategoria();
             if (ModelState.IsValid)
             {
                 try
@@ -93,56 +68,49 @@ namespace PolleriaLovely.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoriaExists(categoria.IdCategoria))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!CategoriaExists(categoria.IdCategoria)) return NotFound();
+                    throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
             return View(categoria);
         }
 
-        // GET: CATEGORIAS/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(m => m.IdCategoria == id);
-            if (categoria == null)
-            {
-                return NotFound();
-            }
-
+            if (id == null) return NotFound();
+            var categoria = await _context.Categorias.Include(c => c.Productos).FirstOrDefaultAsync(m => m.IdCategoria == id);
+            if (categoria == null) return NotFound();
             return View(categoria);
         }
 
-        // POST: CATEGORIAS/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int? id)
         {
-            var categoria = await _context.Categorias.FindAsync(id);
-            if (categoria != null)
+            var categoria = await _context.Categorias.Include(c => c.Productos).FirstOrDefaultAsync(c => c.IdCategoria == id);
+            if (categoria == null) return NotFound();
+            if (categoria.Productos.Count > 0)
             {
-                _context.Categorias.Remove(categoria);
+                TempData["Error"] = $"No se puede eliminar «{categoria.NombreCategoria}» porque tiene {categoria.Productos.Count} producto(s) asociado(s).";
+                return RedirectToAction(nameof(Index));
             }
-
+            _context.Categorias.Remove(categoria);
             await _context.SaveChangesAsync();
+            TempData["Mensaje"] = "La categoría se eliminó correctamente.";
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoriaExists(int? id)
+        private bool CategoriaExists(int? id) =>
+            _context.Categorias.Any(e => e.IdCategoria == id);
+
+        private void NormalizarErroresCategoria()
         {
-            return _context.Categorias.Any(e => e.IdCategoria == id);
+            if (string.IsNullOrWhiteSpace(Request.Form[nameof(Categoria.NombreCategoria)]))
+            {
+                ModelState.Remove(nameof(Categoria.NombreCategoria));
+                ModelState.AddModelError(nameof(Categoria.NombreCategoria), "El nombre de la categoría es obligatorio.");
+            }
         }
     }
 }

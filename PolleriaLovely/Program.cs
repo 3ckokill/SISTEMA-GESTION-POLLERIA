@@ -20,7 +20,7 @@ builder.Services
     .AddCookie(opciones =>
     {
         opciones.LoginPath = "/Usuario/Login";
-        opciones.AccessDeniedPath = "/Usuario/Login";
+        opciones.AccessDeniedPath = "/Usuario/AccesoDenegado";
         opciones.Cookie.HttpOnly = true;
         opciones.Cookie.IsEssential = true;
         opciones.SlidingExpiration = true;
@@ -37,7 +37,7 @@ using (var scope = app.Services.CreateScope())
     await InicializadorDatos.InicializarAsync(context);
 }
 
-// Crear usuario de prueba solo en desarrollo.
+// Crear usuarios de prueba solo en desarrollo.
 if (app.Environment.IsDevelopment())
 {
     using var scope = app.Services.CreateScope();
@@ -48,37 +48,73 @@ if (app.Environment.IsDevelopment())
     var hasher = scope.ServiceProvider
         .GetRequiredService<IPasswordHasher<Usuario>>();
 
-    var existeUsuario = await context.Usuarios
-        .AnyAsync(u => u.NombreUsuario == "admin.prueba");
-
-    if (!existeUsuario)
+    var usuariosPrueba = new[]
     {
-        var rol = await context.Roles
-            .FirstOrDefaultAsync(r =>
-                r.NombreRol == "Administrador");
-
-        if (rol != null)
+        new
         {
-            var usuario = new Usuario
-            {
-                NombreUsuario = "admin.prueba",
-                Nombre = "Administrador",
-                Apellido = "Prueba",
-                Correo = "admin.prueba@lovely.local",
-                Telefono = "999999999",
-                Estado = true,
-                IdRol = rol.IdRol
-            };
-
-            usuario.Contrasena = hasher.HashPassword(
-                usuario,
-                "LovelyDemo2026!"
-            );
-
-            context.Usuarios.Add(usuario);
-            await context.SaveChangesAsync();
+            NombreUsuario = "admin.prueba",
+            Nombre = "Administrador",
+            Apellido = "Prueba",
+            Correo = "admin.prueba@lovely.local",
+            Telefono = "999999999",
+            NombreRol = "Administrador",
+            Contrasena = "LovelyDemo2026!"
+        },
+        new
+        {
+            NombreUsuario = "cajero.prueba",
+            Nombre = "Cajero",
+            Apellido = "Prueba",
+            Correo = "cajero.prueba@lovely.local",
+            Telefono = "999999998",
+            NombreRol = "Cajero",
+            Contrasena = "LovelyCaja2026!"
+        },
+        new
+        {
+            NombreUsuario = "mozo.prueba",
+            Nombre = "Mozo",
+            Apellido = "Prueba",
+            Correo = "mozo.prueba@lovely.local",
+            Telefono = "999999997",
+            NombreRol = "Mozo",
+            Contrasena = "LovelyMozo2026!"
         }
+    };
+
+    foreach (var datos in usuariosPrueba)
+    {
+        var existeUsuario = await context.Usuarios
+            .AnyAsync(u => u.NombreUsuario == datos.NombreUsuario);
+
+        if (existeUsuario)
+            continue;
+
+        var rol = await context.Roles
+            .FirstOrDefaultAsync(r => r.NombreRol == datos.NombreRol);
+
+        if (rol == null)
+            continue;
+
+        var usuario = new Usuario
+        {
+            NombreUsuario = datos.NombreUsuario,
+            Nombre = datos.Nombre,
+            Apellido = datos.Apellido,
+            Correo = datos.Correo,
+            Telefono = datos.Telefono,
+            Estado = true,
+            IdRol = rol.IdRol
+        };
+
+        usuario.Contrasena = hasher.HashPassword(
+            usuario,
+            datos.Contrasena);
+
+        context.Usuarios.Add(usuario);
     }
+
+    await context.SaveChangesAsync();
 }
 
 if (!app.Environment.IsDevelopment())

@@ -1,64 +1,42 @@
 @model PolleriaLovely.Models.Producto
-
-@{
-    ViewData["Title"] = "Crear producto";
-}
-
-<h1>Crear producto</h1>
-
-<h4>Producto</h4>
-<hr />
-
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" method="post">
-            @Html.AntiForgeryToken()
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-group">
-                <label asp-for="NombreProducto" class="control-label"></label>
-                <input asp-for="NombreProducto" class="form-control" />
-                <span asp-validation-for="NombreProducto" class="text-danger"></span>
+@{ ViewData["Title"] = "Nuevo producto"; }
+<div class="form-card">
+    <h1>Nuevo producto</h1>
+    <p class="text-muted">Registra la información del producto y su categoría.</p>
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <input asp-for="IdProducto" type="hidden" />
+        <div class="mb-3">
+            <label asp-for="NombreProducto" class="form-label">Nombre del producto</label>
+            <input asp-for="NombreProducto" class="form-control" placeholder="Ej. Pollo a la brasa personal" />
+            <span asp-validation-for="NombreProducto" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Descripcion" class="form-label">Descripción</label>
+            <textarea asp-for="Descripcion" class="form-control" rows="4" placeholder="Describe el producto"></textarea>
+            <span asp-validation-for="Descripcion" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Precio" class="form-label">Precio</label>
+            <div class="input-group">
+                <span class="input-group-text">S/</span>
+                <input asp-for="Precio" class="form-control" type="text" inputmode="decimal" data-val-number="Ingrese un precio válido mayor que cero." placeholder="0.00" />
             </div>
-
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Precio" class="control-label"></label>
-                <input asp-for="Precio" class="form-control" />
-                <span asp-validation-for="Precio" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-check-input" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="IdCategoria" class="control-label">Categoría</label>
-                <select asp-for="IdCategoria"
-                        asp-items="ViewBag.IdCategoria"
-                        class="form-control">
-                    <option value="">-- Selecciona una categoría --</option>
-                </select>
-                <span asp-validation-for="IdCategoria" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mt-3">
-                <input type="submit" value="Crear" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
-            </div>
-        </form>
-    </div>
+            <span asp-validation-for="Precio" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="IdCategoria" class="form-label">Categoría</label>
+            <select asp-for="IdCategoria" asp-items="ViewBag.IdCategoria" class="form-select" data-val-required="Debe seleccionar una categoría." data-val-range="Debe seleccionar una categoría válida.">
+                <option value="">Selecciona una categoría</option>
+            </select>
+            <span asp-validation-for="IdCategoria" class="text-danger"></span>
+        </div>
+        <div class="form-check form-switch mb-4">
+            <input asp-for="Estado" class="form-check-input" />
+            <label asp-for="Estado" class="form-check-label">Producto activo</label>
+        </div>
+        <a asp-action="Index" class="btn btn-light">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar producto</button>
+    </form>
 </div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

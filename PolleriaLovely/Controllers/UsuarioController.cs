@@ -98,6 +98,13 @@ namespace PolleriaLovely.Controllers
             return RedirectToAction("Index", controlador);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult AccesoDenegado()
+        {
+            return View("AccesoDenegado");
+        }
+
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]

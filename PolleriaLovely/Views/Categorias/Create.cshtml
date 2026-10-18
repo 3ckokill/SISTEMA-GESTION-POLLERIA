@@ -1,37 +1,28 @@
 @model PolleriaLovely.Models.Categoria
-
-@{
-    ViewData["Title"] = "Create";
-}
-
-<h1>Create</h1>
-
-<h4>Categoria</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-group">
-                <label asp-for="NombreCategoria" class="control-label"></label>
-                <input asp-for="NombreCategoria" class="form-control" />
-                <span asp-validation-for="NombreCategoria" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+@{ ViewData["Title"] = "Nueva categoría"; }
+<div class="form-card">
+    <h1>Nueva categoría</h1>
+    <p class="text-muted">Completa los datos y define si la categoría estará disponible.</p>
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <input asp-for="IdCategoria" type="hidden" />
+        <div class="mb-3">
+            <label asp-for="NombreCategoria" class="form-label">Nombre de la categoría</label>
+            <input asp-for="NombreCategoria" class="form-control" placeholder="Ej. Pollos a la brasa" />
+            <span asp-validation-for="NombreCategoria" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Descripcion" class="form-label">Descripción</label>
+            <textarea asp-for="Descripcion" class="form-control" rows="4" placeholder="Describe brevemente esta categoría"></textarea>
+            <span asp-validation-for="Descripcion" class="text-danger"></span>
+        </div>
+        <div class="form-check form-switch mb-4">
+            <input asp-for="Estado" class="form-check-input" />
+            <label asp-for="Estado" class="form-check-label">Categoría activa</label>
+            <div class="form-text">Las categorías inactivas se conservan, pero se identifican como no disponibles.</div>
+        </div>
+        <a asp-action="Index" class="btn btn-light">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar categoría</button>
+    </form>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }
