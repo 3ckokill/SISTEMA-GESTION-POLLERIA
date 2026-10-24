@@ -37,6 +37,7 @@ namespace PolleriaLovely.Controllers
         public async Task<IActionResult> Create()
         {
             ViewBag.IdProveedor = new SelectList(await _context.Proveedores.AsNoTracking().OrderBy(p => p.NombreProveedor).ToListAsync(), "IdProveedor", "NombreProveedor");
+            ViewBag.UnidadMedida = CrearSelectUnidades(null);
             return View(new Insumo { Estado = true });
         }
 
@@ -59,6 +60,7 @@ namespace PolleriaLovely.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.IdProveedor = new SelectList(await _context.Proveedores.AsNoTracking().OrderBy(p => p.NombreProveedor).ToListAsync(), "IdProveedor", "NombreProveedor", insumo.IdProveedor);
+            ViewBag.UnidadMedida = CrearSelectUnidades(insumo.UnidadMedida);
             return View(insumo);
         }
 
@@ -68,6 +70,7 @@ namespace PolleriaLovely.Controllers
             var insumo = await _context.Insumos.FindAsync(id);
             if (insumo == null) return NotFound();
             ViewBag.IdProveedor = new SelectList(await _context.Proveedores.AsNoTracking().OrderBy(p => p.NombreProveedor).ToListAsync(), "IdProveedor", "NombreProveedor", insumo.IdProveedor);
+            ViewBag.UnidadMedida = CrearSelectUnidades(insumo.UnidadMedida);
             return View(insumo);
         }
 
@@ -99,6 +102,7 @@ namespace PolleriaLovely.Controllers
                 }
             }
             ViewBag.IdProveedor = new SelectList(await _context.Proveedores.AsNoTracking().OrderBy(p => p.NombreProveedor).ToListAsync(), "IdProveedor", "NombreProveedor", insumo.IdProveedor);
+            ViewBag.UnidadMedida = CrearSelectUnidades(insumo.UnidadMedida);
             return View(insumo);
         }
 
@@ -129,6 +133,16 @@ namespace PolleriaLovely.Controllers
 
         private bool InsumoExists(int id) =>
             _context.Insumos.Any(e => e.IdInsumo == id);
+
+        private static readonly string[] Unidades = { "Kilogramo", "Gramo", "Litro", "Mililitro", "Unidad", "Docena", "Caja", "Quintal", "Bulto" };
+
+        private static SelectList CrearSelectUnidades(string? seleccionado)
+        {
+            var unidades = Unidades.ToList();
+            if (!string.IsNullOrWhiteSpace(seleccionado) && !unidades.Contains(seleccionado))
+                unidades.Insert(0, seleccionado);
+            return new SelectList(unidades, seleccionado);
+        }
 
         private void NormalizarErrorStock(Insumo insumo)
         {

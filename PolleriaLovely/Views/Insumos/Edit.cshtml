@@ -13,7 +13,9 @@
         </div>
         <div class="mb-3">
             <label asp-for="UnidadMedida" class="form-label">Unidad de medida</label>
-            <input asp-for="UnidadMedida" class="form-control" placeholder="Ej. kg, litro, unidad" />
+            <select asp-for="UnidadMedida" asp-items="ViewBag.UnidadMedida" class="form-select" data-val-required="La unidad de medida es obligatoria.">
+                <option value="">Selecciona una unidad</option>
+            </select>
             <span asp-validation-for="UnidadMedida" class="text-danger"></span>
         </div>
         <div class="mb-3">
