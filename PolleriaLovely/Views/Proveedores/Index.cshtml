@@ -1,59 +1,8 @@
 @model IEnumerable<PolleriaLovely.Proveedor>
-
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreProveedor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RucProveedor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Direccion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(model => item.NombreProveedor)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.RucProveedor)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Telefono)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Direccion)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Estado)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdProveedor">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdProveedor">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdProveedor">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+@{ ViewData["Title"] = "Proveedores"; }
+<div class="page-heading d-flex justify-content-between align-items-center mb-4"><div><h1>Proveedores</h1><p class="text-muted mb-0">Administra los proveedores del negocio.</p></div><a asp-action="Create" class="btn btn-primary">Nuevo proveedor</a></div>
+@if (TempData["Mensaje"] is string mensaje) { <div class="alert alert-success">@mensaje</div> }
+@if (TempData["Error"] is string error) { <div class="alert alert-warning">@error</div> }
+<div class="table-card"><div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th>Proveedor</th><th>RUC</th><th>Teléfono</th><th>Dirección</th><th>Estado</th><th class="text-end">Acciones</th></tr></thead><tbody>
+@foreach (var item in Model) { <tr><td class="fw-semibold">@item.NombreProveedor</td><td>@item.RucProveedor</td><td>@item.Telefono</td><td>@item.Direccion</td><td><span class="status-badge @(item.Estado ? "status-active" : "status-inactive")">@(item.Estado ? "Activo" : "Inactivo")</span></td><td class="text-end"><a asp-action="Edit" asp-route-id="@item.IdProveedor" class="btn btn-sm btn-outline-primary">Editar</a> <a asp-action="Details" asp-route-id="@item.IdProveedor" class="btn btn-sm btn-outline-secondary">Ver</a> <a asp-action="Delete" asp-route-id="@item.IdProveedor" class="btn btn-sm btn-outline-danger">Eliminar</a></td></tr> }
+@if (!Model.Any()) { <tr><td colspan="6" class="text-center py-5 text-muted">Aún no hay proveedores registrados.</td></tr> }</tbody></table></div></div>

@@ -1,58 +1,44 @@
 @model PolleriaLovely.Models.Insumo
-
-@{
-    ViewData["Title"] = "Edit";
-}
-
-<h1>Edit</h1>
-
-<h4>Insumo</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdInsumo" />
-            <div class="form-group">
-                <label asp-for="NombreInsumo" class="control-label"></label>
-                <input asp-for="NombreInsumo" class="form-control" />
-                <span asp-validation-for="NombreInsumo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UnidadMedida" class="control-label"></label>
-                <input asp-for="UnidadMedida" class="form-control" />
-                <span asp-validation-for="UnidadMedida" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Stock" class="control-label"></label>
-                <input asp-for="Stock" class="form-control" />
-                <span asp-validation-for="Stock" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StockMinimo" class="control-label"></label>
-                <input asp-for="StockMinimo" class="form-control" />
-                <span asp-validation-for="StockMinimo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdProveedor" class="control-label"></label>
-                <select asp-for="IdProveedor" class="form-control" asp-items="ViewBag.IdProveedor"></select>
-                <span asp-validation-for="IdProveedor" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <input class="form-check-input" asp-for="Estado" />
-                <label class="form-check-label" asp-for="Estado"></label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+@{ ViewData["Title"] = "Editar insumo"; }
+<div class="form-card">
+    <h1>Editar insumo</h1>
+    <p class="text-muted">Actualiza la información del insumo y su proveedor.</p>
+    <form asp-action="Edit" asp-route-id="@Model.IdInsumo" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <input asp-for="IdInsumo" type="hidden" />
+        <div class="mb-3">
+            <label asp-for="NombreInsumo" class="form-label">Nombre del insumo</label>
+            <input asp-for="NombreInsumo" class="form-control" placeholder="Ej. Pollo entero congelado" />
+            <span asp-validation-for="NombreInsumo" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="UnidadMedida" class="form-label">Unidad de medida</label>
+            <input asp-for="UnidadMedida" class="form-control" placeholder="Ej. kg, litro, unidad" />
+            <span asp-validation-for="UnidadMedida" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Stock" class="form-label">Stock</label>
+            <input asp-for="Stock" class="form-control" type="text" inputmode="decimal" data-val-number="Ingrese un stock válido." placeholder="0.00" />
+            <span asp-validation-for="Stock" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="StockMinimo" class="form-label">Stock mínimo</label>
+            <input asp-for="StockMinimo" class="form-control" type="text" inputmode="decimal" data-val-number="Ingrese un stock mínimo válido." placeholder="0.00" />
+            <span asp-validation-for="StockMinimo" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="IdProveedor" class="form-label">Proveedor</label>
+            <select asp-for="IdProveedor" asp-items="ViewBag.IdProveedor" class="form-select" data-val-required="Debe seleccionar un proveedor." data-val-range="Debe seleccionar un proveedor válido.">
+                <option value="">Selecciona un proveedor</option>
+            </select>
+            <span asp-validation-for="IdProveedor" class="text-danger"></span>
+        </div>
+        <div class="form-check form-switch mb-4">
+            <input asp-for="Estado" class="form-check-input" />
+            <label asp-for="Estado" class="form-check-label">Insumo activo</label>
+        </div>
+        <a asp-action="Index" class="btn btn-light">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </form>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

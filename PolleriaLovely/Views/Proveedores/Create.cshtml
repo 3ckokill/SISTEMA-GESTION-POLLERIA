@@ -1,52 +1,36 @@
 @model PolleriaLovely.Proveedor
-
-@{
-    ViewData["Title"] = "Create";
-}
-
-<h1>Create</h1>
-
-<h4>Proveedor</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NombreProveedor" class="control-label"></label>
-                <input asp-for="NombreProveedor" class="form-control" />
-                <span asp-validation-for="NombreProveedor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RucProveedor" class="control-label"></label>
-                <input asp-for="RucProveedor" class="form-control" />
-                <span asp-validation-for="RucProveedor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <input asp-for="Direccion" class="form-control" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <input class="form-check-input" asp-for="Estado" />
-                <label class="form-check-label" asp-for="Estado"></label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+@{ ViewData["Title"] = "Nuevo proveedor"; }
+<div class="form-card">
+    <h1>Nuevo proveedor</h1>
+    <p class="text-muted">Registra los datos del proveedor.</p>
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <div class="mb-3">
+            <label asp-for="NombreProveedor" class="form-label">Nombre del proveedor</label>
+            <input asp-for="NombreProveedor" class="form-control" placeholder="Ej. Avícola San Juan" />
+            <span asp-validation-for="NombreProveedor" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="RucProveedor" class="form-label">RUC</label>
+            <input asp-for="RucProveedor" class="form-control" maxlength="11" inputmode="numeric" placeholder="20512345678" />
+            <span asp-validation-for="RucProveedor" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Telefono" class="form-label">Teléfono</label>
+            <input asp-for="Telefono" class="form-control" maxlength="9" inputmode="numeric" placeholder="Ej. 987654321" />
+            <span asp-validation-for="Telefono" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Direccion" class="form-label">Dirección</label>
+            <textarea asp-for="Direccion" class="form-control" rows="3" placeholder="Ej. Jr. Los Olivos 123, Santiago de Surco"></textarea>
+            <span asp-validation-for="Direccion" class="text-danger"></span>
+        </div>
+        <div class="form-check form-switch mb-4">
+            <input asp-for="Estado" class="form-check-input" />
+            <label asp-for="Estado" class="form-check-label">Proveedor activo</label>
+        </div>
+        <a asp-action="Index" class="btn btn-light">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar proveedor</button>
+    </form>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }
