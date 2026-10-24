@@ -22,7 +22,7 @@ namespace PolleriaLovely.Data
             base.OnModelCreating(modelBuilder);
             // Configuración de la relación entre Proveedor e Insumo
             modelBuilder.Entity<Insumo>()
-                .HasOne<Proveedor>()
+                .HasOne(i => i.Proveedor)
                 .WithMany(p => p.Insumos)
                 .HasForeignKey(i => i.IdProveedor)
                 .OnDelete(DeleteBehavior.Cascade);
