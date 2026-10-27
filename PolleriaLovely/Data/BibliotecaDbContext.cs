@@ -31,7 +31,7 @@ namespace PolleriaLovely.Data
                 .HasOne(p => p.Categoria)
                 .WithMany(c => c.Productos)
                 .HasForeignKey(p => p.IdCategoria)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
             // Configuración de la relación entre Rol y Usuario
             modelBuilder.Entity<Usuario>()
                 .HasOne(u => u.Rol)

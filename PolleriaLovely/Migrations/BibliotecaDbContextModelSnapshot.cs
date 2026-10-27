@@ -231,11 +231,13 @@ namespace PolleriaLovely.Migrations
 
             modelBuilder.Entity("PolleriaLovely.Models.Insumo", b =>
                 {
-                    b.HasOne("PolleriaLovely.Proveedor", null)
+                    b.HasOne("PolleriaLovely.Proveedor", "Proveedor")
                         .WithMany("Insumos")
                         .HasForeignKey("IdProveedor")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Proveedor");
                 });
 
             modelBuilder.Entity("PolleriaLovely.Models.Producto", b =>
@@ -243,7 +245,7 @@ namespace PolleriaLovely.Migrations
                     b.HasOne("PolleriaLovely.Models.Categoria", "Categoria")
                         .WithMany("Productos")
                         .HasForeignKey("IdCategoria")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Categoria");
