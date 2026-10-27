@@ -2,7 +2,15 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center py-5">
+    <h1 class="display-4">Pollería Lovely</h1>
+    <p class="lead">Bienvenido al sistema de gestión de Pollería Lovely.</p>
+    @if (User.Identity?.IsAuthenticated != true)
+    {
+        <a class="btn btn-primary btn-lg" asp-area="" asp-controller="Usuario" asp-action="Login">Iniciar sesión</a>
+    }
+    else
+    {
+        <p>Sesión iniciada como <strong>@User.Identity.Name</strong>.</p>
+    }
 </div>
