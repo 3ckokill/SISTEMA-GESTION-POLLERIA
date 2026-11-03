@@ -24,6 +24,10 @@ namespace PolleriaLovely.Models
         public int IdCategoria { get; set; }
         [ValidateNever]
         public Categoria Categoria { get; set; }
+
+        public ICollection<DetalleVenta> DetalleVentas { get; set; } = new List<DetalleVenta>();
+
+        public ICollection<DetallePedido> DetallePedidos { get; set; } = new List<DetallePedido>();
     }
 }
 

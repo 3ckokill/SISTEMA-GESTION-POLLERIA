@@ -43,6 +43,21 @@ namespace PolleriaLovely.Data
             }
 
             await context.SaveChangesAsync();
+
+            // Sembrar 10 mesas si la tabla está vacía
+            if (!await context.Mesas.AnyAsync())
+            {
+                for (int numero = 1; numero <= 10; numero++)
+                {
+                    context.Mesas.Add(new Mesa
+                    {
+                        Numero = numero,
+                        Estado = true
+                    });
+                }
+
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

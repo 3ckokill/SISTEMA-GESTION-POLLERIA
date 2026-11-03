@@ -1,0 +1,6 @@
+@model IEnumerable<PolleriaLovely.Models.Venta>
+@{ ViewData["Title"] = "Historial de ventas"; }
+<div class="page-heading d-flex justify-content-between align-items-center mb-4"><div><h1>Historial de ventas</h1><p class="text-muted mb-0">Ventas registradas en el sistema.</p></div></div>
+<div class="table-card"><div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th># Venta</th><th>Fecha</th><th>Registrada por</th><th>Productos</th><th>Total</th><th class="text-end">Acciones</th></tr></thead><tbody>
+@foreach (var item in Model) { <tr><td class="fw-semibold">@item.IdVenta</td><td>@item.Fecha.ToString("dd/MM/yyyy HH:mm")</td><td>@(item.Usuario?.NombreUsuario ?? "—")</td><td>@item.DetalleVentas.Count</td><td>S/ @item.Total.ToString("N2")</td><td class="text-end"><a asp-action="Details" asp-route-id="@item.IdVenta" class="btn btn-sm btn-outline-secondary">Ver detalle</a></td></tr> }
+@if (!Model.Any()) { <tr><td colspan="6" class="text-center py-5 text-muted">Aún no hay ventas registradas.</td></tr> }</tbody></table></div></div>

@@ -31,5 +31,9 @@ namespace PolleriaLovely.Models
 
         public int IdRol { get; set; }
         public Rol Rol { get; set; }
+
+        public ICollection<Venta> Ventas { get; set; } = new List<Venta>();
+
+        public ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();
     }
 }

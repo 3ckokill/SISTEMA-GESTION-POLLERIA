@@ -111,9 +111,20 @@ namespace PolleriaLovely.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int? id)
         {
-            var producto = await _context.Productos.FindAsync(id);
-            if (producto != null) _context.Productos.Remove(producto);
+            var producto = await _context.Productos
+                .Include(p => p.DetalleVentas)
+                .FirstOrDefaultAsync(m => m.IdProducto == id);
+            if (producto == null) return RedirectToAction(nameof(Index));
+
+            if (producto.DetalleVentas.Count > 0)
+            {
+                TempData["Error"] = $"No se puede eliminar «{producto.NombreProducto}» porque tiene {producto.DetalleVentas.Count} venta(s) asociada(s).";
+                return RedirectToAction(nameof(Index));
+            }
+
+            _context.Productos.Remove(producto);
             await _context.SaveChangesAsync();
+            TempData["Mensaje"] = $"Se eliminó «{producto.NombreProducto}» correctamente.";
             return RedirectToAction(nameof(Index));
         }
 

@@ -16,6 +16,11 @@ namespace PolleriaLovely.Data
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Rol> Roles { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Venta> Ventas { get; set; }
+        public DbSet<DetalleVenta> DetalleVentas { get; set; }
+        public DbSet<Mesa> Mesas { get; set; }
+        public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<DetallePedido> DetallePedidos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,6 +43,68 @@ namespace PolleriaLovely.Data
                 .WithMany(r => r.Usuarios)
                 .HasForeignKey(u => u.IdRol)
                 .OnDelete(DeleteBehavior.Cascade);
+            // Configuración de la relación entre Venta y Usuario
+            modelBuilder.Entity<Venta>()
+                .HasOne(v => v.Usuario)
+                .WithMany(u => u.Ventas)
+                .HasForeignKey(v => v.IdUsuario)
+                .OnDelete(DeleteBehavior.Restrict);
+            // Configuración de la relación entre DetalleVenta y Venta
+            modelBuilder.Entity<DetalleVenta>()
+                .HasOne(d => d.Venta)
+                .WithMany(v => v.DetalleVentas)
+                .HasForeignKey(d => d.IdVenta)
+                .OnDelete(DeleteBehavior.Cascade);
+            // Configuración de la relación entre DetalleVenta y Producto
+            modelBuilder.Entity<DetalleVenta>()
+                .HasOne(d => d.Producto)
+                .WithMany(p => p.DetalleVentas)
+                .HasForeignKey(d => d.IdProducto)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Venta>()
+                .Property(v => v.Total)
+                .HasColumnType("decimal(10, 2)");
+            modelBuilder.Entity<Venta>()
+                .Property(v => v.Fecha)
+                .HasDefaultValueSql("GETDATE()");
+            modelBuilder.Entity<DetalleVenta>()
+                .Property(d => d.PrecioUnitario)
+                .HasColumnType("decimal(10, 2)");
+            modelBuilder.Entity<DetalleVenta>()
+                .Property(d => d.Subtotal)
+                .HasColumnType("decimal(10, 2)");
+            // Configuración de la relación entre Pedido y Mesa
+            modelBuilder.Entity<Pedido>()
+                .HasOne(p => p.Mesa)
+                .WithMany(m => m.Pedidos)
+                .HasForeignKey(p => p.IdMesa)
+                .OnDelete(DeleteBehavior.Restrict);
+            // Configuración de la relación entre Pedido y Usuario
+            modelBuilder.Entity<Pedido>()
+                .HasOne(p => p.Usuario)
+                .WithMany(u => u.Pedidos)
+                .HasForeignKey(p => p.IdUsuario)
+                .OnDelete(DeleteBehavior.Restrict);
+            // Configuración de la relación entre DetallePedido y Pedido
+            modelBuilder.Entity<DetallePedido>()
+                .HasOne(d => d.Pedido)
+                .WithMany(p => p.DetallePedidos)
+                .HasForeignKey(d => d.IdPedido)
+                .OnDelete(DeleteBehavior.Cascade);
+            // Configuración de la relación entre DetallePedido y Producto
+            modelBuilder.Entity<DetallePedido>()
+                .HasOne(d => d.Producto)
+                .WithMany(p => p.DetallePedidos)
+                .HasForeignKey(d => d.IdProducto)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Pedido>()
+                .Property(p => p.Fecha)
+                .HasDefaultValueSql("GETDATE()");
+            modelBuilder.Entity<Pedido>()
+                .Property(p => p.Estado)
+                .HasDefaultValue(EstadoPedido.Pendiente);
 
             modelBuilder.Entity<Insumo>()
                 .Property(i => i.Stock)

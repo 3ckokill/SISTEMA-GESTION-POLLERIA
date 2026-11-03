@@ -1,0 +1,86 @@
+@model PolleriaLovely.Models.Pedido
+@{ ViewData["Title"] = "Agregar productos al pedido"; }
+<div class="form-card">
+    <h1>Agregar productos al Pedido #@Model.IdPedido</h1>
+    <p class="text-muted">Mesa @(Model.Mesa?.Numero.ToString() ?? Model.IdMesa.ToString()) — estado actual: <strong>@(Model.Estado == PolleriaLovely.Models.EstadoPedido.EnPreparacion ? "En preparación" : Model.Estado.ToString())</strong>. Lo nuevo se sumará a la comanda.</p>
+    @if (TempData["Mensaje"] is string mensaje) { <div class="alert alert-success">@mensaje</div> }
+    <div class="mb-4">
+        <h5 class="mb-2">Productos en el pedido</h5>
+        <ul class="list-group">
+            @foreach (var linea in Model.DetallePedidos)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    @(linea.Producto?.NombreProducto ?? $"Producto #{linea.IdProducto}")
+                    <span class="badge bg-secondary">@linea.Cantidad</span>
+                </li>
+            }
+        </ul>
+    </div>
+    <form asp-action="Agregar" method="post">
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+        <input type="hidden" name="idPedido" value="@Model.IdPedido" />
+        @{ var productos = ViewBag.Productos as IEnumerable<PolleriaLovely.Models.Producto>; }
+        <div class="table-responsive mb-2">
+            <table class="table align-middle mb-0">
+                <thead><tr><th style="width:75%">Producto nuevo</th><th style="width:15%">Cantidad</th><th style="width:10%"></th></tr></thead>
+                <tbody id="lineas">
+                <tr class="linea">
+                    <td>
+                        <select name="Detalles[0].IdProducto" class="form-select select-producto">
+                            <option value="0">Seleccione un producto</option>
+                            @if (productos != null)
+                            {
+                                foreach (var p in productos)
+                                {
+                                    <option value="@p.IdProducto">@p.NombreProducto</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                    <td><input name="Detalles[0].Cantidad" class="form-control cant" type="number" min="1" max="999" value="1" /></td>
+                    <td class="text-end"><button type="button" class="btn btn-outline-danger btn-sm quitar" title="Quitar línea">✕</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="button" id="agregar" class="btn btn-outline-primary btn-sm mb-3">+ Agregar producto</button>
+        <div class="mt-2 mb-3"><a asp-action="Index" class="btn btn-light">Volver a pedidos</a></div>
+        <button type="submit" class="btn btn-primary">Sumar al pedido</button>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function () {
+            function renumerar() {
+                $('#lineas tr.linea').each(function (i) {
+                    $(this).find('.select-producto').attr('name', 'Detalles[' + i + '].IdProducto');
+                    $(this).find('.cant').attr('name', 'Detalles[' + i + '].Cantidad');
+                });
+            }
+            $(document).on('click', '.quitar', function () {
+                if ($('#lineas tr.linea').length <= 1) return;
+                $(this).closest('tr').remove();
+                renumerar();
+            });
+            $('#agregar').on('click', function () {
+                var fila = $('#lineas tr.linea').first().clone();
+                fila.find('.select-producto').val('0');
+                fila.find('.cant').val(1);
+                $('#lineas').append(fila);
+                renumerar();
+            });
+            $('form').on('submit', function () {
+                var pendiente = false;
+                $('#lineas tr.linea .select-producto').each(function () {
+                    if (!$(this).val() || $(this).val() === '0') pendiente = true;
+                });
+                if (pendiente) {
+                    alert('Debe seleccionar un producto en todas las líneas.');
+                    return false;
+                }
+                return true;
+            });
+        })();
+    </script>
+}

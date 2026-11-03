@@ -1,0 +1,63 @@
+@model IEnumerable<PolleriaLovely.Models.Pedido>
+@{ ViewData["Title"] = "Pedidos";
+   var esAdmin = User.IsInRole("Administrador");
+   var esMozo = User.IsInRole("Mozo");
+   var puedeOperar = esAdmin || esMozo; }
+<div class="page-heading d-flex justify-content-between align-items-center mb-4"><div><h1>Pedidos</h1><p class="text-muted mb-0">Comandas registradas y su estado de preparación.</p></div>@if (esMozo) { <a asp-action="Create" class="btn btn-primary">Nuevo pedido</a> }</div>
+@if (TempData["Mensaje"] is string mensaje) { <div class="alert alert-success">@mensaje</div> }
+@if (TempData["Error"] is string error) { <div class="alert alert-warning">@error</div> }
+@functions {
+    string NombreEstado(PolleriaLovely.Models.EstadoPedido estado) => estado switch
+    {
+        PolleriaLovely.Models.EstadoPedido.EnPreparacion => "En preparación",
+        _ => estado.ToString()
+    };
+    bool EstaAbierto(PolleriaLovely.Models.EstadoPedido estado) =>
+        estado is PolleriaLovely.Models.EstadoPedido.Pendiente
+            or PolleriaLovely.Models.EstadoPedido.EnPreparacion
+            or PolleriaLovely.Models.EstadoPedido.Listo;
+}
+<div class="table-card"><div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th># Pedido</th><th>Mesa</th><th>Fecha</th><th>Mozo</th><th>Productos</th><th style="width:24%">Estado</th><th style="width:12%">Acciones</th></tr></thead><tbody>
+@foreach (var item in Model)
+{
+    var resumen = string.Join(", ", item.DetallePedidos.Select(d => $"{d.Cantidad}× {(d.Producto?.NombreProducto ?? $"Producto #{d.IdProducto}")}"));
+    var abierto = EstaAbierto(item.Estado);
+    <tr class="@(esAdmin && item.Estado == PolleriaLovely.Models.EstadoPedido.Cancelado ? "opacity-50" : "")">
+        <td class="fw-semibold">@item.IdPedido</td>
+        <td>Mesa @(item.Mesa?.Numero.ToString() ?? item.IdMesa.ToString())</td>
+        <td>@item.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+        <td>@(item.Usuario?.NombreUsuario ?? "—")</td>
+        <td>@resumen</td>
+        <td>
+            @if (puedeOperar && abierto)
+            {
+                <form asp-action="ActualizarEstado" method="post" class="d-flex gap-1" onsubmit="if (this.estado.value === '4' && !confirm('¿Cancelar este pedido? No se puede deshacer.')) return false;">
+                    <input type="hidden" name="idPedido" value="@item.IdPedido" />
+                    <select name="estado" class="form-select form-select-sm">
+                        @foreach (PolleriaLovely.Models.EstadoPedido estado in Enum.GetValues(typeof(PolleriaLovely.Models.EstadoPedido)))
+                        {
+                            if (!esAdmin && estado == PolleriaLovely.Models.EstadoPedido.Cancelado) { continue; }
+                            <option value="@((int)estado)" selected="@(item.Estado == estado ? "selected" : null)">@NombreEstado(estado)</option>
+                        }
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-outline-primary">Actualizar</button>
+                </form>
+            }
+            else
+            {
+                <span class="fw-semibold">@(item.Estado == PolleriaLovely.Models.EstadoPedido.EnPreparacion ? "En preparación" : item.Estado.ToString())</span>
+            }
+        </td>
+        <td>
+            @if (puedeOperar && abierto)
+            {
+                <a asp-action="Agregar" asp-route-id="@item.IdPedido" class="btn btn-sm btn-outline-success">+ Agregar</a>
+            }
+            else if (!puedeOperar)
+            {
+                <span class="text-muted">—</span>
+            }
+        </td>
+    </tr>
+}
+@if (!Model.Any()) { <tr><td colspan="7" class="text-center py-5 text-muted">Aún no hay pedidos registrados.</td></tr> }</tbody></table></div></div>

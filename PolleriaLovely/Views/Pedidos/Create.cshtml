@@ -1,0 +1,103 @@
+@model PolleriaLovely.ViewModels.PedidoRegistroViewModel
+@{ ViewData["Title"] = "Nuevo pedido"; }
+<div class="form-card">
+    <h1>Nuevo pedido</h1>
+    <p class="text-muted">Registra la mesa y los productos de la comanda. El pedido nace en estado «Pendiente».</p>
+    @if (TempData["Mensaje"] is string mensaje) { <div class="alert alert-success">@mensaje</div> }
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+        @{ var mesas = ViewBag.Mesas as IEnumerable<PolleriaLovely.Models.Mesa>;
+           var productos = ViewBag.Productos as IEnumerable<PolleriaLovely.Models.Producto>; }
+        <div class="mb-3" style="max-width: 260px;">
+            <label class="form-label">Mesa</label>
+            <select name="IdMesa" class="form-select">
+                <option value="0">Seleccione una mesa</option>
+                @if (mesas != null)
+                {
+                    foreach (var m in mesas)
+                    {
+                        <option value="@m.IdMesa" selected="@(Model.IdMesa == m.IdMesa ? "selected" : null)">Mesa @m.Numero</option>
+                    }
+                }
+            </select>
+            @if (mesas != null && !mesas.Any())
+            {
+                <div class="form-text text-warning">No hay mesas disponibles (todas tienen un pedido en curso).</div>
+            }
+        </div>
+        <div class="table-responsive mb-2">
+            <table class="table align-middle mb-0">
+                <thead><tr><th style="width:75%">Producto</th><th style="width:15%">Cantidad</th><th style="width:10%"></th></tr></thead>
+                <tbody id="lineas">
+                @for (var i = 0; i < Model.Detalles.Count; i++)
+                {
+                    var linea = Model.Detalles[i];
+                    <tr class="linea">
+                        <td>
+                            <select name="Detalles[@i].IdProducto" class="form-select select-producto">
+                                <option value="0">Seleccione un producto</option>
+                                @if (productos != null)
+                                {
+                                    foreach (var p in productos)
+                                    {
+                                        <option value="@p.IdProducto" selected="@(linea.IdProducto == p.IdProducto ? "selected" : null)">@p.NombreProducto</option>
+                                    }
+                                }
+                            </select>
+                        </td>
+                        <td><input name="Detalles[@i].Cantidad" class="form-control cant" type="number" min="1" max="999" value="@linea.Cantidad" /></td>
+                        <td class="text-end"><button type="button" class="btn btn-outline-danger btn-sm quitar" title="Quitar línea">✕</button></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+        @if (productos == null || !productos.Any())
+        {
+            <div class="alert alert-warning">No hay productos disponibles para pedir.</div>
+        }
+        <button type="button" id="agregar" class="btn btn-outline-primary btn-sm mb-3">+ Agregar producto</button>
+        <div class="mt-2 mb-3"><a asp-action="Index" class="btn btn-light">Volver a pedidos</a></div>
+        <button type="submit" class="btn btn-primary">Registrar pedido</button>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function () {
+            function renumerar() {
+                $('#lineas tr.linea').each(function (i) {
+                    $(this).find('.select-producto').attr('name', 'Detalles[' + i + '].IdProducto');
+                    $(this).find('.cant').attr('name', 'Detalles[' + i + '].Cantidad');
+                });
+            }
+            $(document).on('click', '.quitar', function () {
+                if ($('#lineas tr.linea').length <= 1) return;
+                $(this).closest('tr').remove();
+                renumerar();
+            });
+            $('#agregar').on('click', function () {
+                var fila = $('#lineas tr.linea').first().clone();
+                fila.find('.select-producto').val('0');
+                fila.find('.cant').val(1);
+                $('#lineas').append(fila);
+                renumerar();
+            });
+            $('form').on('submit', function () {
+                if (!$('select[name="IdMesa"]').val() || $('select[name="IdMesa"]').val() === '0') {
+                    alert('Debe seleccionar una mesa.');
+                    return false;
+                }
+                var pendiente = false;
+                $('#lineas tr.linea .select-producto').each(function () {
+                    if (!$(this).val() || $(this).val() === '0') pendiente = true;
+                });
+                if (pendiente) {
+                    alert('Debe seleccionar un producto en todas las líneas.');
+                    return false;
+                }
+                return true;
+            });
+        })();
+    </script>
+}
