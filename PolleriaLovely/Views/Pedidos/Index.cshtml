@@ -10,12 +10,15 @@
     string NombreEstado(PolleriaLovely.Models.EstadoPedido estado) => estado switch
     {
         PolleriaLovely.Models.EstadoPedido.EnPreparacion => "En preparación",
+        PolleriaLovely.Models.EstadoPedido.CuentaSolicitada => "Cuenta solicitada",
         _ => estado.ToString()
     };
     bool EstaAbierto(PolleriaLovely.Models.EstadoPedido estado) =>
         estado is PolleriaLovely.Models.EstadoPedido.Pendiente
             or PolleriaLovely.Models.EstadoPedido.EnPreparacion
-            or PolleriaLovely.Models.EstadoPedido.Listo;
+            or PolleriaLovely.Models.EstadoPedido.Listo
+            or PolleriaLovely.Models.EstadoPedido.Entregado
+            or PolleriaLovely.Models.EstadoPedido.CuentaSolicitada;
 }
 <div class="table-card"><div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th># Pedido</th><th>Mesa</th><th>Fecha</th><th>Mozo</th><th>Productos</th><th style="width:24%">Estado</th><th style="width:12%">Acciones</th></tr></thead><tbody>
 @foreach (var item in Model)
@@ -36,6 +39,7 @@
                     <select name="estado" class="form-select form-select-sm">
                         @foreach (PolleriaLovely.Models.EstadoPedido estado in Enum.GetValues(typeof(PolleriaLovely.Models.EstadoPedido)))
                         {
+                            if (estado == PolleriaLovely.Models.EstadoPedido.Cobrado) { continue; }
                             if (!esAdmin && estado == PolleriaLovely.Models.EstadoPedido.Cancelado) { continue; }
                             <option value="@((int)estado)" selected="@(item.Estado == estado ? "selected" : null)">@NombreEstado(estado)</option>
                         }
@@ -45,17 +49,41 @@
             }
             else
             {
-                <span class="fw-semibold">@(item.Estado == PolleriaLovely.Models.EstadoPedido.EnPreparacion ? "En preparación" : item.Estado.ToString())</span>
+                <span class="fw-semibold">@NombreEstado(item.Estado)</span>
+                @if (item.IdVenta != null)
+                {
+                    <span class="text-muted d-block">Venta #@item.IdVenta</span>
+                }
             }
         </td>
         <td>
             @if (puedeOperar && abierto)
             {
-                <a asp-action="Agregar" asp-route-id="@item.IdPedido" class="btn btn-sm btn-outline-success">+ Agregar</a>
+                <div class="d-flex gap-1 flex-wrap">
+                    <a asp-action="Agregar" asp-route-id="@item.IdPedido" class="btn btn-sm btn-outline-success">+ Agregar</a>
+                    @if (esMozo && item.Estado != PolleriaLovely.Models.EstadoPedido.CuentaSolicitada)
+                    {
+                        <form asp-action="ActualizarEstado" method="post" onsubmit="return confirm('¿Solicitar la cuenta del pedido #@item.IdPedido?');">
+                            <input type="hidden" name="idPedido" value="@item.IdPedido" />
+                            <input type="hidden" name="estado" value="@((int)PolleriaLovely.Models.EstadoPedido.CuentaSolicitada)" />
+                            <button type="submit" class="btn btn-sm btn-outline-warning">Solicitar cuenta</button>
+                        </form>
+                    }
+                </div>
             }
             else if (!puedeOperar)
             {
-                <span class="text-muted">—</span>
+                @if (item.IdVenta == null && item.Estado != PolleriaLovely.Models.EstadoPedido.Cancelado && item.Estado != PolleriaLovely.Models.EstadoPedido.Cobrado)
+                {
+                    <form asp-action="Cobrar" method="post" onsubmit="return confirm('¿Cobrar el pedido #@item.IdPedido? Se creará la venta con los precios actuales del catálogo.');">
+                        <input type="hidden" name="idPedido" value="@item.IdPedido" />
+                        <button type="submit" class="btn btn-sm btn-success">Cobrar</button>
+                    </form>
+                }
+                else
+                {
+                    <span class="text-muted">—</span>
+                }
             }
         </td>
     </tr>

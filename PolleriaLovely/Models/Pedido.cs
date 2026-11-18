@@ -28,6 +28,11 @@ namespace PolleriaLovely.Models
         [ValidateNever]
         public Usuario Usuario { get; set; }
 
+        public int? IdVenta { get; set; }
+
+        [ValidateNever]
+        public Venta? Venta { get; set; }
+
         public ICollection<DetallePedido> DetallePedidos { get; set; } = new List<DetallePedido>();
     }
 }

@@ -12,6 +12,7 @@ namespace PolleriaLovely.Controllers
     public class PedidosController : Controller
     {
         private readonly BibliotecaDbContext _context;
+        private const decimal MaximoDecimal = 99999999.99m;
 
         public PedidosController(BibliotecaDbContext context)
         {
@@ -266,6 +267,12 @@ namespace PolleriaLovely.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            if (estado == EstadoPedido.Cobrado)
+            {
+                TempData["Error"] = "El estado «Cobrado» solo se asigna al cobrar el pedido.";
+                return RedirectToAction(nameof(Index));
+            }
+
             pedido.Estado = estado;
             await _context.SaveChangesAsync();
 
@@ -273,28 +280,156 @@ namespace PolleriaLovely.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // POST: Pedidos/Cobrar — crea la Venta con los precios vigentes del catálogo,
+        // asocia el pedido a la venta y lo marca como Cobrado (solo Cajero).
+        // Anti doble cobro: chequeo previo + UPDATE condicional con IdVenta IS NULL en transacción.
+        [Authorize(Roles = "Cajero")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Cobrar(int idPedido)
+        {
+            var pedido = await _context.Pedidos
+                .Include(p => p.DetallePedidos)
+                .FirstOrDefaultAsync(p => p.IdPedido == idPedido);
+
+            if (pedido == null)
+            {
+                TempData["Error"] = "El pedido solicitado no existe.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            if (pedido.IdVenta != null || pedido.Estado == EstadoPedido.Cobrado)
+            {
+                TempData["Error"] = $"El pedido #{pedido.IdPedido} ya fue cobrado.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            if (pedido.Estado == EstadoPedido.Cancelado)
+            {
+                TempData["Error"] = $"No se puede cobrar el pedido #{pedido.IdPedido} porque está cancelado.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            if (pedido.DetallePedidos.Count == 0)
+            {
+                TempData["Error"] = $"El pedido #{pedido.IdPedido} no tiene productos para cobrar.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            int idUsuario = 0;
+            if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out idUsuario))
+            {
+                TempData["Error"] = "No se pudo identificar al cajero que realiza el cobro.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var ids = pedido.DetallePedidos.Select(d => d.IdProducto).Distinct().ToList();
+            var productos = await _context.Productos
+                .Where(p => ids.Contains(p.IdProducto))
+                .ToDictionaryAsync(p => p.IdProducto);
+
+            var venta = new Venta
+            {
+                Fecha = DateTime.Now,
+                IdUsuario = idUsuario
+            };
+
+            decimal total = 0;
+            string? error = null;
+            foreach (var linea in pedido.DetallePedidos)
+            {
+                if (!productos.TryGetValue(linea.IdProducto, out var producto))
+                {
+                    error = "Uno de los productos del pedido ya no existe.";
+                    break;
+                }
+                if (!producto.Estado)
+                {
+                    error = $"No se puede cobrar: el producto «{producto.NombreProducto}» ya no está disponible.";
+                    break;
+                }
+
+                decimal subtotal = producto.Precio * linea.Cantidad;
+                if (subtotal > MaximoDecimal)
+                {
+                    error = $"El subtotal del producto «{producto.NombreProducto}» supera el máximo permitido.";
+                    break;
+                }
+
+                total += subtotal;
+                if (total > MaximoDecimal)
+                {
+                    error = "El total de la venta supera el máximo permitido.";
+                    break;
+                }
+
+                venta.DetalleVentas.Add(new DetalleVenta
+                {
+                    IdProducto = producto.IdProducto,
+                    Cantidad = linea.Cantidad,
+                    PrecioUnitario = producto.Precio,
+                    Subtotal = subtotal
+                });
+            }
+
+            if (error != null)
+            {
+                TempData["Error"] = error;
+                return RedirectToAction(nameof(Index));
+            }
+
+            venta.Total = total;
+
+            await using var transaccion = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                _context.Ventas.Add(venta);
+                await _context.SaveChangesAsync();
+
+                var afectados = await _context.Database.ExecuteSqlAsync(
+                    $"UPDATE Pedidos SET IdVenta = {venta.IdVenta}, Estado = {(int)EstadoPedido.Cobrado} WHERE IdPedido = {pedido.IdPedido} AND IdVenta IS NULL");
+
+                if (afectados == 0)
+                {
+                    await transaccion.RollbackAsync();
+                    TempData["Error"] = $"El pedido #{pedido.IdPedido} ya fue cobrado.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                await transaccion.CommitAsync();
+            }
+            catch
+            {
+                await transaccion.RollbackAsync();
+                throw;
+            }
+
+            TempData["Mensaje"] = $"Pedido #{pedido.IdPedido} cobrado. Venta #{venta.IdVenta} registrada: {venta.DetalleVentas.Count} producto(s), total S/ {venta.Total:N2}.";
+            return RedirectToAction(nameof(Index));
+        }
+
         private static bool EstaAbierto(EstadoPedido estado) =>
-            estado is EstadoPedido.Pendiente or EstadoPedido.EnPreparacion or EstadoPedido.Listo;
+            estado is EstadoPedido.Pendiente or EstadoPedido.EnPreparacion or EstadoPedido.Listo
+                or EstadoPedido.Entregado or EstadoPedido.CuentaSolicitada;
 
         private static string NombreEstado(EstadoPedido estado) => estado switch
         {
             EstadoPedido.EnPreparacion => "En preparación",
+            EstadoPedido.CuentaSolicitada => "Cuenta solicitada",
             _ => estado.ToString()
         };
 
         private async Task<bool> MesaTienePedidoEnCurso(int idMesa) =>
             await _context.Pedidos.AnyAsync(p =>
                 p.IdMesa == idMesa &&
-                (p.Estado == EstadoPedido.Pendiente ||
-                 p.Estado == EstadoPedido.EnPreparacion ||
-                 p.Estado == EstadoPedido.Listo));
+                p.Estado != EstadoPedido.Cancelado &&
+                p.Estado != EstadoPedido.Cobrado);
 
         private async Task CargarMesasYProductos()
         {
             var mesasOcupadas = await _context.Pedidos
-                .Where(p => p.Estado == EstadoPedido.Pendiente ||
-                            p.Estado == EstadoPedido.EnPreparacion ||
-                            p.Estado == EstadoPedido.Listo)
+                .Where(p => p.Estado != EstadoPedido.Cancelado &&
+                            p.Estado != EstadoPedido.Cobrado)
                 .Select(p => p.IdMesa)
                 .Distinct()
                 .ToListAsync();

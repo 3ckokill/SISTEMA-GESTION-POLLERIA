@@ -86,6 +86,12 @@ namespace PolleriaLovely.Data
                 .WithMany(u => u.Pedidos)
                 .HasForeignKey(p => p.IdUsuario)
                 .OnDelete(DeleteBehavior.Restrict);
+            // Configuración de la relación entre Pedido y Venta (cobro)
+            modelBuilder.Entity<Pedido>()
+                .HasOne(p => p.Venta)
+                .WithMany()
+                .HasForeignKey(p => p.IdVenta)
+                .OnDelete(DeleteBehavior.Restrict);
             // Configuración de la relación entre DetallePedido y Pedido
             modelBuilder.Entity<DetallePedido>()
                 .HasOne(d => d.Pedido)

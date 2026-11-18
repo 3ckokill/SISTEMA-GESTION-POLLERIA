@@ -185,11 +185,16 @@ namespace PolleriaLovely.Migrations
                     b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
+                    b.Property<int?>("IdVenta")
+                        .HasColumnType("int");
+
                     b.HasKey("IdPedido");
 
                     b.HasIndex("IdMesa");
 
                     b.HasIndex("IdUsuario");
+
+                    b.HasIndex("IdVenta");
 
                     b.ToTable("Pedidos");
                 });
@@ -429,9 +434,16 @@ namespace PolleriaLovely.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("PolleriaLovely.Models.Venta", "Venta")
+                        .WithMany()
+                        .HasForeignKey("IdVenta")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Mesa");
 
                     b.Navigation("Usuario");
+
+                    b.Navigation("Venta");
                 });
 
             modelBuilder.Entity("PolleriaLovely.Models.Producto", b =>
