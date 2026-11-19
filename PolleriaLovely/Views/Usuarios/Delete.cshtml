@@ -1,0 +1,24 @@
+@model PolleriaLovely.Models.Usuario
+@{ ViewData["Title"] = "Eliminar usuario"; }
+<div class="form-card">
+    <h1>Eliminar usuario</h1>
+    @if (ViewBag.MotivoBloqueo is string motivo)
+    {
+        <div class="alert alert-danger">@motivo</div>
+        <a asp-action="Index" class="btn btn-light">Volver a la lista</a>
+    }
+    else
+    {
+        <div class="alert alert-warning">¿Estás seguro de que deseas eliminar este usuario?</div>
+        <p><strong>@Model.NombreUsuario</strong> — @Model.Nombre @Model.Apellido</p>
+        <p>Correo: @Model.Correo</p>
+        <p>Teléfono: @(string.IsNullOrWhiteSpace(Model.Telefono) ? "—" : Model.Telefono)</p>
+        <p>Rol: @(Model.Rol?.NombreRol ?? "Sin rol")</p>
+        <p>Estado: @(Model.Estado ? "Activo" : "Inactivo")</p>
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="IdUsuario" />
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a asp-action="Index" class="btn btn-light">Cancelar</a>
+        </form>
+    }
+</div>

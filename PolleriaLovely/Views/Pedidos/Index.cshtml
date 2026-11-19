@@ -73,7 +73,11 @@
             }
             else if (!puedeOperar)
             {
-                @if (item.IdVenta == null && item.Estado != PolleriaLovely.Models.EstadoPedido.Cancelado && item.Estado != PolleriaLovely.Models.EstadoPedido.Cobrado)
+                @if (item.IdVenta == null && item.Estado == PolleriaLovely.Models.EstadoPedido.CuentaSolicitada)
+                {
+                    <a asp-action="Precuenta" asp-route-id="@item.IdPedido" class="btn btn-sm btn-outline-info">Ver precuenta</a>
+                }
+                else if (item.IdVenta == null && item.Estado != PolleriaLovely.Models.EstadoPedido.Cancelado && item.Estado != PolleriaLovely.Models.EstadoPedido.Cobrado)
                 {
                     <form asp-action="Cobrar" method="post" onsubmit="return confirm('¿Cobrar el pedido #@item.IdPedido? Se creará la venta con los precios actuales del catálogo.');">
                         <input type="hidden" name="idPedido" value="@item.IdPedido" />

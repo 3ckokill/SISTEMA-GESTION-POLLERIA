@@ -1,0 +1,60 @@
+@model PolleriaLovely.Models.Usuario
+@{ ViewData["Title"] = "Editar usuario"; }
+<div class="form-card">
+    <h1>Editar usuario</h1>
+    <p class="text-muted">Actualiza los datos, el rol y, si lo deseas, la contraseña.</p>
+    <form asp-action="Edit" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <input asp-for="IdUsuario" type="hidden" />
+        <div class="mb-3">
+            <label asp-for="NombreUsuario" class="form-label">Nombre de usuario</label>
+            <input asp-for="NombreUsuario" class="form-control" placeholder="Ej. juan.perez" />
+            <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Nombre" class="form-label">Nombre</label>
+                <input asp-for="Nombre" class="form-control" placeholder="Ej. Juan" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Apellido" class="form-label">Apellido</label>
+                <input asp-for="Apellido" class="form-control" placeholder="Ej. Pérez" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Correo" class="form-label">Correo</label>
+                <input asp-for="Correo" class="form-control" placeholder="Ej. juan.perez@lovely.local" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Telefono" class="form-label">Teléfono (opcional)</label>
+                <input asp-for="Telefono" class="form-control" maxlength="9" placeholder="Ej. 999999999" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Contrasena" class="form-label">Nueva contraseña (opcional)</label>
+            <input asp-for="Contrasena" type="password" class="form-control" autocomplete="new-password" placeholder="Déjalo vacío para mantener la actual" />
+            <span asp-validation-for="Contrasena" class="text-danger"></span>
+            <div class="form-text">Si no deseas cambiarla, déjala vacía. Mínimo 6 caracteres si ingresas una nueva.</div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="IdRol" class="form-label">Rol</label>
+            <select asp-for="IdRol" asp-items="ViewBag.IdRol" class="form-select" data-val-required="Debe seleccionar un rol.">
+                <option value="">Selecciona un rol</option>
+            </select>
+            <span asp-validation-for="IdRol" class="text-danger"></span>
+        </div>
+        <div class="form-check form-switch mb-4">
+            <input asp-for="Estado" class="form-check-input" />
+            <label asp-for="Estado" class="form-check-label">Usuario activo</label>
+            <div class="form-text">Los usuarios inactivos no podrán iniciar sesión.</div>
+        </div>
+        <a asp-action="Index" class="btn btn-light">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </form>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

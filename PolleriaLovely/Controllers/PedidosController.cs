@@ -280,6 +280,60 @@ namespace PolleriaLovely.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: Pedidos/Precuenta/5 — consulta de la precuenta (solo Cajero).
+        // Solo lectura: no crea ventas ni cambia estados; el cobro lo realiza Cobrar.
+        [Authorize(Roles = "Cajero")]
+        public async Task<IActionResult> Precuenta(int? id)
+        {
+            if (id == null) return RedirectToAction(nameof(Index));
+
+            var pedido = await _context.Pedidos
+                .AsNoTracking()
+                .Include(p => p.Mesa)
+                .Include(p => p.DetallePedidos).ThenInclude(d => d.Producto)
+                .FirstOrDefaultAsync(p => p.IdPedido == id);
+
+            if (pedido == null)
+            {
+                TempData["Error"] = "El pedido solicitado no existe.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            if (pedido.IdVenta != null || pedido.Estado == EstadoPedido.Cobrado)
+            {
+                TempData["Error"] = $"El pedido #{pedido.IdPedido} ya fue cobrado.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            if (pedido.Estado == EstadoPedido.Cancelado)
+            {
+                TempData["Error"] = $"No se puede ver la precuenta del pedido #{pedido.IdPedido} porque está cancelado.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var modelo = new PrecuentaViewModel
+            {
+                IdPedido = pedido.IdPedido,
+                NumeroMesa = pedido.Mesa?.Numero ?? pedido.IdMesa
+            };
+
+            foreach (var detalle in pedido.DetallePedidos)
+            {
+                var precio = detalle.Producto?.Precio ?? 0m;
+                var subtotal = precio * detalle.Cantidad;
+                modelo.Lineas.Add(new LineaPrecuenta
+                {
+                    NombreProducto = detalle.Producto?.NombreProducto ?? $"Producto #{detalle.IdProducto}",
+                    Cantidad = detalle.Cantidad,
+                    PrecioUnitario = precio,
+                    Subtotal = subtotal
+                });
+                modelo.Total += subtotal;
+            }
+
+            return View(modelo);
+        }
+
         // POST: Pedidos/Cobrar — crea la Venta con los precios vigentes del catálogo,
         // asocia el pedido a la venta y lo marca como Cobrado (solo Cajero).
         // Anti doble cobro: chequeo previo + UPDATE condicional con IdVenta IS NULL en transacción.

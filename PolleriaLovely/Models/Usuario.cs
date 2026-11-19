@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PolleriaLovely.Models
@@ -8,28 +9,36 @@ namespace PolleriaLovely.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdUsuario { get; set; }
 
-        [Required, StringLength(50)]
+        [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
+        [StringLength(50, ErrorMessage = "El nombre de usuario no puede superar los 50 caracteres.")]
         public string NombreUsuario { get; set; }
 
-        [Required, StringLength(100)]
+        [Required(ErrorMessage = "La contraseña es obligatoria.")]
+        [StringLength(100, ErrorMessage = "La contraseña no puede superar los 100 caracteres.")]
         public string Contrasena { get; set; }
 
-        [Required, StringLength(100)]
+        [Required(ErrorMessage = "El nombre es obligatorio.")]
+        [StringLength(100, ErrorMessage = "El nombre no puede superar los 100 caracteres.")]
         public string Nombre { get; set; }
 
-        [Required, StringLength(100)]
+        [Required(ErrorMessage = "El apellido es obligatorio.")]
+        [StringLength(100, ErrorMessage = "El apellido no puede superar los 100 caracteres.")]
         public string Apellido { get; set; }
 
-        [Required, StringLength(150)]
+        [Required(ErrorMessage = "El correo es obligatorio.")]
+        [StringLength(150, ErrorMessage = "El correo no puede superar los 150 caracteres.")]
+        [EmailAddress(ErrorMessage = "El correo no tiene un formato válido.")]
         public string Correo { get; set; }
 
-        [StringLength(9)]
+        [StringLength(9, ErrorMessage = "El teléfono no puede superar los 9 caracteres.")]
         public string Telefono { get; set; }
 
         [Required]
         public bool Estado { get; set; }
 
         public int IdRol { get; set; }
+
+        [ValidateNever]
         public Rol Rol { get; set; }
 
         public ICollection<Venta> Ventas { get; set; } = new List<Venta>();

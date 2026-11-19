@@ -1,0 +1,37 @@
+@model PolleriaLovely.ViewModels.PrecuentaViewModel
+@{ ViewData["Title"] = "Precuenta"; }
+<div class="page-heading mb-4"><h1>Precuenta — Pedido #@Model.IdPedido</h1><p class="text-muted mb-0">Consulta previa al cobro con los precios vigentes del catálogo. No registra ventas ni cambia el estado del pedido.</p></div>
+<div class="form-card mb-4">
+    <div class="row g-3">
+        <div class="col-sm-4"><div class="text-muted small">Pedido</div><div class="fw-semibold">#@Model.IdPedido</div></div>
+        <div class="col-sm-4"><div class="text-muted small">Mesa</div><div class="fw-semibold">Mesa @Model.NumeroMesa</div></div>
+        <div class="col-sm-4"><div class="text-muted small">Total</div><div class="fw-semibold fs-5">S/ @Model.Total.ToString("N2")</div></div>
+    </div>
+</div>
+<div class="table-card"><div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th>Producto</th><th class="text-end">Cantidad</th><th class="text-end">Precio vigente</th><th class="text-end">Subtotal</th></tr></thead><tbody>
+@foreach (var linea in Model.Lineas)
+{
+    <tr>
+        <td class="fw-semibold">@linea.NombreProducto</td>
+        <td class="text-end">@linea.Cantidad</td>
+        <td class="text-end">S/ @linea.PrecioUnitario.ToString("N2")</td>
+        <td class="text-end">S/ @linea.Subtotal.ToString("N2")</td>
+    </tr>
+}
+@if (!Model.Lineas.Any())
+{
+    <tr><td colspan="4" class="text-center py-4 text-muted">Este pedido no tiene productos.</td></tr>
+}
+</tbody>
+<tfoot><tr><th colspan="3" class="text-end">Total</th><th class="text-end">S/ @Model.Total.ToString("N2")</th></tr></tfoot>
+</table></div></div>
+<div class="mt-4 d-flex gap-2">
+    <a asp-action="Index" class="btn btn-light">Volver a pedidos</a>
+    @if (Model.Lineas.Count > 0)
+    {
+        <form asp-action="Cobrar" method="post" onsubmit="return confirm('¿Confirmar el cobro del pedido #@Model.IdPedido? Se creará la venta con los precios actuales del catálogo.');">
+            <input type="hidden" name="idPedido" value="@Model.IdPedido" />
+            <button type="submit" class="btn btn-success">Confirmar cobro</button>
+        </form>
+    }
+</div>
