@@ -1,5 +1,17 @@
+/* Lovely Chicken — paleta compartida: azul profesional */
+:root {
+  --lot-primary: #2563eb;
+  --lot-primary-dark: #1d4ed8;
+  --lot-primary-ring: rgba(37, 99, 235, .32);
+  --lot-primary-soft: #dbeafe;
+  --lot-text: #1f2937;
+  --lot-muted: #6b7280;
+  --lot-border: #dfe3ec;
+  --lot-radius: .75rem;
+}
+
 html {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 @media (min-width: 768px) {
@@ -9,7 +21,7 @@ html {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  box-shadow: 0 0 0 .1rem white, 0 0 0 .25rem var(--lot-primary-ring);
 }
 
 html {
@@ -19,17 +31,49 @@ html {
 
 body {
   margin-bottom: 60px;
-  background: #f8fafc;
+  background: #f4f7fb;
+  color: var(--lot-text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.form-card, .table-card { background: #fff; border: 1px solid #dbe3ec; border-radius: .75rem; box-shadow: 0 .25rem 1rem rgba(15, 23, 42, .05); padding: 1.5rem; }
+/* Tarjetas de página y tablas: apariencia elevada y pulida */
+.form-card, .table-card {
+  background: #fff;
+  border: 1px solid var(--lot-border);
+  border-radius: var(--lot-radius);
+  box-shadow: 0 8px 24px -10px rgba(15, 23, 42, .14);
+  padding: 1.5rem;
+}
+
 .form-card { max-width: 680px; margin: 2rem auto; }
-.form-control { border: 1px solid #9aaabd; border-radius: .5rem; min-height: 2.75rem; }
-.form-control:focus { border-color: #2563eb; box-shadow: 0 0 0 .2rem rgba(37, 99, 235, .15); }
+
+.table-card { overflow: hidden; }
+
+.table-card thead th {
+  background: #f1f5f9;
+  color: #334155;
+  font-weight: 600;
+  border-bottom: 1px solid #e6eaf1;
+  white-space: nowrap;
+}
+
+.table-card tbody tr:hover { background: #f7f9fc; }
+
+/* Encabezados de página */
+.page-heading h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+
+.page-heading p { color: var(--lot-muted); }
+
 .status-badge { border-radius: 999px; display: inline-block; font-size: .8rem; font-weight: 600; padding: .35rem .7rem; }
 .status-active { background: #dcfce7; color: #166534; }
 .status-inactive { background: #e5e7eb; color: #374151; }
-.table-card thead th { background: #f1f5f9; color: #334155; }
+
+.form-control { border: 1px solid #9aaabd; border-radius: .5rem; min-height: 2.75rem; }
+.form-control:focus { border-color: var(--lot-primary); box-shadow: 0 0 0 .2rem rgba(37, 99, 235, .15); }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);
@@ -39,6 +83,57 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* Botones */
+.btn { transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease, transform .12s ease; }
+.btn:hover { box-shadow: 0 3px 10px rgba(37, 99, 235, .22); }
+
+.btn-primary { background: var(--lot-primary); border-color: var(--lot-primary); color: #fff; }
+.btn-primary:hover { background: var(--lot-primary-dark); border-color: var(--lot-primary-dark); box-shadow: 0 4px 14px -4px var(--lot-primary-ring); }
+
+.btn-outline-primary:hover { background: var(--lot-primary-soft); color: var(--lot-primary-dark); border-color: var(--lot-primary); }
+.btn-outline-secondary:hover { border-color: #c9d1db; }
+
+.btn-danger { background: #b91c1c; border-color: #b91c1c; }
+.btn-danger:hover { background: #991b1b; border-color: #991b1b; }
+
+.btn-light:hover { background: #f1f5f9; border-color: #c9d1db; }
+
+/* Navbar */
+nav.navbar.navbar-light {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  box-shadow: 0 2px 10px rgba(37, 99, 235, .3);
+}
+
+nav.navbar.navbar-light .navbar-brand { color: #fff; font-weight: 700; letter-spacing: -.02em; }
+nav.navbar.navbar-light .navbar-brand:hover, nav.navbar.navbar-light .navbar-brand:focus { color: #fff; }
+
+nav.navbar.navbar-light .navbar-nav .nav-link {
+  color: #fff;
+  border-radius: .5rem;
+  padding: .5rem .8rem;
+}
+nav.navbar.navbar-light .navbar-nav .nav-link:hover, nav.navbar.navbar-light .navbar-nav .nav-link:focus {
+  background: rgba(255, 255, 255, .12);
+  color: #fff;
+}
+
+nav.navbar.navbar-light .navbar-text { color: #fff; }
+nav.navbar.navbar-light .navbar-text strong { color: #fff; }
+
+nav.navbar.navbar-light .btn-outline-primary { color: var(--lot-primary); background: #fff; border-color: #fff; }
+nav.navbar.navbar-light .btn-outline-primary:hover { background: rgba(255, 255, 255, .16); border-color: #fff; color: #fff; }
+
+nav.navbar.navbar-light .btn-outline-danger { color: #fff; border-color: rgba(255, 255, 255, .65); }
+nav.navbar.navbar-light .btn-outline-danger:hover { border-color: #fff; }
+
+nav.navbar.navbar-light .navbar-toggler { border: 0; background: rgba(255, 255, 255, .2); }
+
+/* Footer */
+footer.footer { background: #fff; border-top: 1px solid var(--lot-border); color: var(--lot-muted); padding: 1rem 0; }
+
+/* Alertas */
+.alert { border-radius: var(--lot-radius); }
 
 /* Acceso Lovely Chicken */
 .login-page {
@@ -89,11 +184,11 @@ body {
 .login-brand-panel::after { border: 1px solid rgba(24, 36, 59, .12); border-radius: 50%; content: ""; height: 250px; position: absolute; right: -130px; top: 45%; width: 250px; }
 .login-logo { display: block; margin: 0 auto 2.4rem; max-height: 215px; max-width: 100%; object-fit: contain; position: relative; z-index: 1; }
 .eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .18em; margin: 0 0 .8rem; text-transform: uppercase; }
-.login-brand-panel .eyebrow { color: #b9232e; }
+.login-brand-panel .eyebrow { color: var(--login-brown); }
 .login-brand-panel h1 { font-family: Georgia, serif; font-size: clamp(2.8rem, 6vw, 4.5rem); letter-spacing: -.05em; line-height: .88; margin: 0; position: relative; z-index: 1; }
-.login-brand-panel h1 span { color: #b9232e; font-style: italic; }
+.login-brand-panel h1 span { color: var(--login-brown); font-style: italic; }
 .brand-copy { color: #5c6574; line-height: 1.7; margin: 2rem 0; max-width: 220px; position: relative; z-index: 1; }
-.brand-line { background: #e4ad18; height: 3px; margin-bottom: .8rem; width: 42px; }
+.brand-line { background: var(--login-orange); height: 3px; margin-bottom: .8rem; width: 42px; }
 .brand-caption { color: #77808e; font-size: .78rem; letter-spacing: .08em; margin: 0; text-transform: uppercase; }
 
 .login-form-panel { padding: 3.5rem clamp(2rem, 5vw, 4rem); }
@@ -105,7 +200,7 @@ body {
 .login-field .form-label { color: #51463e; font-size: .84rem; font-weight: 700; margin-bottom: .5rem; }
 .input-with-icon { position: relative; }
 .input-with-icon .form-control { background: #fff; padding-left: 2.75rem; }
-.input-icon { color: var(--login-orange); font-size: 1.15rem; left: 1rem; position: absolute; top: .62rem; z-index: 2; }
+.input-icon { color: var(--login-orange); left: 1rem; position: absolute; top: .62rem; z-index: 2; }
 .login-submit { align-items: center; background: var(--login-brown); border: 0; border-radius: .65rem; color: #fff; display: flex; font-weight: 700; justify-content: space-between; margin-top: 1.8rem; padding: .85rem 1.1rem; transition: background .2s, transform .2s; width: 100%; }
 .login-submit:hover { background: #4e2519; color: #fff; transform: translateY(-1px); }
 .login-validation { color: #b42318; font-size: .85rem; margin-bottom: 1rem; }
@@ -120,4 +215,8 @@ body {
   .login-brand-panel h1 { font-size: 3rem; }
   .brand-copy { margin: 1.2rem 0; }
   .login-form-panel { padding: 2.4rem 2rem 2.2rem; }
+}
+
+@media (max-width: 575px) {
+  .form-card { margin: 1rem auto; padding: 1.25rem; }
 }
