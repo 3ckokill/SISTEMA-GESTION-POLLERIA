@@ -4,34 +4,62 @@
     ViewData["Title"] = "Iniciar sesión";
 }
 
-<h1>Iniciar sesión</h1>
+<div class="login-page">
+    <div class="login-orbit login-orbit-one"></div>
+    <div class="login-orbit login-orbit-two"></div>
 
-<form asp-controller="Usuario" asp-action="Login" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <section class="login-shell" aria-label="Acceso al sistema Lovely Chicken">
+        <div class="login-brand-panel">
+            <div class="brand-mark" aria-hidden="true">
+                <span>LC</span>
+            </div>
+            <p class="eyebrow">GESTIÓN • SERVICIO • CALIDAD</p>
+            <h1>Lovely<br /><span>Chicken</span></h1>
+            <p class="brand-copy">
+                Todo el sabor de casa, organizado en un solo lugar.
+            </p>
+            <div class="brand-line" aria-hidden="true"></div>
+            <p class="brand-caption">Sistema de gestión</p>
+        </div>
 
-    <div class="mb-3">
-        <label asp-for="NombreUsuario" class="form-label">
-            Nombre de usuario
-        </label>
-        <input asp-for="NombreUsuario" class="form-control" />
-        <span asp-validation-for="NombreUsuario"
-              class="text-danger"></span>
-    </div>
+        <div class="login-form-panel">
+            <div class="login-heading">
+                <p class="eyebrow">Bienvenido de vuelta</p>
+                <h2>Inicia sesión</h2>
+                <p>Ingresa tus credenciales para continuar.</p>
+            </div>
 
-    <div class="mb-3">
-        <label asp-for="Contrasena" class="form-label">
-            Contraseña
-        </label>
-        <input asp-for="Contrasena" type="password"
-               class="form-control" />
-        <span asp-validation-for="Contrasena"
-              class="text-danger"></span>
-    </div>
+            <form asp-controller="Usuario" asp-action="Login" method="post" class="login-form">
+                <div asp-validation-summary="ModelOnly" class="login-validation" role="alert"></div>
 
-    <button type="submit" class="btn btn-primary">
-        Ingresar
-    </button>
-</form>
+                <div class="login-field">
+                    <label asp-for="NombreUsuario" class="form-label">Nombre de usuario</label>
+                    <div class="input-with-icon">
+                        <span class="input-icon" aria-hidden="true">⌁</span>
+                        <input asp-for="NombreUsuario" class="form-control" placeholder="ej. admin.prueba" autocomplete="username" />
+                    </div>
+                    <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+                </div>
+
+                <div class="login-field">
+                    <label asp-for="Contrasena" class="form-label">Contraseña</label>
+                    <div class="input-with-icon">
+                        <span class="input-icon" aria-hidden="true">✦</span>
+                        <input asp-for="Contrasena" type="password" class="form-control" placeholder="Ingresa tu contraseña" autocomplete="current-password" />
+                    </div>
+                    <span asp-validation-for="Contrasena" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn login-submit">
+                    <span>Entrar al sistema</span>
+                    <span aria-hidden="true">→</span>
+                </button>
+            </form>
+
+            <p class="login-footer-note">Lovely Chicken <span>•</span> Gestión simple y cercana</p>
+        </div>
+    </section>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

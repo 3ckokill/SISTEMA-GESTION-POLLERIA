@@ -39,3 +39,85 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* Acceso Lovely Chicken */
+.login-page {
+  --login-ink: #292018;
+  --login-brown: #6b321f;
+  --login-orange: #e97932;
+  align-items: center;
+  background: #f7efe4;
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 175px);
+  overflow: hidden;
+  padding: 3rem 1rem;
+  position: relative;
+}
+
+.login-page::before {
+  background: radial-gradient(circle, rgba(231, 126, 66, .18) 0 2px, transparent 2px 100%);
+  background-size: 22px 22px;
+  content: "";
+  height: 180px;
+  left: 4%;
+  opacity: .55;
+  position: absolute;
+  top: 8%;
+  width: 180px;
+}
+
+.login-orbit { border: 1px solid rgba(190, 100, 49, .2); border-radius: 50%; position: absolute; }
+.login-orbit-one { height: 420px; right: -170px; top: -190px; width: 420px; }
+.login-orbit-two { bottom: -280px; height: 520px; left: -220px; width: 520px; }
+
+.login-shell {
+  background: #fffdf9;
+  border: 1px solid rgba(116, 60, 32, .12);
+  border-radius: 1.5rem;
+  box-shadow: 0 1.5rem 4rem rgba(80, 45, 25, .16);
+  display: grid;
+  grid-template-columns: minmax(250px, .85fr) minmax(320px, 1fr);
+  max-width: 880px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.login-brand-panel { background: linear-gradient(145deg, #7b3722, #4d2419); color: #fff8ef; padding: 3.5rem 3rem; position: relative; }
+.login-brand-panel::after { border: 1px solid rgba(255, 237, 210, .18); border-radius: 50%; content: ""; height: 250px; position: absolute; right: -130px; top: 45%; width: 250px; }
+.brand-mark { align-items: center; background: #f39a4e; border: 7px solid rgba(255, 247, 231, .2); border-radius: 50%; display: flex; font-family: Georgia, serif; font-size: 1.1rem; font-weight: 700; height: 70px; justify-content: center; letter-spacing: .08em; margin-bottom: 2.7rem; width: 70px; }
+.eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .18em; margin: 0 0 .8rem; text-transform: uppercase; }
+.login-brand-panel .eyebrow { color: #f8bb7d; }
+.login-brand-panel h1 { font-family: Georgia, serif; font-size: clamp(2.8rem, 6vw, 4.5rem); letter-spacing: -.05em; line-height: .88; margin: 0; position: relative; z-index: 1; }
+.login-brand-panel h1 span { color: #f6a45e; font-style: italic; }
+.brand-copy { color: rgba(255, 248, 239, .78); line-height: 1.7; margin: 2rem 0; max-width: 220px; position: relative; z-index: 1; }
+.brand-line { background: #f39a4e; height: 3px; margin-bottom: .8rem; width: 42px; }
+.brand-caption { color: rgba(255, 248, 239, .58); font-size: .78rem; letter-spacing: .08em; margin: 0; text-transform: uppercase; }
+
+.login-form-panel { padding: 3.5rem clamp(2rem, 5vw, 4rem); }
+.login-heading h2 { color: var(--login-ink); font-size: 2rem; font-weight: 700; margin: 0 0 .55rem; }
+.login-heading p:last-child { color: #84766c; margin-bottom: 2.2rem; }
+.login-heading .eyebrow { color: var(--login-orange); margin-bottom: .65rem; }
+.login-form { max-width: 360px; }
+.login-field { margin-bottom: 1.25rem; }
+.login-field .form-label { color: #51463e; font-size: .84rem; font-weight: 700; margin-bottom: .5rem; }
+.input-with-icon { position: relative; }
+.input-with-icon .form-control { background: #fff; padding-left: 2.75rem; }
+.input-icon { color: var(--login-orange); font-size: 1.15rem; left: 1rem; position: absolute; top: .62rem; z-index: 2; }
+.login-submit { align-items: center; background: var(--login-brown); border: 0; border-radius: .65rem; color: #fff; display: flex; font-weight: 700; justify-content: space-between; margin-top: 1.8rem; padding: .85rem 1.1rem; transition: background .2s, transform .2s; width: 100%; }
+.login-submit:hover { background: #4e2519; color: #fff; transform: translateY(-1px); }
+.login-validation { color: #b42318; font-size: .85rem; margin-bottom: 1rem; }
+.login-footer-note { color: #a2968b; font-size: .75rem; margin: 2.4rem 0 0; }
+.login-footer-note span { color: var(--login-orange); margin: 0 .35rem; }
+
+@media (max-width: 650px) {
+  .login-page { min-height: calc(100vh - 130px); padding: 1.5rem .75rem; }
+  .login-shell { grid-template-columns: 1fr; }
+  .login-brand-panel { padding: 2rem 2rem 2.2rem; }
+  .brand-mark { margin-bottom: 1.6rem; }
+  .login-brand-panel h1 { font-size: 3rem; }
+  .brand-copy { margin: 1.2rem 0; }
+  .login-form-panel { padding: 2.4rem 2rem 2.2rem; }
+}
