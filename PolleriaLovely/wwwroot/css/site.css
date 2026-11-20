@@ -42,9 +42,9 @@ body {
 
 /* Acceso Lovely Chicken */
 .login-page {
-  --login-ink: #292018;
-  --login-brown: #6b321f;
-  --login-orange: #e97932;
+  --login-ink: #18243b;
+  --login-brown: #b9232e;
+  --login-orange: #e4ad18;
   align-items: center;
   background: #f7efe4;
   display: flex;
@@ -85,16 +85,16 @@ body {
   z-index: 1;
 }
 
-.login-brand-panel { background: linear-gradient(145deg, #7b3722, #4d2419); color: #fff8ef; padding: 3.5rem 3rem; position: relative; }
-.login-brand-panel::after { border: 1px solid rgba(255, 237, 210, .18); border-radius: 50%; content: ""; height: 250px; position: absolute; right: -130px; top: 45%; width: 250px; }
-.brand-mark { align-items: center; background: #f39a4e; border: 7px solid rgba(255, 247, 231, .2); border-radius: 50%; display: flex; font-family: Georgia, serif; font-size: 1.1rem; font-weight: 700; height: 70px; justify-content: center; letter-spacing: .08em; margin-bottom: 2.7rem; width: 70px; }
+.login-brand-panel { background: linear-gradient(145deg, #fffaf0, #f8ead7); color: var(--login-ink); padding: 3.5rem 3rem; position: relative; }
+.login-brand-panel::after { border: 1px solid rgba(24, 36, 59, .12); border-radius: 50%; content: ""; height: 250px; position: absolute; right: -130px; top: 45%; width: 250px; }
+.login-logo { display: block; margin: 0 auto 2.4rem; max-height: 215px; max-width: 100%; object-fit: contain; position: relative; z-index: 1; }
 .eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .18em; margin: 0 0 .8rem; text-transform: uppercase; }
-.login-brand-panel .eyebrow { color: #f8bb7d; }
+.login-brand-panel .eyebrow { color: #b9232e; }
 .login-brand-panel h1 { font-family: Georgia, serif; font-size: clamp(2.8rem, 6vw, 4.5rem); letter-spacing: -.05em; line-height: .88; margin: 0; position: relative; z-index: 1; }
-.login-brand-panel h1 span { color: #f6a45e; font-style: italic; }
-.brand-copy { color: rgba(255, 248, 239, .78); line-height: 1.7; margin: 2rem 0; max-width: 220px; position: relative; z-index: 1; }
-.brand-line { background: #f39a4e; height: 3px; margin-bottom: .8rem; width: 42px; }
-.brand-caption { color: rgba(255, 248, 239, .58); font-size: .78rem; letter-spacing: .08em; margin: 0; text-transform: uppercase; }
+.login-brand-panel h1 span { color: #b9232e; font-style: italic; }
+.brand-copy { color: #5c6574; line-height: 1.7; margin: 2rem 0; max-width: 220px; position: relative; z-index: 1; }
+.brand-line { background: #e4ad18; height: 3px; margin-bottom: .8rem; width: 42px; }
+.brand-caption { color: #77808e; font-size: .78rem; letter-spacing: .08em; margin: 0; text-transform: uppercase; }
 
 .login-form-panel { padding: 3.5rem clamp(2rem, 5vw, 4rem); }
 .login-heading h2 { color: var(--login-ink); font-size: 2rem; font-weight: 700; margin: 0 0 .55rem; }
@@ -116,7 +116,7 @@ body {
   .login-page { min-height: calc(100vh - 130px); padding: 1.5rem .75rem; }
   .login-shell { grid-template-columns: 1fr; }
   .login-brand-panel { padding: 2rem 2rem 2.2rem; }
-  .brand-mark { margin-bottom: 1.6rem; }
+  .login-logo { margin-bottom: 1.6rem; max-height: 170px; }
   .login-brand-panel h1 { font-size: 3rem; }
   .brand-copy { margin: 1.2rem 0; }
   .login-form-panel { padding: 2.4rem 2rem 2.2rem; }
