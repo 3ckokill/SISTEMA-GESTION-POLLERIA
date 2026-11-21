@@ -82,6 +82,12 @@ namespace PolleriaLovely.Controllers
                 ? 0m
                 : modelo.TotalVendido / modelo.CantidadVentas;
 
+            modelo.TotalGastado = await _context.Gastos
+                .AsNoTracking()
+                .Where(g => !g.Anulado && g.Fecha >= inicio && g.Fecha < finExclusivo)
+                .SumAsync(g => (decimal?)g.Monto) ?? 0m;
+            modelo.UtilidadEstimada = modelo.TotalVendido - modelo.TotalGastado;
+
             // 2) Ventas agrupadas por cajero (registrador de la venta).
             modelo.VentasPorCajero = await _context.Ventas
                 .AsNoTracking()
@@ -124,6 +130,58 @@ namespace PolleriaLovely.Controllers
                 })
                 .OrderBy(x => x.Fecha)
                 .ToListAsync();
+
+            // 5) Ventas agrupadas por método de pago.
+            modelo.VentasPorMetodoPago = await _context.Ventas
+                .AsNoTracking()
+                .Where(v => v.Fecha >= inicio && v.Fecha < finExclusivo)
+                .GroupBy(v => v.MetodoPago)
+                .Select(g => new VentaPorMetodoPagoViewModel
+                {
+                    MetodoPago = g.Key,
+                    CantidadVentas = g.Count(),
+                    Total = g.Sum(v => v.Total)
+                })
+                .OrderByDescending(x => x.Total)
+                .ToListAsync();
+
+            foreach (var item in modelo.VentasPorMetodoPago)
+                item.NombreMetodo = NombreMetodoPago(item.MetodoPago);
+
+            // 6) Cajas que tuvieron ventas dentro del rango seleccionado.
+            modelo.ResumenCajas = await _context.Cajas
+                .AsNoTracking()
+                .Where(c => c.Ventas.Any(v => v.Fecha >= inicio && v.Fecha < finExclusivo))
+                .Select(c => new ResumenCajaViewModel
+                {
+                    IdCaja = c.IdCaja,
+                    Cajero = c.Usuario.NombreUsuario,
+                    FechaApertura = c.FechaApertura,
+                    FechaCierre = c.FechaCierre,
+                    MontoInicial = c.MontoInicial,
+                    TotalVentas = c.Ventas
+                        .Where(v => v.Fecha >= inicio && v.Fecha < finExclusivo)
+                        .Sum(v => (decimal?)v.Total) ?? 0m,
+                    VentasEfectivo = c.Ventas
+                        .Where(v => v.Fecha >= inicio && v.Fecha < finExclusivo && v.MetodoPago == MetodoPago.Efectivo)
+                        .Sum(v => (decimal?)v.Total) ?? 0m,
+                    MontoContado = c.MontoContado,
+                    Diferencia = c.Diferencia
+                })
+                .OrderByDescending(x => x.FechaApertura)
+                .ToListAsync();
+
+            foreach (var caja in modelo.ResumenCajas)
+                caja.EfectivoEsperado = caja.MontoInicial + caja.VentasEfectivo;
         }
+
+        private static string NombreMetodoPago(MetodoPago metodo) => metodo switch
+        {
+            MetodoPago.Efectivo => "Efectivo",
+            MetodoPago.Tarjeta => "Tarjeta",
+            MetodoPago.YapePlin => "Yape/Plin",
+            MetodoPago.Otro => "Otro",
+            _ => "No registrado"
+        };
     }
 }

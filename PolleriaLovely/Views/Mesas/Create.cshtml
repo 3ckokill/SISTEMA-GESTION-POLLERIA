@@ -1,0 +1,4 @@
+@model PolleriaLovely.ViewModels.MesaEdicionViewModel
+@{ ViewData["Title"] = "Nueva mesa"; }
+<div class="form-card"><h1>Nueva mesa</h1><p class="text-muted">Registra una mesa que podrá utilizar el mozo.</p><form asp-action="Create" method="post"><div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div><div class="mb-3"><label asp-for="Numero" class="form-label">Número de mesa</label><input asp-for="Numero" class="form-control" min="1" max="1000" /><span asp-validation-for="Numero" class="text-danger"></span></div><a asp-action="Index" class="btn btn-light">Cancelar</a><button type="submit" class="btn btn-primary">Guardar mesa</button></form></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

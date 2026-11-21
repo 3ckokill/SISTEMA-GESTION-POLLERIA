@@ -139,6 +139,50 @@ namespace PolleriaLovely.Migrations
                     b.ToTable("DetalleVentas");
                 });
 
+            modelBuilder.Entity("PolleriaLovely.Models.Gasto", b =>
+                {
+                    b.Property<int>("IdGasto")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdGasto"));
+
+                    b.Property<bool>("Anulado")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Categoria")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("Fecha")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MetodoPago")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Monto")
+                        .HasColumnType("decimal(10, 2)");
+
+                    b.Property<string>("Observaciones")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("IdGasto");
+
+                    b.HasIndex("IdUsuario");
+
+                    b.ToTable("Gastos");
+                });
+
             modelBuilder.Entity("PolleriaLovely.Models.Insumo", b =>
                 {
                     b.Property<int>("IdInsumo")
@@ -459,6 +503,17 @@ namespace PolleriaLovely.Migrations
                     b.Navigation("Producto");
 
                     b.Navigation("Venta");
+                });
+
+            modelBuilder.Entity("PolleriaLovely.Models.Gasto", b =>
+                {
+                    b.HasOne("PolleriaLovely.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("PolleriaLovely.Models.Insumo", b =>

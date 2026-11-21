@@ -1,6 +1,6 @@
 @model PolleriaLovely.ViewModels.ReporteViewModel
 @{ ViewData["Title"] = "Reportes"; }
-<div class="page-heading mb-4"><h1>Reportes</h1><p class="text-muted mb-0">Consulta las ventas y los pedidos del sistema por rango de fechas.</p></div>
+<div class="page-heading mb-4"><h1>Reportes</h1><p class="text-muted mb-0">Consulta ventas, métodos de pago y cierres de caja por rango de fechas.</p></div>
 <div class="form-card mb-4">
     <form asp-controller="Reportes" asp-action="Index" method="get">
         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
@@ -24,7 +24,7 @@
 </div>
 @if (Model.ReporteGenerado)
 {
-    <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+    <div class="row row-cols-1 row-cols-md-5 g-4 mb-4">
         <div class="col">
             <div class="card h-100">
                 <div class="card-body">
@@ -46,6 +46,22 @@
                 <div class="card-body">
                     <h5 class="card-title">Promedio por venta</h5>
                     <p class="fs-3 fw-semibold mb-0">S/ @Model.PromedioVenta.ToString("N2")</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Total gastado</h5>
+                    <p class="fs-3 fw-semibold mb-0">S/ @Model.TotalGastado.ToString("N2")</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Utilidad estimada</h5>
+                    <p class="fs-3 fw-semibold mb-0">S/ @Model.UtilidadEstimada.ToString("N2")</p>
                 </div>
             </div>
         </div>
@@ -92,6 +108,36 @@
         @foreach (var item in Model.VentasPorDia)
         {
             <tr><td class="fw-semibold">@item.Fecha.ToString("dd/MM/yyyy")</td><td>@item.CantidadVentas</td><td>S/ @item.Total.ToString("N2")</td></tr>
+        }
+    }
+    </tbody></table></div></div>
+
+    <h2 class="h5 mb-3 mt-4">Ventas por método de pago</h2>
+    <div class="table-card"><div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th>Método</th><th>Ventas</th><th>Total</th></tr></thead><tbody>
+    @if (Model.VentasPorMetodoPago.Count == 0)
+    {
+        <tr><td colspan="3" class="text-center py-5 text-muted">No hay ventas en el rango seleccionado.</td></tr>
+    }
+    else
+    {
+        @foreach (var item in Model.VentasPorMetodoPago)
+        {
+            <tr><td class="fw-semibold">@item.NombreMetodo</td><td>@item.CantidadVentas</td><td>S/ @item.Total.ToString("N2")</td></tr>
+        }
+    }
+    </tbody></table></div></div>
+
+    <h2 class="h5 mb-3 mt-4">Resumen por caja</h2>
+    <div class="table-card"><div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th>Caja</th><th>Cajero</th><th>Ventas</th><th>Efectivo esperado</th><th>Contado</th><th>Diferencia</th></tr></thead><tbody>
+    @if (Model.ResumenCajas.Count == 0)
+    {
+        <tr><td colspan="6" class="text-center py-5 text-muted">No hay cajas con ventas en el rango seleccionado.</td></tr>
+    }
+    else
+    {
+        @foreach (var item in Model.ResumenCajas)
+        {
+            <tr><td class="fw-semibold">#@item.IdCaja</td><td>@item.Cajero</td><td>S/ @item.TotalVentas.ToString("N2")</td><td>S/ @item.EfectivoEsperado.ToString("N2")</td><td>@(item.MontoContado.HasValue ? $"S/ {item.MontoContado.Value:N2}" : "Pendiente")</td><td>@(item.Diferencia.HasValue ? $"S/ {item.Diferencia.Value:N2}" : "Pendiente")</td></tr>
         }
     }
     </tbody></table></div></div>

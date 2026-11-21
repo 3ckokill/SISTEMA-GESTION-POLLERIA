@@ -19,6 +19,7 @@ namespace PolleriaLovely.Data
         public DbSet<Venta> Ventas { get; set; }
         public DbSet<DetalleVenta> DetalleVentas { get; set; }
         public DbSet<Caja> Cajas { get; set; }
+        public DbSet<Gasto> Gastos { get; set; }
         public DbSet<Mesa> Mesas { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<DetallePedido> DetallePedidos { get; set; }
@@ -62,6 +63,12 @@ namespace PolleriaLovely.Data
                 .WithMany(c => c.Ventas)
                 .HasForeignKey(v => v.IdCaja)
                 .OnDelete(DeleteBehavior.Restrict);
+            // Configuración de la relación entre Gasto y Usuario
+            modelBuilder.Entity<Gasto>()
+                .HasOne(g => g.Usuario)
+                .WithMany()
+                .HasForeignKey(g => g.IdUsuario)
+                .OnDelete(DeleteBehavior.Restrict);
             // Configuración de la relación entre DetalleVenta y Venta
             modelBuilder.Entity<DetalleVenta>()
                 .HasOne(d => d.Venta)
@@ -90,6 +97,12 @@ namespace PolleriaLovely.Data
             modelBuilder.Entity<Caja>()
                 .Property(c => c.Diferencia)
                 .HasColumnType("decimal(10, 2)");
+            modelBuilder.Entity<Gasto>()
+                .Property(g => g.Monto)
+                .HasColumnType("decimal(10, 2)");
+            modelBuilder.Entity<Gasto>()
+                .Property(g => g.Fecha)
+                .HasDefaultValueSql("GETDATE()");
             modelBuilder.Entity<DetalleVenta>()
                 .Property(d => d.PrecioUnitario)
                 .HasColumnType("decimal(10, 2)");
