@@ -19,8 +19,15 @@ namespace PolleriaLovely.Models
         [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar un usuario válido.")]
         public int IdUsuario { get; set; }
 
+        public MetodoPago MetodoPago { get; set; } = MetodoPago.NoRegistrado;
+
+        public int? IdCaja { get; set; }
+
         [ValidateNever]
         public Usuario Usuario { get; set; }
+
+        [ValidateNever]
+        public Caja? Caja { get; set; }
 
         public ICollection<DetalleVenta> DetalleVentas { get; set; } = new List<DetalleVenta>();
     }

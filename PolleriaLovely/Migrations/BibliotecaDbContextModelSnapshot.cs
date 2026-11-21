@@ -22,6 +22,39 @@ namespace PolleriaLovely.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("PolleriaLovely.Models.Caja", b =>
+                {
+                    b.Property<int>("IdCaja")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCaja"));
+
+                    b.Property<decimal?>("Diferencia")
+                        .HasColumnType("decimal(10, 2)");
+
+                    b.Property<DateTime>("FechaApertura")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaCierre")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("MontoContado")
+                        .HasColumnType("decimal(10, 2)");
+
+                    b.Property<decimal>("MontoInicial")
+                        .HasColumnType("decimal(10, 2)");
+
+                    b.HasKey("IdCaja");
+
+                    b.HasIndex("IdUsuario");
+
+                    b.ToTable("Cajas");
+                });
+
             modelBuilder.Entity("PolleriaLovely.Models.Categoria", b =>
                 {
                     b.Property<int>("IdCategoria")
@@ -322,13 +355,21 @@ namespace PolleriaLovely.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
+                    b.Property<int?>("IdCaja")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MetodoPago")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(10, 2)");
 
                     b.HasKey("IdVenta");
+
+                    b.HasIndex("IdCaja");
 
                     b.HasIndex("IdUsuario");
 
@@ -369,6 +410,17 @@ namespace PolleriaLovely.Migrations
                     b.HasKey("IdProveedor");
 
                     b.ToTable("Proveedores");
+                });
+
+            modelBuilder.Entity("PolleriaLovely.Models.Caja", b =>
+                {
+                    b.HasOne("PolleriaLovely.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("PolleriaLovely.Models.DetallePedido", b =>
@@ -470,13 +522,25 @@ namespace PolleriaLovely.Migrations
 
             modelBuilder.Entity("PolleriaLovely.Models.Venta", b =>
                 {
+                    b.HasOne("PolleriaLovely.Models.Caja", "Caja")
+                        .WithMany("Ventas")
+                        .HasForeignKey("IdCaja")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("PolleriaLovely.Models.Usuario", "Usuario")
                         .WithMany("Ventas")
                         .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.Navigation("Caja");
+
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("PolleriaLovely.Models.Caja", b =>
+                {
+                    b.Navigation("Ventas");
                 });
 
             modelBuilder.Entity("PolleriaLovely.Models.Categoria", b =>

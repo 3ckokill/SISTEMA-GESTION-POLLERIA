@@ -1,0 +1,23 @@
+@model PolleriaLovely.ViewModels.CajaPanelViewModel
+@{ ViewData["Title"] = "Caja"; }
+<div class="page-heading d-flex justify-content-between align-items-center mb-4"><div><h1>Caja</h1><p class="text-muted mb-0">Control de apertura, ventas y cierre de caja.</p></div>@if (!Model.EsAdministrador && Model.CajaActiva == null) { <a asp-action="Abrir" class="btn btn-primary">Abrir caja</a> } @if (!Model.EsAdministrador && Model.CajaActiva != null) { <a asp-action="Cerrar" class="btn btn-warning">Cerrar caja</a> }</div>
+@if (TempData["Mensaje"] is string mensaje) { <div class="alert alert-success">@mensaje</div> }
+@if (TempData["Error"] is string error) { <div class="alert alert-warning">@error</div> }
+@if (!Model.EsAdministrador && Model.CajaActiva != null)
+{
+    <div class="row row-cols-1 row-cols-md-4 g-3 mb-4">
+        <div class="col"><div class="card h-100"><div class="card-body"><div class="text-muted">Total vendido</div><div class="fs-4 fw-semibold">S/ @Model.TotalVentas.ToString("N2")</div></div></div></div>
+        <div class="col"><div class="card h-100"><div class="card-body"><div class="text-muted">Efectivo</div><div class="fs-4 fw-semibold">S/ @Model.TotalEfectivo.ToString("N2")</div></div></div></div>
+        <div class="col"><div class="card h-100"><div class="card-body"><div class="text-muted">Tarjeta</div><div class="fs-4 fw-semibold">S/ @Model.TotalTarjeta.ToString("N2")</div></div></div></div>
+        <div class="col"><div class="card h-100"><div class="card-body"><div class="text-muted">Yape/Plin</div><div class="fs-4 fw-semibold">S/ @Model.TotalYapePlin.ToString("N2")</div></div></div></div>
+    </div>
+    <div class="alert alert-info">Caja abierta desde @Model.CajaActiva.FechaApertura.ToString("dd/MM/yyyy HH:mm"). Monto inicial: S/ @Model.CajaActiva.MontoInicial.ToString("N2").</div>
+}
+<h2 class="h5 mb-3">@(Model.EsAdministrador ? "Historial de cajas" : "Mis cajas")</h2>
+<div class="table-card"><div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th>Usuario</th><th>Apertura</th><th>Cierre</th><th>Monto inicial</th><th>Contado</th><th>Diferencia</th></tr></thead><tbody>
+@foreach (var caja in Model.Historial)
+{
+    <tr><td>@(caja.Usuario?.NombreUsuario ?? "—")</td><td>@caja.FechaApertura.ToString("dd/MM/yyyy HH:mm")</td><td>@(caja.FechaCierre?.ToString("dd/MM/yyyy HH:mm") ?? "Abierta")</td><td>S/ @caja.MontoInicial.ToString("N2")</td><td>@(caja.MontoContado.HasValue ? $"S/ {caja.MontoContado.Value:N2}" : "—")</td><td>@(caja.Diferencia.HasValue ? $"S/ {caja.Diferencia.Value:N2}" : "—")</td></tr>
+}
+@if (!Model.Historial.Any()) { <tr><td colspan="6" class="text-center py-5 text-muted">Aún no hay cajas registradas.</td></tr> }
+</tbody></table></div></div>

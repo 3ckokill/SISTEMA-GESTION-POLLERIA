@@ -340,7 +340,7 @@ namespace PolleriaLovely.Controllers
         [Authorize(Roles = "Cajero")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Cobrar(int idPedido)
+        public async Task<IActionResult> Cobrar(int idPedido, MetodoPago metodoPago)
         {
             var pedido = await _context.Pedidos
                 .Include(p => p.DetallePedidos)
@@ -377,6 +377,20 @@ namespace PolleriaLovely.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            if (!Enum.IsDefined(metodoPago) || metodoPago == MetodoPago.NoRegistrado)
+            {
+                TempData["Error"] = "Debes seleccionar un método de pago para cobrar el pedido.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var caja = await _context.Cajas
+                .FirstOrDefaultAsync(c => c.IdUsuario == idUsuario && c.FechaCierre == null);
+            if (caja == null)
+            {
+                TempData["Error"] = "Debes abrir una caja antes de cobrar pedidos.";
+                return RedirectToAction(nameof(Index));
+            }
+
             var ids = pedido.DetallePedidos.Select(d => d.IdProducto).Distinct().ToList();
             var productos = await _context.Productos
                 .Where(p => ids.Contains(p.IdProducto))
@@ -385,7 +399,9 @@ namespace PolleriaLovely.Controllers
             var venta = new Venta
             {
                 Fecha = DateTime.Now,
-                IdUsuario = idUsuario
+                IdUsuario = idUsuario,
+                MetodoPago = metodoPago,
+                IdCaja = caja.IdCaja
             };
 
             decimal total = 0;

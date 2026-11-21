@@ -18,6 +18,7 @@ namespace PolleriaLovely.Data
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Venta> Ventas { get; set; }
         public DbSet<DetalleVenta> DetalleVentas { get; set; }
+        public DbSet<Caja> Cajas { get; set; }
         public DbSet<Mesa> Mesas { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<DetallePedido> DetallePedidos { get; set; }
@@ -49,6 +50,18 @@ namespace PolleriaLovely.Data
                 .WithMany(u => u.Ventas)
                 .HasForeignKey(v => v.IdUsuario)
                 .OnDelete(DeleteBehavior.Restrict);
+            // Configuración de la relación entre Caja y Usuario
+            modelBuilder.Entity<Caja>()
+                .HasOne(c => c.Usuario)
+                .WithMany()
+                .HasForeignKey(c => c.IdUsuario)
+                .OnDelete(DeleteBehavior.Restrict);
+            // Las ventas históricas pueden no tener una caja asociada.
+            modelBuilder.Entity<Venta>()
+                .HasOne(v => v.Caja)
+                .WithMany(c => c.Ventas)
+                .HasForeignKey(v => v.IdCaja)
+                .OnDelete(DeleteBehavior.Restrict);
             // Configuración de la relación entre DetalleVenta y Venta
             modelBuilder.Entity<DetalleVenta>()
                 .HasOne(d => d.Venta)
@@ -68,6 +81,15 @@ namespace PolleriaLovely.Data
             modelBuilder.Entity<Venta>()
                 .Property(v => v.Fecha)
                 .HasDefaultValueSql("GETDATE()");
+            modelBuilder.Entity<Caja>()
+                .Property(c => c.MontoInicial)
+                .HasColumnType("decimal(10, 2)");
+            modelBuilder.Entity<Caja>()
+                .Property(c => c.MontoContado)
+                .HasColumnType("decimal(10, 2)");
+            modelBuilder.Entity<Caja>()
+                .Property(c => c.Diferencia)
+                .HasColumnType("decimal(10, 2)");
             modelBuilder.Entity<DetalleVenta>()
                 .Property(d => d.PrecioUnitario)
                 .HasColumnType("decimal(10, 2)");

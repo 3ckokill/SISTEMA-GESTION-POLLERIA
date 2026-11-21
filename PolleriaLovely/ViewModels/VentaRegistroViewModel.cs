@@ -1,9 +1,14 @@
 using System.ComponentModel.DataAnnotations;
+using PolleriaLovely.Models;
 
 namespace PolleriaLovely.ViewModels
 {
     public class VentaRegistroViewModel
     {
+        [Required(ErrorMessage = "Debe seleccionar un método de pago.")]
+        [Range(1, 4, ErrorMessage = "Debe seleccionar un método de pago válido.")]
+        public MetodoPago MetodoPago { get; set; }
+
         public List<LineaVentaInput> Detalles { get; set; } = new List<LineaVentaInput>();
     }
 

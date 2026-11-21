@@ -5,6 +5,7 @@
     <div class="row g-3">
         <div class="col-sm-4"><div class="text-muted small">Fecha</div><div class="fw-semibold">@Model.Fecha.ToString("dd/MM/yyyy HH:mm")</div></div>
         <div class="col-sm-4"><div class="text-muted small">Registrada por</div><div class="fw-semibold">@(Model.Usuario?.NombreUsuario ?? "—")</div></div>
+        <div class="col-sm-4"><div class="text-muted small">Método de pago</div><div class="fw-semibold">@(Model.MetodoPago == PolleriaLovely.Models.MetodoPago.YapePlin ? "Yape/Plin" : Model.MetodoPago.ToString())</div></div>
         <div class="col-sm-4"><div class="text-muted small">Total</div><div class="fw-semibold fs-5">S/ @Model.Total.ToString("N2")</div></div>
     </div>
 </div>

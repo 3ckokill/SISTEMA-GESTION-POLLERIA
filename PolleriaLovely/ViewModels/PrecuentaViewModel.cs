@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using PolleriaLovely.Models;
+
 namespace PolleriaLovely.ViewModels
 {
     // Precuenta de un pedido: consulta de solo lectura con precios vigentes del catálogo.
@@ -10,6 +13,10 @@ namespace PolleriaLovely.ViewModels
         public List<LineaPrecuenta> Lineas { get; set; } = new();
 
         public decimal Total { get; set; }
+
+        [Required(ErrorMessage = "Debe seleccionar un método de pago.")]
+        [Range(1, 4, ErrorMessage = "Debe seleccionar un método de pago válido.")]
+        public MetodoPago MetodoPago { get; set; }
     }
 
     public class LineaPrecuenta

@@ -53,6 +53,7 @@ namespace PolleriaLovely.Controllers
         public async Task<IActionResult> Create()
         {
             await CargarProductos();
+            ViewBag.CajaAbierta = await CajaAbiertaAsync();
             var modelo = new VentaRegistroViewModel();
             modelo.Detalles.Add(new LineaVentaInput());
             return View(modelo);
@@ -75,6 +76,12 @@ namespace PolleriaLovely.Controllers
                 ModelState.AddModelError("", "No se pudo identificar al usuario que registra la venta.");
             }
 
+            var caja = await CajaAbiertaAsync();
+            if (caja == null)
+            {
+                ModelState.AddModelError("", "Debes abrir una caja antes de registrar una venta.");
+            }
+
             if (ModelState.IsValid && modelo.Detalles != null && modelo.Detalles.Count > 0)
             {
                 var ids = modelo.Detalles.Select(d => d.IdProducto).Distinct().ToList();
@@ -85,7 +92,9 @@ namespace PolleriaLovely.Controllers
                 var venta = new Venta
                 {
                     Fecha = DateTime.Now,
-                    IdUsuario = idUsuario
+                    IdUsuario = idUsuario,
+                    MetodoPago = modelo.MetodoPago,
+                    IdCaja = caja!.IdCaja
                 };
 
                 decimal total = 0;
@@ -137,7 +146,15 @@ namespace PolleriaLovely.Controllers
             }
 
             await CargarProductos();
+            ViewBag.CajaAbierta = caja != null;
             return View(modelo);
+        }
+
+        private Task<Caja?> CajaAbiertaAsync()
+        {
+            var valor = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(valor, out var idUsuario)) return Task.FromResult<Caja?>(null);
+            return _context.Cajas.FirstOrDefaultAsync(c => c.IdUsuario == idUsuario && c.FechaCierre == null);
         }
 
         private async Task CargarProductos()

@@ -4,6 +4,7 @@
     <h1>Nueva venta</h1>
     <p class="text-muted">Agrega los productos vendidos. Los precios y los subtotales se calculan en el servidor con los valores del catálogo.</p>
     @if (TempData["Mensaje"] is string mensaje) { <div class="alert alert-success">@mensaje</div> }
+    @if (ViewBag.CajaAbierta == null) { <div class="alert alert-warning">Debes abrir una caja antes de registrar ventas. <a asp-controller="Caja" asp-action="Abrir">Abrir caja</a></div> }
     <form asp-action="Create" method="post">
         <div asp-validation-summary="All" class="text-danger mb-3"></div>
         @{ var productos = ViewBag.Productos as IEnumerable<PolleriaLovely.Models.Producto>; }
@@ -41,6 +42,7 @@
             <div class="alert alert-warning">No hay productos disponibles para vender.</div>
         }
         <button type="button" id="agregar" class="btn btn-outline-primary btn-sm mb-3">+ Agregar producto</button>
+        <div class="mb-3"><label asp-for="MetodoPago" class="form-label">Método de pago</label><select asp-for="MetodoPago" class="form-select"><option value="0">Seleccione un método</option><option value="1">Efectivo</option><option value="2">Tarjeta</option><option value="3">Yape/Plin</option><option value="4">Otro</option></select><span asp-validation-for="MetodoPago" class="text-danger"></span></div>
         <div class="d-flex justify-content-end mb-3"><strong class="fs-5">Total: <span id="total">S/ 0.00</span></strong></div>
         <a asp-controller="Cajero" asp-action="Index" class="btn btn-light">Cancelar</a>
         <button type="submit" class="btn btn-primary">Registrar venta</button>
