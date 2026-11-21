@@ -22,6 +22,13 @@ body {
   background: #f8fafc;
 }
 
+.login-layout { background: #111a2b; }
+.login-layout .container { max-width: none; padding: 0; }
+.login-layout main { padding-bottom: 0 !important; }
+.login-layout .navbar { margin-bottom: 0 !important; }
+.login-layout .footer { background: #111a2b; border-color: rgba(255,255,255,.12) !important; color: rgba(255,255,255,.68) !important; }
+.login-layout .footer a { color: #e4ad18; }
+
 .form-card, .table-card { background: #fff; border: 1px solid #dbe3ec; border-radius: .75rem; box-shadow: 0 .25rem 1rem rgba(15, 23, 42, .05); padding: 1.5rem; }
 .form-card { max-width: 680px; margin: 2rem auto; }
 .form-control { border: 1px solid #9aaabd; border-radius: .5rem; min-height: 2.75rem; }
@@ -46,7 +53,7 @@ body {
   --login-brown: #b9232e;
   --login-orange: #e4ad18;
   align-items: center;
-  background: #f7efe4;
+  background: #111a2b;
   display: flex;
   justify-content: center;
   min-height: calc(100vh - 175px);
@@ -56,7 +63,7 @@ body {
 }
 
 .login-page::before {
-  background: radial-gradient(circle, rgba(231, 126, 66, .18) 0 2px, transparent 2px 100%);
+  background: radial-gradient(circle, rgba(228, 173, 24, .22) 0 2px, transparent 2px 100%);
   background-size: 22px 22px;
   content: "";
   height: 180px;
@@ -67,7 +74,7 @@ body {
   width: 180px;
 }
 
-.login-orbit { border: 1px solid rgba(190, 100, 49, .2); border-radius: 50%; position: absolute; }
+.login-orbit { border: 1px solid rgba(228, 173, 24, .18); border-radius: 50%; position: absolute; }
 .login-orbit-one { height: 420px; right: -170px; top: -190px; width: 420px; }
 .login-orbit-two { bottom: -280px; height: 520px; left: -220px; width: 520px; }
 
@@ -111,6 +118,97 @@ body {
 .login-validation { color: #b42318; font-size: .85rem; margin-bottom: 1rem; }
 .login-footer-note { color: #a2968b; font-size: .75rem; margin: 2.4rem 0 0; }
 .login-footer-note span { color: var(--login-orange); margin: 0 .35rem; }
+
+/* Panel del Administrador */
+.admin-dashboard { color: #18243b; }
+.admin-hero { align-items: center; background: linear-gradient(120deg, #18243b, #243552); border-radius: 1.1rem; box-shadow: 0 .8rem 2rem rgba(24, 36, 59, .14); color: #fff; display: flex; justify-content: space-between; margin-bottom: 2.3rem; overflow: hidden; padding: 2.2rem 2.4rem; position: relative; }
+.admin-hero::after { border: 1px solid rgba(228, 173, 24, .25); border-radius: 50%; content: ""; height: 260px; position: absolute; right: -100px; top: -150px; width: 260px; }
+.admin-hero h1 { font-size: clamp(1.7rem, 3vw, 2.35rem); margin: 0 0 .55rem; position: relative; z-index: 1; }
+.admin-hero p:last-child { color: rgba(255,255,255,.72); margin: 0; max-width: 600px; position: relative; z-index: 1; }
+.dashboard-eyebrow { color: #d9a919; font-size: .68rem; font-weight: 800; letter-spacing: .16em; margin: 0 0 .5rem; text-transform: uppercase; }
+.admin-hero-mark { align-items: center; background: #b9232e; border: 7px solid rgba(255,255,255,.14); border-radius: 50%; display: flex; flex: 0 0 74px; font-family: Georgia, serif; font-size: 1.25rem; font-weight: 700; height: 74px; justify-content: center; letter-spacing: .08em; margin-left: 2rem; position: relative; z-index: 1; }
+.dashboard-section-heading { align-items: end; display: flex; justify-content: space-between; margin-bottom: 1rem; }
+.dashboard-section-heading h2 { color: #18243b; font-size: 1.35rem; margin: 0; }
+.dashboard-section-heading > span { color: #788292; font-size: .82rem; }
+.dashboard-card { background: #fff; border: 1px solid #e2e6ec; border-radius: .85rem; box-shadow: 0 .35rem 1rem rgba(24,36,59,.05); transition: border-color .2s, box-shadow .2s, transform .2s; }
+.dashboard-card:hover { border-color: rgba(185,35,46,.38); box-shadow: 0 .7rem 1.4rem rgba(24,36,59,.1); transform: translateY(-2px); }
+.dashboard-card .card-body { padding: 1.35rem; }
+.dashboard-card-icon { align-items: center; border-radius: .65rem; display: inline-flex; font-size: .95rem; font-weight: 800; height: 2.25rem; justify-content: center; margin-bottom: 1rem; width: 2.25rem; }
+.icon-red { background: #f9e7e8; color: #b9232e; }
+.icon-gold { background: #fbf3d9; color: #a17800; }
+.icon-navy { background: #e8edf5; color: #18243b; }
+.dashboard-card .card-title { color: #18243b; font-size: 1.05rem; margin-bottom: .5rem; }
+.dashboard-card .card-text { color: #697384; font-size: .9rem; line-height: 1.55; min-height: 2.8rem; }
+.dashboard-card .btn-primary { background: #18243b; border-color: #18243b; font-size: .82rem; margin-top: .7rem; }
+.dashboard-card .btn-primary:hover { background: #b9232e; border-color: #b9232e; }
+
+/* Lenguaje visual común para las vistas del Administrador */
+.admin-layout { background: #f3f5f8; }
+.admin-layout .navbar { background: #18243b !important; border-bottom: 0 !important; box-shadow: 0 .25rem .8rem rgba(24,36,59,.16); }
+.admin-layout .navbar-brand, .admin-layout .navbar .nav-link, .admin-layout .navbar-text { color: #f8fafc !important; }
+.admin-layout .navbar .nav-link:hover { color: #f1bd2a !important; }
+.admin-layout .navbar .btn-outline-danger { border-color: rgba(255,255,255,.5); color: #fff; }
+.admin-layout .navbar .btn-outline-danger:hover { background: #b9232e; border-color: #b9232e; }
+.admin-layout .footer { background: #f3f5f8; }
+.admin-layout main { padding-top: .5rem; }
+.admin-layout .page-heading { align-items: center; background: #18243b; border-radius: 1rem; box-shadow: 0 .6rem 1.3rem rgba(24,36,59,.12); color: #fff; margin: 1rem 0 1.5rem; padding: 1.4rem 1.6rem; }
+.admin-layout .page-heading h1, .admin-layout .page-heading h2 { color: #fff; margin-bottom: .25rem; }
+.admin-layout .page-heading p { color: rgba(255,255,255,.7); }
+.admin-layout .page-heading .btn-primary { background: #b9232e; border-color: #b9232e; }
+.admin-layout .table-card, .admin-layout .form-card { border-color: #e0e5ec; box-shadow: 0 .35rem 1rem rgba(24,36,59,.06); }
+.admin-layout .table-card thead th { background: #e8edf5; color: #18243b; }
+.admin-layout .table-card tbody tr:hover { background: #fffaf0; }
+.admin-layout .form-card h1, .admin-layout .form-card h2, .admin-layout .form-card h3 { color: #18243b; }
+.admin-layout .form-control:focus, .admin-layout .form-select:focus { border-color: #d4a51b; box-shadow: 0 0 0 .2rem rgba(228,173,24,.18); }
+.admin-layout .btn-primary { background: #18243b; border-color: #18243b; }
+.admin-layout .btn-primary:hover { background: #b9232e; border-color: #b9232e; }
+.admin-layout .btn-outline-primary { border-color: #18243b; color: #18243b; }
+.admin-layout .btn-outline-primary:hover { background: #18243b; border-color: #18243b; }
+.admin-layout .card { border-color: #e0e5ec; border-radius: .85rem; box-shadow: 0 .35rem 1rem rgba(24,36,59,.05); }
+
+/* Lenguaje visual común para Mozo y Cajero */
+.mozo-layout, .cajero-layout { background: #f3f5f8; }
+.mozo-layout .navbar, .cajero-layout .navbar { background: #18243b !important; border-bottom: 0 !important; box-shadow: 0 .25rem .8rem rgba(24,36,59,.16); }
+.mozo-layout .navbar-brand, .mozo-layout .navbar .nav-link, .mozo-layout .navbar-text,
+.cajero-layout .navbar-brand, .cajero-layout .navbar .nav-link, .cajero-layout .navbar-text { color: #f8fafc !important; }
+.mozo-layout .navbar .nav-link:hover, .cajero-layout .navbar .nav-link:hover { color: #f1bd2a !important; }
+.mozo-layout .navbar .btn-outline-danger, .cajero-layout .navbar .btn-outline-danger { border-color: rgba(255,255,255,.5); color: #fff; }
+.mozo-layout .navbar .btn-outline-danger:hover, .cajero-layout .navbar .btn-outline-danger:hover { background: #b9232e; border-color: #b9232e; }
+.mozo-layout main, .cajero-layout main { padding-top: .5rem; }
+.mozo-layout .page-heading, .cajero-layout .page-heading { background: #18243b; border-radius: 1rem; color: #fff; }
+.mozo-layout .page-heading h1, .cajero-layout .page-heading h1 { color: #fff; }
+.mozo-layout .table-card, .mozo-layout .form-card, .cajero-layout .table-card, .cajero-layout .form-card { border-color: #e0e5ec; box-shadow: 0 .35rem 1rem rgba(24,36,59,.06); }
+.mozo-layout .table-card thead th, .cajero-layout .table-card thead th { background: #e8edf5; color: #18243b; }
+.mozo-layout .form-control:focus, .mozo-layout .form-select:focus, .cajero-layout .form-control:focus, .cajero-layout .form-select:focus { border-color: #d4a51b; box-shadow: 0 0 0 .2rem rgba(228,173,24,.18); }
+.mozo-layout .btn-primary, .cajero-layout .btn-primary { background: #18243b; border-color: #18243b; }
+.mozo-layout .btn-primary:hover, .cajero-layout .btn-primary:hover { background: #b9232e; border-color: #b9232e; }
+.mozo-layout .footer, .cajero-layout .footer { background: #f3f5f8; }
+.role-hero { align-items: center; background: linear-gradient(120deg, #18243b, #243552); border-radius: 1.1rem; box-shadow: 0 .8rem 2rem rgba(24,36,59,.14); color: #fff; display: flex; justify-content: space-between; margin-bottom: 2rem; overflow: hidden; padding: 2.2rem 2.4rem; position: relative; }
+.role-hero::after { border: 1px solid rgba(228,173,24,.25); border-radius: 50%; content: ""; height: 260px; position: absolute; right: -100px; top: -150px; width: 260px; }
+.role-hero h1 { font-size: clamp(1.7rem, 3vw, 2.35rem); margin: 0 0 .55rem; position: relative; z-index: 1; }
+.role-hero p:last-child { color: rgba(255,255,255,.72); margin: 0; position: relative; z-index: 1; }
+.role-hero-mark { align-items: center; border: 7px solid rgba(255,255,255,.14); border-radius: 50%; display: flex; flex: 0 0 74px; font-family: Georgia, serif; font-size: 1.35rem; font-weight: 700; height: 74px; justify-content: center; margin-left: 2rem; position: relative; z-index: 1; }
+.role-hero-mark-red { background: #b9232e; }
+.role-hero-mark-gold { background: #d4a51b; color: #18243b; }
+.role-actions { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.role-actions-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.role-action-card { background: #fff; border: 1px solid #e0e5ec; border-radius: .85rem; box-shadow: 0 .35rem 1rem rgba(24,36,59,.05); padding: 1.4rem; }
+.role-action-card-muted { background: #fbfcfd; }
+.role-action-card h2 { color: #18243b; font-size: 1.05rem; }
+.role-action-card p { color: #697384; font-size: .9rem; line-height: 1.55; min-height: 2.8rem; }
+.role-action-card .btn { font-size: .82rem; margin-top: .55rem; }
+
+@media (max-width: 800px) {
+  .role-actions, .role-actions-three { grid-template-columns: 1fr; }
+  .role-hero { align-items: flex-start; padding: 1.7rem; }
+  .role-hero-mark { flex-basis: 58px; height: 58px; margin-left: 1rem; width: 58px; }
+}
+
+@media (max-width: 650px) {
+  .admin-hero { align-items: flex-start; padding: 1.7rem; }
+  .admin-hero-mark { flex-basis: 58px; height: 58px; margin-left: 1rem; width: 58px; }
+  .dashboard-section-heading { align-items: flex-start; flex-direction: column; gap: .35rem; }
+}
 
 @media (max-width: 650px) {
   .login-page { min-height: calc(100vh - 130px); padding: 1.5rem .75rem; }

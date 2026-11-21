@@ -2,13 +2,34 @@
     ViewData["Title"] = "Panel del cajero";
 }
 
-<div class="container py-4">
-    <h1>Panel del cajero</h1>
-    <p>Bienvenido al módulo de caja de PolleriaLovely.</p>
-    <div class="alert alert-info">
-        Gestiona ventas y cobra pedidos. Cuando un pedido esté en «Cuenta solicitada», revisa su precuenta antes de confirmar el cobro.
+<div class="role-dashboard container py-4">
+    <section class="role-hero">
+        <div>
+            <p class="dashboard-eyebrow">OPERACIÓN DE CAJA</p>
+            <h1>Panel del Cajero</h1>
+            <p>Gestiona ventas, precuentas y el cierre diario de caja.</p>
+        </div>
+        <div class="role-hero-mark role-hero-mark-gold" aria-hidden="true">C</div>
+    </section>
+
+    <div class="role-actions role-actions-three">
+        <div class="role-action-card">
+            <span class="dashboard-card-icon icon-red">S/</span>
+            <h2>Nueva venta</h2>
+            <p>Registra una venta con el método de pago correspondiente.</p>
+            <a asp-controller="Ventas" asp-action="Create" class="btn btn-primary">Registrar nueva venta</a>
+        </div>
+        <div class="role-action-card">
+            <span class="dashboard-card-icon icon-gold">▤</span>
+            <h2>Pedidos y precuentas</h2>
+            <p>Revisa pedidos y confirma los cobros solicitados.</p>
+            <a asp-controller="Pedidos" asp-action="Index" class="btn btn-outline-primary">Ver pedidos</a>
+        </div>
+        <div class="role-action-card role-action-card-muted">
+            <span class="dashboard-card-icon icon-navy">▥</span>
+            <h2>Caja</h2>
+            <p>Consulta el estado de tu caja y realiza el cierre diario.</p>
+            <a asp-controller="Caja" asp-action="Index" class="btn btn-outline-primary">Abrir o cerrar caja</a>
+        </div>
     </div>
-    <a asp-controller="Ventas" asp-action="Create" class="btn btn-primary">Registrar nueva venta</a>
-    <a asp-controller="Pedidos" asp-action="Index" class="btn btn-success">Ver pedidos y precuentas</a>
-    <a asp-controller="Caja" asp-action="Index" class="btn btn-warning">Abrir o cerrar caja</a>
 </div>
