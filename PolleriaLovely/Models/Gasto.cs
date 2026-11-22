@@ -11,7 +11,7 @@ namespace PolleriaLovely.Models
 
         [Required(ErrorMessage = "La descripción es obligatoria.")]
         [StringLength(200, ErrorMessage = "La descripción no puede superar los 200 caracteres.")]
-        public string Descripcion { get; set; }
+        public string Descripcion { get; set; } = string.Empty;
 
         [Required]
         public CategoriaGasto Categoria { get; set; }
@@ -33,6 +33,6 @@ namespace PolleriaLovely.Models
         public int IdUsuario { get; set; }
 
         [ValidateNever]
-        public Usuario Usuario { get; set; }
+        public Usuario? Usuario { get; set; }
     }
 }

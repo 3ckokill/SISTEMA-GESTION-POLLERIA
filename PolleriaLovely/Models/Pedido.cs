@@ -19,14 +19,14 @@ namespace PolleriaLovely.Models
         public int IdMesa { get; set; }
 
         [ValidateNever]
-        public Mesa Mesa { get; set; }
+        public Mesa? Mesa { get; set; }
 
         [Required(ErrorMessage = "Debe identificar al mozo.")]
         [Range(1, int.MaxValue, ErrorMessage = "Debe identificar al mozo.")]
         public int IdUsuario { get; set; }
 
         [ValidateNever]
-        public Usuario Usuario { get; set; }
+        public Usuario? Usuario { get; set; }
 
         public int? IdVenta { get; set; }
 

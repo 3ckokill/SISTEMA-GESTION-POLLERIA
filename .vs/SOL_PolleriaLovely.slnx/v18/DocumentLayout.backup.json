@@ -3,32 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|c:\\users\\3ckok\\documents\\sol_pollerialovely\\pollerialovely\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|c:\\users\\3ckok\\documents\\sol_pollerialovely\\pollerialovely\\models\\insumo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\models\\insumo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Migrations\\20260929050707_migra1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PolleriaLovely\\Migrations\\20260929050707_migra1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|c:\\users\\3ckok\\documents\\sol_pollerialovely\\pollerialovely\\data\\bibliotecadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\data\\bibliotecadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|c:\\users\\3ckok\\documents\\sol_pollerialovely\\pollerialovely\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|c:\\users\\3ckok\\documents\\sol_pollerialovely\\pollerialovely\\models\\proveedor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\models\\proveedor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|c:\\users\\3ckok\\documents\\sol_pollerialovely\\pollerialovely\\models\\insumo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\models\\insumo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|c:\\users\\3ckok\\documents\\sol_pollerialovely\\pollerialovely\\migrations\\20260929054240_migra1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\migrations\\20260929054240_migra1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Migrations\\20260929050707_migra1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PolleriaLovely\\Migrations\\20260929050707_migra1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|c:\\users\\3ckok\\documents\\sol_pollerialovely\\pollerialovely\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\models\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|c:\\users\\3ckok\\documents\\sol_pollerialovely\\pollerialovely\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\models\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,35 +38,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "20260929054240_migra1.cs",
               "DocumentMoniker": "C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Migrations\\20260929054240_migra1.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Migrations\\20260929054240_migra1.cs",
               "ToolTip": "C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Migrations\\20260929054240_migra1.cs",
               "RelativeToolTip": "PolleriaLovely\\Migrations\\20260929054240_migra1.cs",
-              "ViewState": "AgIAAFgAAAAAAAAAAAAYwBsAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-29T05:42:40.259Z"
+              "WhenOpened": "2026-09-29T05:42:40.259Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "20260929050707_migra1.cs",
               "DocumentMoniker": "C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Migrations\\20260929050707_migra1.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Migrations\\20260929050707_migra1.cs",
               "ToolTip": "C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Migrations\\20260929050707_migra1.cs",
               "RelativeToolTip": "PolleriaLovely\\Migrations\\20260929050707_migra1.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-29T05:07:08.263Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Insumo.cs",
               "DocumentMoniker": "C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Models\\Insumo.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Insumo.cs",
@@ -74,11 +74,12 @@
               "RelativeToolTip": "PolleriaLovely\\Models\\Insumo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-16T05:10:37.209Z"
+              "WhenOpened": "2026-09-16T05:10:37.209Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "Proveedor.cs",
               "DocumentMoniker": "C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Models\\Proveedor.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Proveedor.cs",
@@ -86,11 +87,12 @@
               "RelativeToolTip": "PolleriaLovely\\Models\\Proveedor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-16T05:02:31.01Z"
+              "WhenOpened": "2026-09-16T05:02:31.01Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "BibliotecaDbContext.cs",
               "DocumentMoniker": "C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Data\\BibliotecaDbContext.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Data\\BibliotecaDbContext.cs",
@@ -98,11 +100,12 @@
               "RelativeToolTip": "PolleriaLovely\\Data\\BibliotecaDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-16T03:28:04.641Z"
+              "WhenOpened": "2026-09-16T03:28:04.641Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Producto.cs",
               "DocumentMoniker": "C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Models\\Producto.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Producto.cs",
@@ -114,13 +117,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "Categoria.cs",
               "DocumentMoniker": "C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Models\\Categoria.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Categoria.cs",
               "ToolTip": "C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Models\\Categoria.cs",
               "RelativeToolTip": "PolleriaLovely\\Models\\Categoria.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-15T21:40:44.616Z",
               "EditorCaption": ""

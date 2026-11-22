@@ -11,27 +11,27 @@ namespace PolleriaLovely.Models
 
         [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
         [StringLength(50, ErrorMessage = "El nombre de usuario no puede superar los 50 caracteres.")]
-        public string NombreUsuario { get; set; }
+        public string NombreUsuario { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "La contraseña es obligatoria.")]
         [StringLength(100, ErrorMessage = "La contraseña no puede superar los 100 caracteres.")]
-        public string Contrasena { get; set; }
+        public string Contrasena { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [StringLength(100, ErrorMessage = "El nombre no puede superar los 100 caracteres.")]
-        public string Nombre { get; set; }
+        public string Nombre { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El apellido es obligatorio.")]
         [StringLength(100, ErrorMessage = "El apellido no puede superar los 100 caracteres.")]
-        public string Apellido { get; set; }
+        public string Apellido { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El correo es obligatorio.")]
         [StringLength(150, ErrorMessage = "El correo no puede superar los 150 caracteres.")]
         [EmailAddress(ErrorMessage = "El correo no tiene un formato válido.")]
-        public string Correo { get; set; }
+        public string Correo { get; set; } = string.Empty;
 
         [StringLength(9, ErrorMessage = "El teléfono no puede superar los 9 caracteres.")]
-        public string Telefono { get; set; }
+        public string Telefono { get; set; } = string.Empty;
 
         [Required]
         public bool Estado { get; set; }
@@ -39,7 +39,7 @@ namespace PolleriaLovely.Models
         public int IdRol { get; set; }
 
         [ValidateNever]
-        public Rol Rol { get; set; }
+        public Rol? Rol { get; set; }
 
         public ICollection<Venta> Ventas { get; set; } = new List<Venta>();
 

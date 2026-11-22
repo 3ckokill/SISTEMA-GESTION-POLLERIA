@@ -11,7 +11,7 @@ namespace PolleriaLovely.Models
         public int IdProducto { get; set; }
         [Required(ErrorMessage = "El nombre del producto es obligatorio.")]
         [StringLength(100, ErrorMessage = "El nombre del producto no puede superar los 100 caracteres.")]
-        public string NombreProducto { get; set; }
+        public string NombreProducto { get; set; } = string.Empty;
         [StringLength(200, ErrorMessage = "La descripción no puede superar los 200 caracteres.")]
 
         public string? Descripcion { get; set; }
@@ -23,7 +23,7 @@ namespace PolleriaLovely.Models
         [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar una categoría válida.")]
         public int IdCategoria { get; set; }
         [ValidateNever]
-        public Categoria Categoria { get; set; }
+        public Categoria? Categoria { get; set; }
 
         public ICollection<DetalleVenta> DetalleVentas { get; set; } = new List<DetalleVenta>();
 

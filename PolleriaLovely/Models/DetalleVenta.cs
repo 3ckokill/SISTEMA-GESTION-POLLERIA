@@ -13,14 +13,14 @@ namespace PolleriaLovely.Models
         public int IdVenta { get; set; }
 
         [ValidateNever]
-        public Venta Venta { get; set; }
+        public Venta? Venta { get; set; }
 
         [Required(ErrorMessage = "Debe seleccionar un producto.")]
         [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar un producto válido.")]
         public int IdProducto { get; set; }
 
         [ValidateNever]
-        public Producto Producto { get; set; }
+        public Producto? Producto { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage = "La cantidad debe ser al menos 1.")]
         public int Cantidad { get; set; }

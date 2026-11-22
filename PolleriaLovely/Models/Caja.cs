@@ -26,7 +26,7 @@ namespace PolleriaLovely.Models
         public int IdUsuario { get; set; }
 
         [ValidateNever]
-        public Usuario Usuario { get; set; }
+        public Usuario? Usuario { get; set; }
 
         public ICollection<Venta> Ventas { get; set; } = new List<Venta>();
     }

@@ -24,7 +24,7 @@ namespace PolleriaLovely.Models
         public int? IdCaja { get; set; }
 
         [ValidateNever]
-        public Usuario Usuario { get; set; }
+        public Usuario? Usuario { get; set; }
 
         [ValidateNever]
         public Caja? Caja { get; set; }

@@ -9,10 +9,10 @@ namespace PolleriaLovely.Models
         public int IdRol { get; set; }
 
         [Required, StringLength(50)]
-        public string NombreRol { get; set; }
+        public string NombreRol { get; set; } = string.Empty;
 
         [StringLength(200)]
-        public string Descripcion { get; set; }
+        public string Descripcion { get; set; } = string.Empty;
 
         [Required]
         public bool Estado { get; set; }
