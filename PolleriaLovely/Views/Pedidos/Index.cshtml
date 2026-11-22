@@ -94,3 +94,11 @@
     </tr>
 }
 @if (!Model.Any()) { <tr><td colspan="7" class="text-center py-5 text-muted">Aún no hay pedidos registrados.</td></tr> }</tbody></table></div></div>
+
+@section Scripts {
+    <script>
+        setTimeout(function () {
+            location.reload();
+        }, 5000);
+    </script>
+}
