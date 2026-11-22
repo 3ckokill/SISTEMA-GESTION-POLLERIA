@@ -27,6 +27,12 @@ namespace PolleriaLovely.Data
                     NombreRol = "Mozo",
                     Descripcion = "Atiende a los clientes y registra pedidos.",
                     Estado = true
+                },
+                new Rol
+                {
+                    NombreRol = "Cocinero",
+                    Descripcion = "Visualiza y prepara los pedidos en cocina.",
+                    Estado = true
                 }
             };
 

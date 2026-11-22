@@ -76,6 +76,7 @@ namespace PolleriaLovely.Controllers
                 "Administrador" => "Administrador",
                 "Cajero" => "Cajero",
                 "Mozo" => "Mozo",
+                "Cocinero" => "Cocina",
                 _ => null
             };
 

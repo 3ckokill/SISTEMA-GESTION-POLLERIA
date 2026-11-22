@@ -79,6 +79,16 @@ if (app.Environment.IsDevelopment())
             Telefono = "999999997",
             NombreRol = "Mozo",
             Contrasena = "LovelyMozo2026!"
+        },
+        new
+        {
+            NombreUsuario = "cocinero.prueba",
+            Nombre = "Cocinero",
+            Apellido = "Prueba",
+            Correo = "cocinero.prueba@lovely.local",
+            Telefono = "999999996",
+            NombreRol = "Cocinero",
+            Contrasena = "LovelyCocina2026!"
         }
     };
 
