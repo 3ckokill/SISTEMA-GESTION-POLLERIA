@@ -8,7 +8,7 @@
     var esCocinero = User.IsInRole("Cocinero");
     var conMenu = esAdmin || esCajero || esMozo;
     var rol = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
-    var inicioCtl = esAdmin ? "Administrador" : esCajero ? "Cajero" : esMozo ? "Mozo" : "Home";
+    var inicioCtl = esAdmin ? "Administrador" : esCajero ? "Cajero" : esMozo ? "Mozo" : esCocinero ? "Cocina" : "Home";
 
     bool En(string c) => string.Equals(c, ctl, StringComparison.OrdinalIgnoreCase);
     string Cls(bool activo) => activo ? " active" : "";

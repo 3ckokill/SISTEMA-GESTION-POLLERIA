@@ -1298,3 +1298,203 @@ body:is(.admin-layout, .cajero-layout, .mozo-layout) .footer .container {
     background: #d4a51b;
     color: #2b1b12;
 }
+
+/* ===== Lovely Chicken: vista de Cocina ===== */
+.cocina-layout {
+    background: var(--lc-cream);
+    color: var(--lc-ink);
+    margin-bottom: var(--lc-footer-h);
+}
+
+    .cocina-layout main {
+        padding-top: 1.5rem;
+    }
+
+    .cocina-layout .page-heading {
+        background: transparent;
+        border-radius: 0;
+        box-shadow: none;
+        color: var(--lc-ink);
+        margin: 0 0 1.25rem;
+        padding: 0;
+    }
+
+        .cocina-layout .page-heading h1 {
+            color: var(--lc-ink);
+            font-weight: 700;
+        }
+
+        .cocina-layout .page-heading p {
+            color: var(--lc-muted);
+        }
+
+    .cocina-layout .btn-primary {
+        background: var(--lc-red);
+        border-color: var(--lc-red);
+        color: #fff;
+    }
+
+        .cocina-layout .btn-primary:hover {
+            background: var(--lc-red-dark);
+            border-color: var(--lc-red-dark);
+        }
+
+    .cocina-layout .btn-outline-primary {
+        border-color: var(--lc-red);
+        color: var(--lc-red);
+    }
+
+        .cocina-layout .btn-outline-primary:hover {
+            background: var(--lc-red);
+            border-color: var(--lc-red);
+            color: #fff;
+        }
+
+    .cocina-layout .footer {
+        background: var(--lc-cream);
+        border-top: 1px solid var(--lc-line);
+        bottom: 0;
+        height: var(--lc-footer-h);
+        left: 0;
+        line-height: var(--lc-footer-h);
+        position: fixed;
+        right: 0;
+        text-align: center;
+        white-space: nowrap;
+        width: 100%;
+        z-index: 1020;
+    }
+
+        .cocina-layout .footer .container {
+            max-width: none;
+            padding: 0 1.25rem;
+        }
+
+        .cocina-layout .footer a {
+            color: var(--lc-red);
+        }
+
+.comanda-card {
+    background: #fff;
+    border: 1px solid var(--lc-line);
+    border-radius: .85rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    transition: border-color .2s, transform .2s;
+}
+
+    .comanda-card:hover {
+        border-color: rgba(184, 58, 26, .45);
+    }
+
+.comanda-head {
+    align-items: center;
+    background: var(--lc-head);
+    border-bottom: 1px solid var(--lc-line);
+    display: flex;
+    justify-content: space-between;
+    padding: .9rem 1.15rem;
+}
+
+.comanda-head-preparacion {
+    background: #fbf0d6;
+    border-bottom-color: #ecd79b;
+}
+
+.comanda-title {
+    color: var(--lc-ink);
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.comanda-mesa {
+    background: var(--lc-ink);
+    border-radius: .45rem;
+    color: #fff8ef;
+    font-size: .82rem;
+    font-weight: 700;
+    padding: .25rem .65rem;
+}
+
+.comanda-meta {
+    color: var(--lc-muted);
+    display: flex;
+    font-size: .82rem;
+    justify-content: space-between;
+    padding: .75rem 1.15rem 0;
+}
+
+.comanda-items {
+    flex: 1;
+    list-style: none;
+    margin: .75rem 0;
+    padding: 0 1.15rem;
+}
+
+    .comanda-items li {
+        align-items: center;
+        border-bottom: 1px dashed var(--lc-line);
+        display: flex;
+        gap: .75rem;
+        justify-content: space-between;
+        padding: .55rem 0;
+    }
+
+        .comanda-items li:last-child {
+            border-bottom: 0;
+        }
+
+.comanda-producto {
+    color: var(--lc-ink);
+    font-weight: 600;
+}
+
+.comanda-cant {
+    background: #fbe6df;
+    border-radius: 999px;
+    color: var(--lc-red);
+    font-size: .88rem;
+    font-weight: 800;
+    min-width: 2.2rem;
+    padding: .2rem .6rem;
+    text-align: center;
+}
+
+.comanda-foot {
+    border-top: 1px solid var(--lc-line);
+    display: grid;
+    gap: .5rem;
+    padding: .9rem 1.15rem;
+}
+
+.btn-cocina-prep {
+    background: #e4ad18;
+    border: 0;
+    border-radius: .5rem;
+    color: var(--lc-ink);
+    font-weight: 700;
+    min-height: 40px;
+    width: 100%;
+}
+
+    .btn-cocina-prep:hover {
+        background: #cfa016;
+        color: var(--lc-ink);
+    }
+
+.btn-cocina-listo {
+    background: #166534;
+    border: 0;
+    border-radius: .5rem;
+    color: #fff;
+    font-weight: 700;
+    min-height: 40px;
+    width: 100%;
+}
+
+    .btn-cocina-listo:hover {
+        background: #14532d;
+        color: #fff;
+    }

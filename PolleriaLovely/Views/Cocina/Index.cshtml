@@ -1,84 +1,104 @@
 ﻿@model IEnumerable<PolleriaLovely.Models.Pedido>
 @{
     ViewData["Title"] = "Cocina";
+    var totalPendientes = Model.Count(p => p.Estado == PolleriaLovely.Models.EstadoPedido.Pendiente);
+    var totalPreparacion = Model.Count(p => p.Estado == PolleriaLovely.Models.EstadoPedido.EnPreparacion);
 }
 
-<div class="page-heading d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h1>Monitor de Cocina</h1>
-        <p class="text-muted mb-0">Pedidos pendientes y en preparación</p>
+<div class="role-dashboard py-2">
+    <section class="role-hero mb-4">
+        <div>
+            <p class="dashboard-eyebrow">PREPARACIÓN EN COCINA</p>
+            <h1>Monitor de Cocina</h1>
+            <p>
+                Pedidos pendientes y en preparación.
+                @if (Model.Any())
+                {
+                    <span>(@totalPendientes pendiente(s) • @totalPreparacion en preparación)</span>
+                }
+            </p>
+        </div>
+        <div class="role-hero-mark role-hero-mark-gold" aria-hidden="true">C</div>
+    </section>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted small">Se actualiza automáticamente cada 15 segundos.</span>
+        <button type="button" onclick="location.reload()" class="btn btn-outline-primary btn-sm">Actualizar ahora</button>
     </div>
-    <button type="button" onclick="location.reload()" class="btn btn-outline-primary">Actualizar ahora</button>
-</div>
 
-@if (TempData["Mensaje"] is string mensaje)
-{
-    <div class="alert alert-success">@mensaje</div>
-}
-@if (TempData["Error"] is string error)
-{
-    <div class="alert alert-warning">@error</div>
-}
+    @if (TempData["Mensaje"] is string mensaje)
+    {
+        <div class="alert alert-success">@mensaje</div>
+    }
+    @if (TempData["Error"] is string error)
+    {
+        <div class="alert alert-warning">@error</div>
+    }
 
-@if (!Model.Any())
-{
-    <div class="table-card text-center py-5">
-        <h2 class="h5 mb-1">No hay pedidos pendientes en cocina</h2>
-        <p class="text-muted mb-0">Los nuevos pedidos registrados por los mozos aparecerán aquí automáticamente.</p>
-    </div>
-}
-else
-{
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-        @foreach (var item in Model)
-        {
-            var enPreparacion = item.Estado == PolleriaLovely.Models.EstadoPedido.EnPreparacion;
-            var minutosEspera = (int)(DateTime.Now - item.Fecha).TotalMinutes;
+    @if (!Model.Any())
+    {
+        <div class="table-card text-center py-5">
+            <span class="dashboard-card-icon icon-gold mb-2">✓</span>
+            <h2 class="h5 mb-1">No hay pedidos pendientes en cocina</h2>
+            <p class="text-muted mb-0">Los nuevos pedidos registrados por los mozos aparecerán aquí automáticamente.</p>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            @foreach (var item in Model)
+            {
+                var enPreparacion = item.Estado == PolleriaLovely.Models.EstadoPedido.EnPreparacion;
+                var minutosEspera = (int)(DateTime.Now - item.Fecha).TotalMinutes;
 
-            <div class="col">
-                <div class="card h-100 shadow-sm border-@(enPreparacion ? "warning" : "danger")">
-                    <div class="card-header d-flex justify-content-between align-items-center @(enPreparacion ? "bg-warning text-dark" : "bg-danger text-white")">
-                        <span class="fw-bold">Pedido #@item.IdPedido — Mesa @(item.Mesa?.Numero.ToString() ?? item.IdMesa.ToString())</span>
-                        <span class="badge bg-dark">@(enPreparacion ? "En preparación" : "Pendiente")</span>
-                    </div>
+                <div class="col">
+                    <article class="comanda-card">
+                        <div class="comanda-head @(enPreparacion ? "comanda-head-preparacion" : "")">
+                            <div>
+                                <div class="comanda-title">Pedido #@item.IdPedido</div>
+                                <span class="status-badge @(enPreparacion ? "status-active" : "status-inactive") mt-1">
+                                    @(enPreparacion ? "En preparación" : "Pendiente")
+                                </span>
+                            </div>
+                            <span class="comanda-mesa">Mesa @(item.Mesa?.Numero.ToString() ?? item.IdMesa.ToString())</span>
+                        </div>
 
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between text-muted small mb-2">
-                            <span>Hora: @item.Fecha.ToString("HH:mm") (@(minutosEspera < 1 ? "recién" : $"hace {minutosEspera} min"))</span>
+                        <div class="comanda-meta">
+                            <span>Hora: @item.Fecha.ToString("HH:mm") (@(minutosEspera < 1 ? "recién" : $"{minutosEspera} min"))</span>
                             <span>Mozo: @(item.Usuario?.NombreUsuario ?? "—")</span>
                         </div>
 
-                        <ul class="list-group list-group-flush border-top border-bottom my-2">
+                        <ul class="comanda-items">
                             @foreach (var detalle in item.DetallePedidos)
                             {
-                                <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
-                                    <span class="fw-semibold">@(detalle.Producto?.NombreProducto ?? $"Producto #{detalle.IdProducto}")</span>
-                                    <span class="badge bg-primary rounded-pill fs-6">@detalle.Cantidad×</span>
+                                <li>
+                                    <span class="comanda-producto">@(detalle.Producto?.NombreProducto ?? $"Producto #{detalle.IdProducto}")</span>
+                                    <span class="comanda-cant">@detalle.Cantidad×</span>
                                 </li>
                             }
                         </ul>
-                    </div>
 
-                    <div class="card-footer bg-transparent border-top-0 d-grid gap-2 pb-3">
-                        @if (item.Estado == PolleriaLovely.Models.EstadoPedido.Pendiente)
-                        {
+                        <div class="comanda-foot">
+                            @if (item.Estado == PolleriaLovely.Models.EstadoPedido.Pendiente)
+                            {
+                                <form asp-action="CambiarEstado" method="post">
+                                    <input type="hidden" name="idPedido" value="@item.IdPedido" />
+                                    <input type="hidden" name="nuevoEstado" value="@((int)PolleriaLovely.Models.EstadoPedido.EnPreparacion)" />
+                                    <button type="submit" class="btn btn-cocina-prep">Empezar a preparar</button>
+                                </form>
+                            }
                             <form asp-action="CambiarEstado" method="post">
                                 <input type="hidden" name="idPedido" value="@item.IdPedido" />
-                                <input type="hidden" name="nuevoEstado" value="@((int)PolleriaLovely.Models.EstadoPedido.EnPreparacion)" />
-                                <button type="submit" class="btn btn-warning w-100 fw-semibold">Empezar a preparar</button>
+                                <input type="hidden" name="nuevoEstado" value="@((int)PolleriaLovely.Models.EstadoPedido.Listo)" />
+                                <button type="submit" class="btn btn-cocina-listo">Marcar como Listo</button>
                             </form>
-                        }
-                        <form asp-action="CambiarEstado" method="post">
-                            <input type="hidden" name="idPedido" value="@item.IdPedido" />
-                            <input type="hidden" name="nuevoEstado" value="@((int)PolleriaLovely.Models.EstadoPedido.Listo)" />
-                            <button type="submit" class="btn btn-success w-100 fw-semibold">Marcar como Listo</button>
-                        </form>
-                    </div>
+                        </div>
+                    </article>
                 </div>
-            </div>
-        }
-    </div>
-}
+            }
+        </div>
+    }
+</div>
 
 @section Scripts {
     <script>
