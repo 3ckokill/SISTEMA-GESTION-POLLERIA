@@ -5,13 +5,9 @@
     var esAdmin = User.IsInRole("Administrador");
     var esCajero = User.IsInRole("Cajero");
     var esMozo = User.IsInRole("Mozo");
+    var conMenu = esAdmin || esCajero || esMozo;
     var rol = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
-
-    var panelController = esAdmin ? "Administrador"
-                        : esCajero ? "Cajero"
-                        : esMozo ? "Mozo"
-                        : "Usuario";
-    var panelAction = autenticado ? "Index" : "Login";
+    var inicioCtl = esAdmin ? "Administrador" : esCajero ? "Cajero" : esMozo ? "Mozo" : "Home";
 
     bool En(string c) => string.Equals(c, ctl, StringComparison.OrdinalIgnoreCase);
     string Cls(bool activo) => activo ? " active" : "";
@@ -30,7 +26,7 @@
 <body class="@(esAdmin ? "admin-layout" : esCajero ? "cajero-layout" : esMozo ? "mozo-layout" : "")@(ViewData["PaginaLogin"] is true ? " login-layout" : "")">
     <header class="app-topbar">
         <div class="app-topbar-inner">
-            @if (esAdmin)
+            @if (conMenu)
             {
                 <button class="btn btn-outline-primary btn-sm d-lg-none" type="button"
                         data-bs-toggle="collapse" data-bs-target="#menuLateral"
@@ -38,31 +34,14 @@
                     Menú
                 </button>
             }
-            <a class="app-brand" asp-area="" asp-controller="@panelController" asp-action="@panelAction">Lovely Chicken</a>
 
-            @if (esCajero)
-            {
-                <nav class="app-topnav" aria-label="Principal">
-                    <a class="@Cls(En("Ventas"))" asp-controller="Ventas" asp-action="Create">Nueva venta</a>
-                    <a class="@Cls(En("Pedidos"))" asp-controller="Pedidos" asp-action="Index">Pedidos</a>
-                    <a class="@Cls(En("Caja"))" asp-controller="Caja" asp-action="Index">Caja</a>
-                    <a class="@Cls(En("Cajero"))" asp-controller="Cajero" asp-action="Index">Panel</a>
-                </nav>
-            }
-            else if (esMozo)
-            {
-                <nav class="app-topnav" aria-label="Principal">
-                    <a class="@Cls(En("Pedidos") && accion != "Create")" asp-controller="Pedidos" asp-action="Index">Pedidos</a>
-                    <a class="@Cls(En("Pedidos") && accion == "Create")" asp-controller="Pedidos" asp-action="Create">Nuevo pedido</a>
-                    <a class="@Cls(En("Mozo"))" asp-controller="Mozo" asp-action="Index">Panel</a>
-                </nav>
-            }
+            <a class="app-brand" asp-area="" asp-controller="@inicioCtl" asp-action="Index">Lovely Chicken</a>
 
             <div class="app-user">
                 @if (autenticado)
                 {
                     <span>@User.Identity!.Name (@rol)</span>
-                    @if (!esAdmin)
+                    @if (!conMenu)
                     {
                         <form asp-controller="Usuario" asp-action="Logout" method="post" class="d-inline">
                             <button type="submit" class="btn btn-outline-danger btn-sm">Cerrar sesión</button>
@@ -77,23 +56,37 @@
         </div>
     </header>
 
-    @if (esAdmin)
+    @if (conMenu)
     {
         <div class="app-body">
-                        <aside id="menuLateral" class="sidebar collapse d-lg-block" aria-label="Menú del administrador">
+            <aside id="menuLateral" class="sidebar collapse d-lg-block" aria-label="@(esAdmin ? "Menú del administrador" : esCajero ? "Menú del cajero" : "Menú del mozo")">
                 <div class="sidebar-inner">
                     <nav class="sidebar-nav">
-                        <a class="@Cls(En("Productos"))" asp-controller="Productos" asp-action="Index">Productos</a>
-                        <a class="@Cls(En("Categorias"))" asp-controller="Categorias" asp-action="Index">Categorías</a>
-                        <a class="@Cls(En("Insumos"))" asp-controller="Insumos" asp-action="Index">Insumos</a>
-                        <a class="@Cls(En("Proveedores"))" asp-controller="Proveedores" asp-action="Index">Proveedores</a>
-                        <a class="@Cls(En("Ventas"))" asp-controller="Ventas" asp-action="Index">Ventas</a>
-                        <a class="@Cls(En("Pedidos"))" asp-controller="Pedidos" asp-action="Index">Pedidos</a>
-                        <a class="@Cls(En("Mesas"))" asp-controller="Mesas" asp-action="Index">Mesas</a>
-                        <a class="@Cls(En("Caja"))" asp-controller="Caja" asp-action="Index">Caja</a>
-                        <a class="@Cls(En("Gastos"))" asp-controller="Gastos" asp-action="Index">Gastos</a>
-                        <a class="@Cls(En("Usuarios"))" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
-                        <a class="@Cls(En("Reportes"))" asp-controller="Reportes" asp-action="Index">Reportes</a>
+                        @if (esAdmin)
+                        {
+                            <a class="@Cls(En("Productos"))" asp-controller="Productos" asp-action="Index">Productos</a>
+                            <a class="@Cls(En("Categorias"))" asp-controller="Categorias" asp-action="Index">Categorías</a>
+                            <a class="@Cls(En("Insumos"))" asp-controller="Insumos" asp-action="Index">Insumos</a>
+                            <a class="@Cls(En("Proveedores"))" asp-controller="Proveedores" asp-action="Index">Proveedores</a>
+                            <a class="@Cls(En("Ventas"))" asp-controller="Ventas" asp-action="Index">Ventas</a>
+                            <a class="@Cls(En("Pedidos"))" asp-controller="Pedidos" asp-action="Index">Pedidos</a>
+                            <a class="@Cls(En("Mesas"))" asp-controller="Mesas" asp-action="Index">Mesas</a>
+                            <a class="@Cls(En("Caja"))" asp-controller="Caja" asp-action="Index">Caja</a>
+                            <a class="@Cls(En("Gastos"))" asp-controller="Gastos" asp-action="Index">Gastos</a>
+                            <a class="@Cls(En("Usuarios"))" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                            <a class="@Cls(En("Reportes"))" asp-controller="Reportes" asp-action="Index">Reportes</a>
+                        }
+                        else if (esCajero)
+                        {
+                            <a class="@Cls(En("Ventas"))" asp-controller="Ventas" asp-action="Create">Nueva venta</a>
+                            <a class="@Cls(En("Pedidos"))" asp-controller="Pedidos" asp-action="Index">Pedidos</a>
+                            <a class="@Cls(En("Caja"))" asp-controller="Caja" asp-action="Index">Caja</a>
+                        }
+                        else
+                        {
+                            <a class="@Cls(En("Pedidos") && accion != "Create")" asp-controller="Pedidos" asp-action="Index">Pedidos</a>
+                            <a class="@Cls(En("Pedidos") && accion == "Create")" asp-controller="Pedidos" asp-action="Create">Nuevo pedido</a>
+                        }
                     </nav>
                     <form asp-controller="Usuario" asp-action="Logout" method="post" class="sidebar-foot">
                         <button type="submit" class="btn btn-logout">Cerrar sesión</button>
