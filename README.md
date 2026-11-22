@@ -365,8 +365,8 @@ En modo **Development**, el sistema inicializa automáticamente los roles del si
 
 | Rol | Usuario | Contraseña Inicial | Acceso y Capacidades |
 | :--- | :--- | :--- | :--- |
-| ** Administrador** | `admin.prueba` | `LovelyDemo2026!` | Acceso completo al sistema, reportes de utilidad, usuarios, productos, gastos y auditoría. |
-| ** Cajero** | `cajero.prueba` | `LovelyCaja2026!` | Apertura y cierre de caja, cobro de comandas, precuentas y ventas de mostrador. |
-| ** Mozo** | `mozo.prueba` | `LovelyMozo2026!` | Toma de pedidos por mesa, adición de extras y cambio de estados en salón. |
+|  Administrador | `admin.prueba` | `LovelyDemo2026!` | Acceso completo al sistema, reportes de utilidad, usuarios, productos, gastos y auditoría. |
+|  Cajero | `cajero.prueba` | `LovelyCaja2026!` | Apertura y cierre de caja, cobro de comandas, precuentas y ventas de mostrador. |
+|  Mozo | `mozo.prueba` | `LovelyMozo2026!` | Toma de pedidos por mesa, adición de extras y cambio de estados en salón. |
 
 > Estas credenciales son generadas exclusivamente con fines didácticos y de pruebas locales. En entornos de producción, las credenciales por defecto se omiten automáticamente.
