@@ -26,8 +26,15 @@ namespace PolleriaLovely.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                await HttpContext.SignOutAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme);
+                return RedirectToAction(nameof(Login));
+            }
+
             return View();
         }
 
@@ -93,7 +100,8 @@ namespace PolleriaLovely.Controllers
 
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(identidad));
+                new ClaimsPrincipal(identidad),
+                new AuthenticationProperties { IsPersistent = false });
 
             return RedirectToAction("Index", controlador);
         }
