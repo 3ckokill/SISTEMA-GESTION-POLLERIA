@@ -1,50 +1,18 @@
 @model PolleriaLovely.Models.Categoria
+@{ ViewData["Title"] = "Eliminar categoría"; }
 
-@{
-    ViewData["Title"] = "Delete";
-}
-
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>PolleriaLovely.Models.Categoria</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreCategoria)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreCategoria)
-        </dd>
+<div class="form-card">
+    <p class="dashboard-eyebrow mb-2">CATÁLOGO</p>
+    <h1>Eliminar categoría</h1>
+    <div class="alert alert-warning mt-4">¿Estás seguro de que deseas eliminar esta categoría?</div>
+    <dl class="row mb-4">
+        <dt class="col-sm-4">Nombre</dt><dd class="col-sm-8">@Model.NombreCategoria</dd>
+        <dt class="col-sm-4">Descripción</dt><dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Descripcion) ? "Sin descripción" : Model.Descripcion)</dd>
+        <dt class="col-sm-4">Productos asociados</dt><dd class="col-sm-8">@(Model.Productos?.Count ?? 0)</dd>
     </dl>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Productos)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Productos)
-        </dd>
-    </dl>
-    <form asp-action="Delete">
+    <form asp-action="Delete" method="post">
         <input type="hidden" asp-for="IdCategoria" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a asp-action="Index" class="btn btn-light">Cancelar</a>
     </form>
 </div>

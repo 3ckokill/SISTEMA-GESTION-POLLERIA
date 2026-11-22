@@ -1,45 +1,19 @@
 @model PolleriaLovely.Models.Categoria
+@{ ViewData["Title"] = "Detalle de categoría"; }
 
-@{
-    ViewData["Title"] = "Details";
-}
-
-<h1>Details</h1>
-
-<div>
-    <h4>Categoria</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreCategoria)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreCategoria)
-        </dd>
+<div class="form-card">
+    <div class="d-flex justify-content-between align-items-start mb-4">
+        <div>
+            <p class="dashboard-eyebrow mb-2">CATÁLOGO</p>
+            <h1>Detalle de categoría</h1>
+        </div>
+        <span class="status-badge @(Model.Estado ? "status-active" : "status-inactive")">@(Model.Estado ? "Activa" : "Inactiva")</span>
+    </div>
+    <dl class="row mb-4">
+        <dt class="col-sm-4">Nombre</dt><dd class="col-sm-8">@Model.NombreCategoria</dd>
+        <dt class="col-sm-4">Descripción</dt><dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Descripcion) ? "Sin descripción" : Model.Descripcion)</dd>
+        <dt class="col-sm-4">Productos asociados</dt><dd class="col-sm-8">@(Model.Productos?.Count ?? 0)</dd>
     </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Productos)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Productos)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdCategoria">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-light">Volver a categorías</a>
+    <a asp-action="Edit" asp-route-id="@Model.IdCategoria" class="btn btn-primary">Editar categoría</a>
 </div>
