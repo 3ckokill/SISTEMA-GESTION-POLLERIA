@@ -1498,3 +1498,34 @@ body:is(.admin-layout, .cajero-layout, .mozo-layout) .footer .container {
         background: #14532d;
         color: #fff;
     }
+
+/* ===== Lovely Chicken: pie de página (bloque final, manda sobre los anteriores) ===== */
+body:not(.login-layout) {
+    margin-bottom: var(--lc-footer-h, 44px);
+}
+
+    body:not(.login-layout) .footer {
+        background: var(--lc-cream, #fff8ef);
+        border-top: 1px solid var(--lc-line, #e6d9c8);
+        bottom: 0 !important;
+        display: block;
+        height: var(--lc-footer-h, 44px);
+        left: 0 !important;
+        line-height: var(--lc-footer-h, 44px);
+        position: fixed !important;
+        right: 0 !important;
+        text-align: center;
+        white-space: nowrap;
+        width: 100%;
+        z-index: 1020;
+    }
+
+        body:not(.login-layout) .footer .container {
+            max-width: none;
+            padding: 0 1.25rem;
+            text-align: center;
+        }
+
+        body:not(.login-layout) .footer a {
+            color: var(--lc-red, #b83a1a);
+        }

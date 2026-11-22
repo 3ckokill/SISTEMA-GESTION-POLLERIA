@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PolleriaLovely.styles.css" asp-append-version="true" />
 </head>
-<body class="@(esAdmin ? "admin-layout" : esCajero ? "cajero-layout" : esMozo ? "mozo-layout" : "")@(ViewData["PaginaLogin"] is true ? " login-layout" : "")">
+<body class="@(esAdmin ? "admin-layout" : esCajero ? "cajero-layout" : esMozo ? "mozo-layout" : esCocinero ? "cocina-layout" : "")@(ViewData["PaginaLogin"] is true ? " login-layout" : "")">
     <header class="app-topbar">
         <div class="app-topbar-inner">
             @if (conMenu)
