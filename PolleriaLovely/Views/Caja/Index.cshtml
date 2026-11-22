@@ -1,4 +1,13 @@
-@model PolleriaLovely.ViewModels.CajaPanelViewModel
+<div class="col">
+    <div class="card h-100">
+        <div class="card-body">
+            <div class="text-muted">Otros</div>
+            <div class="fs-4 fw-semibold">
+                S/ @Model.TotalOtro.ToString("N2")
+            </div>
+        </div>
+    </div>
+</div>@model PolleriaLovely.ViewModels.CajaPanelViewModel
 @{ ViewData["Title"] = "Caja"; }
 <div class="page-heading d-flex justify-content-between align-items-center mb-4"><div><h1>Caja</h1><p class="text-muted mb-0">Control de apertura, ventas y cierre de caja.</p></div>@if (!Model.EsAdministrador && Model.CajaActiva == null) { <a asp-action="Abrir" class="btn btn-primary">Abrir caja</a> } @if (!Model.EsAdministrador && Model.CajaActiva != null) { <a asp-action="Cerrar" class="btn btn-warning">Cerrar caja</a> }</div>
 @if (TempData["Mensaje"] is string mensaje) { <div class="alert alert-success">@mensaje</div> }
