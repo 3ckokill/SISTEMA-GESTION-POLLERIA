@@ -6,60 +6,76 @@
     ViewData["PaginaLogin"] = true;
 }
 
-<div class="login-page login-page-dark">
-    <div class="login-orbit login-orbit-one"></div>
-    <div class="login-orbit login-orbit-two"></div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Lovely Chicken</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PolleriaLovely.styles.css" asp-append-version="true" />
+</head>
+<body class="login-layout">
 
-    <section class="login-shell" aria-label="Acceso al sistema Lovely Chicken">
-        <div class="login-brand-panel">
-            <img class="login-logo" src="~/images/lovely-chicken-logo.png" alt="Lovely Chicken - El verdadero sabor cajamarquino" />
-            <p class="eyebrow">GESTIÓN • SERVICIO • CALIDAD</p>
-            <p class="brand-copy">
-                Todo el sabor de casa, organizado en un solo lugar.
-            </p>
-            <div class="brand-line" aria-hidden="true"></div>
-            <p class="brand-caption">Sistema de gestión</p>
-        </div>
+    <div class="login-page login-page-dark">
+        <div class="login-orbit login-orbit-one"></div>
+        <div class="login-orbit login-orbit-two"></div>
 
-        <div class="login-form-panel">
-            <div class="login-heading">
-                <p class="eyebrow">Bienvenido de vuelta</p>
-                <h2>Inicia sesión</h2>
-                <p>Ingresa tus credenciales para continuar.</p>
+        <section class="login-shell" aria-label="Acceso al sistema Lovely Chicken">
+            <div class="login-brand-panel">
+                <img class="login-logo" src="~/images/lovely-chicken-logo.png" alt="Lovely Chicken - El verdadero sabor cajamarquino" />
+                <p class="eyebrow">GESTIÓN • SERVICIO • CALIDAD</p>
+                <p class="brand-copy">
+                    Todo el sabor de casa, organizado en un solo lugar.
+                </p>
+                <div class="brand-line" aria-hidden="true"></div>
+                <p class="brand-caption">Sistema de gestión</p>
             </div>
 
-            <form asp-controller="Usuario" asp-action="Login" method="post" class="login-form">
-                <div asp-validation-summary="ModelOnly" class="login-validation" role="alert"></div>
-
-                <div class="login-field">
-                    <label asp-for="NombreUsuario" class="form-label">Nombre de usuario</label>
-                    <div class="input-with-icon">
-                        <span class="input-icon" aria-hidden="true">⌁</span>
-                        <input asp-for="NombreUsuario" class="form-control" placeholder="ej. admin.prueba" autocomplete="username" />
-                    </div>
-                    <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+            <div class="login-form-panel">
+                <div class="login-heading">
+                    <p class="eyebrow">Bienvenido de vuelta</p>
+                    <h2>Inicia sesión</h2>
+                    <p>Ingresa tus credenciales para continuar.</p>
                 </div>
 
-                <div class="login-field">
-                    <label asp-for="Contrasena" class="form-label">Contraseña</label>
-                    <div class="input-with-icon">
-                        <span class="input-icon" aria-hidden="true">✦</span>
-                        <input asp-for="Contrasena" type="password" class="form-control" placeholder="Ingresa tu contraseña" autocomplete="current-password" />
+                <form asp-controller="Usuario" asp-action="Login" method="post" class="login-form">
+                    <div asp-validation-summary="ModelOnly" class="login-validation" role="alert"></div>
+
+                    <div class="login-field">
+                        <label asp-for="NombreUsuario" class="form-label">Nombre de usuario</label>
+                        <div class="input-with-icon">
+                            <span class="input-icon" aria-hidden="true">⌁</span>
+                            <input asp-for="NombreUsuario" class="form-control" placeholder="ej. admin.prueba" autocomplete="username" />
+                        </div>
+                        <span asp-validation-for="NombreUsuario" class="text-danger"></span>
                     </div>
-                    <span asp-validation-for="Contrasena" class="text-danger"></span>
-                </div>
 
-                <button type="submit" class="btn login-submit">
-                    <span>Entrar al sistema</span>
-                    <span aria-hidden="true">→</span>
-                </button>
-            </form>
+                    <div class="login-field">
+                        <label asp-for="Contrasena" class="form-label">Contraseña</label>
+                        <div class="input-with-icon">
+                            <span class="input-icon" aria-hidden="true">✦</span>
+                            <input asp-for="Contrasena" type="password" class="form-control" placeholder="Ingresa tu contraseña" autocomplete="current-password" />
+                        </div>
+                        <span asp-validation-for="Contrasena" class="text-danger"></span>
+                    </div>
 
-            <p class="login-footer-note">Lovely Chicken <span>•</span> Gestión simple y cercana</p>
-        </div>
-    </section>
-</div>
+                    <button type="submit" class="btn login-submit">
+                        <span>Entrar al sistema</span>
+                        <span aria-hidden="true">→</span>
+                    </button>
+                </form>
 
-@section Scripts {
+                <p class="login-footer-note">Lovely Chicken <span>•</span> Gestión simple y cercana</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     <partial name="_ValidationScriptsPartial" />
-}
+</body>
+</html>
