@@ -5,6 +5,7 @@
     var esAdmin = User.IsInRole("Administrador");
     var esCajero = User.IsInRole("Cajero");
     var esMozo = User.IsInRole("Mozo");
+    var esCocinero = User.IsInRole("Cocinero");
     var conMenu = esAdmin || esCajero || esMozo;
     var rol = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
     var inicioCtl = esAdmin ? "Administrador" : esCajero ? "Cajero" : esMozo ? "Mozo" : "Home";
@@ -70,6 +71,7 @@
                             <a class="@Cls(En("Proveedores"))" asp-controller="Proveedores" asp-action="Index">Proveedores</a>
                             <a class="@Cls(En("Ventas"))" asp-controller="Ventas" asp-action="Index">Ventas</a>
                             <a class="@Cls(En("Pedidos"))" asp-controller="Pedidos" asp-action="Index">Pedidos</a>
+                            <a class="@Cls(En("Cocina"))" asp-controller="Cocina" asp-action="Index">Cocina</a>
                             <a class="@Cls(En("Mesas"))" asp-controller="Mesas" asp-action="Index">Mesas</a>
                             <a class="@Cls(En("Caja"))" asp-controller="Caja" asp-action="Index">Caja</a>
                             <a class="@Cls(En("Gastos"))" asp-controller="Gastos" asp-action="Index">Gastos</a>

@@ -32,7 +32,7 @@ namespace PolleriaLovely.Controllers
             return View(pedidosCocina);
         }
 
-        // POST: Cocina/CambiarEstado — avanza el pedido en cocina (Pendiente -> EnPreparacion -> Listo)
+        // POST: Cocina/CambiarEstado
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CambiarEstado(int idPedido, EstadoPedido nuevoEstado)

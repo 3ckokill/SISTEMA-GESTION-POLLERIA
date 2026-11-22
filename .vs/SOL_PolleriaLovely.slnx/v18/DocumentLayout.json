@@ -3,8 +3,28 @@
   "WorkspaceRootPath": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\views\\cocina\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\views\\cocina\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\controllers\\cocinacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\controllers\\cocinacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\views\\pedidos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\views\\pedidos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\views\\mozo\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\views\\mozo\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\controllers\\cajerocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +45,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\data\\inicializadordatos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -73,14 +89,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\views\\cajero\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\views\\cajero\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\views\\mozo\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\views\\mozo\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|solutionrelative:pollerialovely\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A3EF8B2F-DDF6-C872-CE68-B4E302FEDAD0}|PolleriaLovely\\PolleriaLovely.csproj|d:\\upn\\ciclo 6\\dise\u00F1o\\proyecto\\sistema-gestion-polleria\\pollerialovely\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -222,19 +230,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Cocina\\Index.cshtml",
+              "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Cocina\\Index.cshtml",
+              "ToolTip": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Cocina\\Index.cshtml",
+              "RelativeToolTip": "PolleriaLovely\\Views\\Cocina\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-11-22T20:41:00.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Pedidos\\Index.cshtml",
+              "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Pedidos\\Index.cshtml",
+              "ToolTip": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Pedidos\\Index.cshtml",
+              "RelativeToolTip": "PolleriaLovely\\Views\\Pedidos\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFYAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-11-22T20:39:12.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "CocinaController.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Controllers\\CocinaController.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Controllers\\CocinaController.cs",
               "ToolTip": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Controllers\\CocinaController.cs",
               "RelativeToolTip": "PolleriaLovely\\Controllers\\CocinaController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAABhAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-11-22T20:36:31.847Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "PedidosController.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Controllers\\PedidosController.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Controllers\\PedidosController.cs",
@@ -242,12 +276,11 @@
               "RelativeToolTip": "PolleriaLovely\\Controllers\\PedidosController.cs",
               "ViewState": "AgIAANsBAAAAAAAAAAAAwPQBAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-22T20:33:34.804Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-22T20:33:34.804Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "Cocina.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\Cocina.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Cocina.cs",
@@ -259,7 +292,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Reportes\\Index.cshtml",
               "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Reportes\\Index.cshtml",
@@ -271,7 +304,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "EstadoPedido.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\EstadoPedido.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\EstadoPedido.cs",
@@ -283,7 +316,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\appsettings.json",
               "RelativeDocumentMoniker": "PolleriaLovely\\appsettings.json",
@@ -295,7 +328,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "InicializadorDatos.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Data\\InicializadorDatos.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Data\\InicializadorDatos.cs",
@@ -307,19 +340,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Program.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Program.cs",
               "ToolTip": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Program.cs",
               "RelativeToolTip": "PolleriaLovely\\Program.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAAAFoAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAFoAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-22T16:45:02.616Z"
+              "WhenOpened": "2026-11-22T16:45:02.616Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "PolleriaLovely\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE4AAAB1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-11-22T16:57:27.237Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "UsuarioController.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Controllers\\UsuarioController.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Controllers\\UsuarioController.cs",
@@ -331,7 +378,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Mozo\\Index.cshtml",
+              "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Mozo\\Index.cshtml",
+              "ToolTip": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Mozo\\Index.cshtml",
+              "RelativeToolTip": "PolleriaLovely\\Views\\Mozo\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-11-22T18:40:25.43Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{ca8cc5c7-0231-406a-95cd-aa5ed6ac0190}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "Pedido.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\Pedido.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Pedido.cs",
@@ -343,7 +407,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "CajeroController.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Controllers\\CajeroController.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Controllers\\CajeroController.cs",
@@ -351,16 +415,11 @@
               "RelativeToolTip": "PolleriaLovely\\Controllers\\CajeroController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-22T16:04:08.93Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{ca8cc5c7-0231-406a-95cd-aa5ed6ac0190}"
+              "WhenOpened": "2026-11-22T16:04:08.93Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "DetallePedido.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\DetallePedido.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\DetallePedido.cs",
@@ -372,7 +431,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "Abrir.cshtml",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Caja\\Abrir.cshtml",
               "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Caja\\Abrir.cshtml",
@@ -384,7 +443,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "Cerrar.cshtml",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Caja\\Cerrar.cshtml",
               "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Caja\\Cerrar.cshtml",
@@ -396,7 +455,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Caja\\Index.cshtml",
               "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Caja\\Index.cshtml",
@@ -408,7 +467,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Administrador\\Index.cshtml",
               "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Administrador\\Index.cshtml",
@@ -420,19 +479,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Mozo\\Index.cshtml",
-              "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Mozo\\Index.cshtml",
-              "ToolTip": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Mozo\\Index.cshtml",
-              "RelativeToolTip": "PolleriaLovely\\Views\\Mozo\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-11-22T18:40:25.43Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Cajero\\Index.cshtml",
               "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Cajero\\Index.cshtml",
@@ -444,7 +491,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 25,
               "Title": "HomeController.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Controllers\\HomeController.cs",
@@ -456,19 +503,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "PolleriaLovely\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAowHkAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-11-22T16:57:27.237Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "Login.cshtml",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Usuario\\Login.cshtml",
               "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Usuario\\Login.cshtml",
@@ -480,7 +515,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 49,
               "Title": "20261122165023_MigJOSUE.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Migrations\\20261122165023_MigJOSUE.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Migrations\\20261122165023_MigJOSUE.cs",
@@ -492,7 +527,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 30,
               "Title": "GastosController.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Controllers\\GastosController.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Controllers\\GastosController.cs",
@@ -504,7 +539,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "CategoriasController.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Controllers\\CategoriasController.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Controllers\\CategoriasController.cs",
@@ -516,7 +551,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "site.css",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\wwwroot\\css\\site.css",
               "RelativeDocumentMoniker": "PolleriaLovely\\wwwroot\\css\\site.css",
@@ -528,7 +563,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "_ValidationScriptsPartial.cshtml",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "RelativeDocumentMoniker": "PolleriaLovely\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
@@ -540,7 +575,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 29,
               "Title": "InsumosController.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Controllers\\InsumosController.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Controllers\\InsumosController.cs",
@@ -552,7 +587,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 28,
               "Title": "MesasController.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Controllers\\MesasController.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Controllers\\MesasController.cs",
@@ -564,7 +599,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 31,
               "Title": "CajaController.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Controllers\\CajaController.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Controllers\\CajaController.cs",
@@ -576,7 +611,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 26,
               "Title": "AdministradorController.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Controllers\\AdministradorController.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Controllers\\AdministradorController.cs",
@@ -588,7 +623,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 27,
               "Title": "CategoriaGasto.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\CategoriaGasto.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\CategoriaGasto.cs",
@@ -600,7 +635,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 48,
               "Title": "20261122155645_MIGRafa1.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Migrations\\20261122155645_MIGRafa1.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Migrations\\20261122155645_MIGRafa1.cs",
@@ -612,7 +647,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 33,
               "Title": "Venta.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\Venta.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Venta.cs",
@@ -624,7 +659,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 41,
               "Title": "MetodoPago.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\MetodoPago.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\MetodoPago.cs",
@@ -636,7 +671,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 40,
               "Title": "Mesa.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\Mesa.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Mesa.cs",
@@ -648,7 +683,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 38,
               "Title": "Gasto.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\Gasto.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Gasto.cs",
@@ -660,7 +695,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 37,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\ErrorViewModel.cs",
@@ -672,7 +707,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 36,
               "Title": "DetalleVenta.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\DetalleVenta.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\DetalleVenta.cs",
@@ -684,7 +719,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 34,
               "Title": "Caja.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\Caja.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Caja.cs",
@@ -696,7 +731,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 32,
               "Title": "BibliotecaDbContext.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Data\\BibliotecaDbContext.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Data\\BibliotecaDbContext.cs",
@@ -708,7 +743,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 44,
               "Title": "Rol.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\Rol.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Rol.cs",
@@ -720,7 +755,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 45,
               "Title": "Usuario.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\Usuario.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Usuario.cs",
@@ -732,7 +767,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 39,
               "Title": "Insumo.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\Insumo.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Insumo.cs",
@@ -744,7 +779,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 43,
               "Title": "Proveedor.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\Proveedor.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Proveedor.cs",
@@ -756,7 +791,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 42,
               "Title": "Producto.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\Producto.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Producto.cs",
@@ -768,7 +803,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 35,
               "Title": "Categoria.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Models\\Categoria.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Models\\Categoria.cs",
@@ -780,7 +815,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 47,
               "Title": "20260929050707_migra1.cs",
               "DocumentMoniker": "C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Migrations\\20260929050707_migra1.cs",
               "ToolTip": "C:\\Users\\3ckok\\Documents\\SOL_PolleriaLovely\\PolleriaLovely\\Migrations\\20260929050707_migra1.cs",
@@ -789,7 +824,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 46,
               "Title": "20260929054240_migra1.cs",
               "DocumentMoniker": "D:\\UPN\\Ciclo 6\\Dise\u00F1o\\Proyecto\\SISTEMA-GESTION-POLLERIA\\PolleriaLovely\\Migrations\\20260929054240_migra1.cs",
               "RelativeDocumentMoniker": "PolleriaLovely\\Migrations\\20260929054240_migra1.cs",

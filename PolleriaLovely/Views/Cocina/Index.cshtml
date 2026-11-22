@@ -1,0 +1,89 @@
+﻿@model IEnumerable<PolleriaLovely.Models.Pedido>
+@{
+    ViewData["Title"] = "Cocina";
+}
+
+<div class="page-heading d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1>Monitor de Cocina</h1>
+        <p class="text-muted mb-0">Pedidos pendientes y en preparación</p>
+    </div>
+    <button type="button" onclick="location.reload()" class="btn btn-outline-primary">Actualizar ahora</button>
+</div>
+
+@if (TempData["Mensaje"] is string mensaje)
+{
+    <div class="alert alert-success">@mensaje</div>
+}
+@if (TempData["Error"] is string error)
+{
+    <div class="alert alert-warning">@error</div>
+}
+
+@if (!Model.Any())
+{
+    <div class="table-card text-center py-5">
+        <h2 class="h5 mb-1">No hay pedidos pendientes en cocina</h2>
+        <p class="text-muted mb-0">Los nuevos pedidos registrados por los mozos aparecerán aquí automáticamente.</p>
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+        @foreach (var item in Model)
+        {
+            var enPreparacion = item.Estado == PolleriaLovely.Models.EstadoPedido.EnPreparacion;
+            var minutosEspera = (int)(DateTime.Now - item.Fecha).TotalMinutes;
+
+            <div class="col">
+                <div class="card h-100 shadow-sm border-@(enPreparacion ? "warning" : "danger")">
+                    <div class="card-header d-flex justify-content-between align-items-center @(enPreparacion ? "bg-warning text-dark" : "bg-danger text-white")">
+                        <span class="fw-bold">Pedido #@item.IdPedido — Mesa @(item.Mesa?.Numero.ToString() ?? item.IdMesa.ToString())</span>
+                        <span class="badge bg-dark">@(enPreparacion ? "En preparación" : "Pendiente")</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between text-muted small mb-2">
+                            <span>Hora: @item.Fecha.ToString("HH:mm") (@(minutosEspera < 1 ? "recién" : $"hace {minutosEspera} min"))</span>
+                            <span>Mozo: @(item.Usuario?.NombreUsuario ?? "—")</span>
+                        </div>
+
+                        <ul class="list-group list-group-flush border-top border-bottom my-2">
+                            @foreach (var detalle in item.DetallePedidos)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
+                                    <span class="fw-semibold">@(detalle.Producto?.NombreProducto ?? $"Producto #{detalle.IdProducto}")</span>
+                                    <span class="badge bg-primary rounded-pill fs-6">@detalle.Cantidad×</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="card-footer bg-transparent border-top-0 d-grid gap-2 pb-3">
+                        @if (item.Estado == PolleriaLovely.Models.EstadoPedido.Pendiente)
+                        {
+                            <form asp-action="CambiarEstado" method="post">
+                                <input type="hidden" name="idPedido" value="@item.IdPedido" />
+                                <input type="hidden" name="nuevoEstado" value="@((int)PolleriaLovely.Models.EstadoPedido.EnPreparacion)" />
+                                <button type="submit" class="btn btn-warning w-100 fw-semibold">Empezar a preparar</button>
+                            </form>
+                        }
+                        <form asp-action="CambiarEstado" method="post">
+                            <input type="hidden" name="idPedido" value="@item.IdPedido" />
+                            <input type="hidden" name="nuevoEstado" value="@((int)PolleriaLovely.Models.EstadoPedido.Listo)" />
+                            <button type="submit" class="btn btn-success w-100 fw-semibold">Marcar como Listo</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@section Scripts {
+    <script>
+        setTimeout(function () {
+            location.reload();
+        }, 15000);
+    </script>
+}
