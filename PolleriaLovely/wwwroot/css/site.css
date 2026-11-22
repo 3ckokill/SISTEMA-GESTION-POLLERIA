@@ -219,3 +219,247 @@ body {
   .brand-copy { margin: 1.2rem 0; }
   .login-form-panel { padding: 2.4rem 2rem 2.2rem; }
 }
+/* ===== Lovely Chicken: layout base (paso 2) ===== */
+:root {
+    --lc-red: #b83a1a;
+    --lc-red-dark: #8f2c13;
+    --lc-ink: #2b1b12;
+    --lc-cream: #fff8ef;
+    --lc-line: #e6d9c8;
+    --lc-head: #f6ece0;
+    --lc-muted: #6b5a4a;
+}
+
+.admin-layout, .cajero-layout, .mozo-layout {
+    background: var(--lc-cream);
+    color: var(--lc-ink);
+}
+
+/* Barra superior */
+.app-topbar {
+    background: #fff;
+    border-bottom: 1px solid var(--lc-line);
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+.app-topbar-inner {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem 1rem;
+    min-height: 60px;
+    padding: .5rem 1.25rem;
+}
+
+.app-brand {
+    color: var(--lc-red);
+    font-size: 1.15rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+    .app-brand:hover {
+        color: var(--lc-red-dark);
+    }
+
+.app-topnav {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    gap: .25rem;
+}
+
+    .app-topnav a {
+        border-radius: .5rem;
+        color: var(--lc-ink);
+        font-size: .92rem;
+        font-weight: 600;
+        padding: .5rem .8rem;
+        text-decoration: none;
+    }
+
+        .app-topnav a:hover {
+            background: var(--lc-head);
+        }
+
+        .app-topnav a.active {
+            background: var(--lc-red);
+            color: #fff;
+        }
+
+.app-user {
+    align-items: center;
+    color: var(--lc-ink);
+    display: flex;
+    font-size: .9rem;
+    gap: .75rem;
+    margin-left: auto;
+}
+
+    .app-user .btn-outline-danger, .app-user .btn-outline-primary, .app-topbar .btn-outline-primary {
+        border-color: var(--lc-red);
+        color: var(--lc-red);
+        min-height: 36px;
+    }
+
+        .app-user .btn-outline-danger:hover, .app-user .btn-outline-primary:hover, .app-topbar .btn-outline-primary:hover {
+            background: var(--lc-red);
+            border-color: var(--lc-red);
+            color: #fff;
+        }
+
+/* Menú lateral (Administrador) */
+.app-body {
+    align-items: stretch;
+    display: flex;
+}
+
+.sidebar {
+    background: var(--lc-ink);
+    flex: 0 0 230px;
+    padding: 1rem .75rem 2rem;
+    width: 230px;
+}
+
+    .sidebar a {
+        border-radius: .5rem;
+        color: #f3e6d4;
+        display: block;
+        font-size: .92rem;
+        padding: .6rem .75rem;
+        text-decoration: none;
+    }
+
+        .sidebar a:hover {
+            background: rgba(255,255,255,.08);
+            color: #fff;
+        }
+
+        .sidebar a.active {
+            background: var(--lc-red);
+            color: #fff;
+            font-weight: 600;
+        }
+
+.sidebar-label {
+    color: #c9b8a3;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    margin: 1.1rem .75rem .35rem;
+    text-transform: uppercase;
+}
+
+.app-content {
+    flex: 1;
+    min-width: 0;
+    padding: 1.5rem 2rem;
+}
+
+@media (min-width: 992px) {
+    .sidebar {
+        height: calc(100vh - 60px);
+        overflow-y: auto;
+        position: sticky;
+        top: 60px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .app-body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        flex-basis: auto;
+        width: 100%;
+    }
+
+    .app-content {
+        padding: 1rem;
+    }
+}
+
+/* Encabezados, tablas, formularios y botones (comunes a los 3 roles) */
+:is(.admin-layout, .cajero-layout, .mozo-layout) .footer {
+    background: var(--lc-cream);
+}
+
+:is(.admin-layout, .cajero-layout, .mozo-layout) .page-heading {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    color: var(--lc-ink);
+    margin: 0 0 1.25rem;
+    padding: 0;
+}
+
+    :is(.admin-layout, .cajero-layout, .mozo-layout) .page-heading h1,
+    :is(.admin-layout, .cajero-layout, .mozo-layout) .page-heading h2 {
+        color: var(--lc-ink);
+        font-weight: 700;
+    }
+
+    :is(.admin-layout, .cajero-layout, .mozo-layout) .page-heading p {
+        color: var(--lc-muted);
+    }
+
+:is(.admin-layout, .cajero-layout, .mozo-layout) .table-card,
+:is(.admin-layout, .cajero-layout, .mozo-layout) .form-card,
+:is(.admin-layout, .cajero-layout, .mozo-layout) .card {
+    background: #fff;
+    border: 1px solid var(--lc-line);
+    border-radius: .75rem;
+    box-shadow: none;
+}
+
+    :is(.admin-layout, .cajero-layout, .mozo-layout) .table-card thead th {
+        background: var(--lc-head);
+        color: var(--lc-ink);
+    }
+
+    :is(.admin-layout, .cajero-layout, .mozo-layout) .table-card tbody tr:hover {
+        background: var(--lc-cream);
+    }
+
+    :is(.admin-layout, .cajero-layout, .mozo-layout) .form-card h1,
+    :is(.admin-layout, .cajero-layout, .mozo-layout) .form-card h2,
+    :is(.admin-layout, .cajero-layout, .mozo-layout) .form-card h3 {
+        color: var(--lc-ink);
+    }
+
+:is(.admin-layout, .cajero-layout, .mozo-layout) .form-control {
+    border-color: #8a7968;
+}
+
+    :is(.admin-layout, .cajero-layout, .mozo-layout) .form-control:focus,
+    :is(.admin-layout, .cajero-layout, .mozo-layout) .form-select:focus {
+        border-color: var(--lc-red);
+        box-shadow: 0 0 0 .2rem rgba(184,58,26,.18);
+    }
+
+:is(.admin-layout, .cajero-layout, .mozo-layout) .btn-primary,
+:is(.admin-layout, .cajero-layout, .mozo-layout) .page-heading .btn-primary {
+    background: var(--lc-red);
+    border-color: var(--lc-red);
+    color: #fff;
+}
+
+    :is(.admin-layout, .cajero-layout, .mozo-layout) .btn-primary:hover,
+    :is(.admin-layout, .cajero-layout, .mozo-layout) .page-heading .btn-primary:hover {
+        background: var(--lc-red-dark);
+        border-color: var(--lc-red-dark);
+    }
+
+:is(.admin-layout, .cajero-layout, .mozo-layout) .btn-outline-primary {
+    border-color: var(--lc-red);
+    color: var(--lc-red);
+}
+
+    :is(.admin-layout, .cajero-layout, .mozo-layout) .btn-outline-primary:hover {
+        background: var(--lc-red);
+        border-color: var(--lc-red);
+        color: #fff;
+    }
