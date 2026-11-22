@@ -2,7 +2,7 @@
   <img src="PolleriaLovely/wwwroot/images/lovely-chicken-logo.png" alt="Logo Pollería Lovely" width="220" style="border-radius: 50%; box-shadow: 0 4px 14px rgba(0,0,0,0.15);" />
 </p>
 
-<h1 align="center">🍗 Pollería Lovely — Sistema de Gestión Gastronómica</h1>
+<h1 align="center"> Pollería Lovely — Sistema de Gestión Gastronómica</h1>
 
 <p align="center">
   <strong>Plataforma web integral para la administración, toma de comandas en salón, facturación, control de caja y analítica financiera para restaurantes y pollerías.</strong>
@@ -19,7 +19,7 @@
 
 ---
 
-## 📑 Tabla de Contenidos
+##  Tabla de Contenidos
 
 1. [Visión General](#-visión-general)
 2. [Características Principales](#-características-principales)
@@ -36,7 +36,7 @@
 
 ---
 
-## 🌟 Visión General
+##  Visión General
 
 **Pollería Lovely** es un sistema web concebido para optimizar y digitalizar de punta a punta las operaciones de una pollería/restaurante tradicional. Resuelve los cuellos de botella más comunes en el rubro gastronómico:
 
@@ -47,7 +47,7 @@
 
 ---
 
-## ✨ Características Principales
+##  Características Principales
 
 | Área | Capacidades Clave |
 | :--- | :--- |
@@ -60,7 +60,7 @@
 
 ---
 
-## 🔄 Flujo Operativo del Negocio
+##  Flujo Operativo del Negocio
 
 El sistema sincroniza la interacción entre salón, cocina y caja mediante una máquina de estados segura:
 
@@ -108,19 +108,19 @@ stateDiagram-v2
 
 ---
 
-## 👥 Roles y Control de Acceso (RBAC)
+##  Roles y Control de Acceso (RBAC)
 
 La plataforma cuenta con un esquema de autorización estricta basada en roles (`[Authorize(Roles = "...")]`):
 
 ```
                                   ┌───────────────────────────┐
-                                  │   🔐 Autenticación Cookie │
+                                  │    Autenticación Cookie   │
                                   └─────────────┬─────────────┘
                                                 │
                  ┌──────────────────────────────┼──────────────────────────────┐
                  ▼                              ▼                              ▼
       ┌─────────────────────┐        ┌─────────────────────┐        ┌─────────────────────┐
-      │  👑 Administrador   │        │     💳 Cajero       │        │      🍽️ Mozo        │
+      │   Administrador     │        │      Cajero         │        │       Mozo          │
       ├─────────────────────┤        ├─────────────────────┤        ├─────────────────────┤
       │ • Dashboard global  │        │ • Apertura de caja  │        │ • Dashboard salón   │
       │ • Gestión productos │        │ • Venta de mostrador│        │ • Crear comanda     │
@@ -135,7 +135,7 @@ La plataforma cuenta con un esquema de autorización estricta basada en roles (`
 
 ---
 
-## 📦 Módulos del Sistema
+##  Módulos del Sistema
 
 ### 1. 🍗 Catálogo de Productos y Categorías
 - **Categorías**: Clasificación del menú (Pollos, Guarniciones, Bebidas, Promociones, Postres). Protección para evitar el borrado de categorías que contengan productos activos.
@@ -176,7 +176,7 @@ La plataforma cuenta con un esquema de autorización estricta basada en roles (`
 - **Productos más vendidos**: Listado de demanda por volumen y subtotal generado.
 - **Distribución por método de pago** y **recaudación diaria**.
 
-### 8. 👤 Gestión de Personal y Seguridad
+### 8.  Gestión de Personal y Seguridad
 - CRUD administrativo de usuarios con selección de rol (`Administrador`, `Cajero`, `Mozo`).
 - Hasheo de credenciales con `IPasswordHasher<Usuario>`.
 - Reglas anti-bloqueo: el administrador no puede desactivar su propia cuenta ni al último administrador activo del sistema.
@@ -365,38 +365,8 @@ En modo **Development**, el sistema inicializa automáticamente los roles del si
 
 | Rol | Usuario | Contraseña Inicial | Acceso y Capacidades |
 | :--- | :--- | :--- | :--- |
-| **👑 Administrador** | `admin.prueba` | `LovelyDemo2026!` | Acceso completo al sistema, reportes de utilidad, usuarios, productos, gastos y auditoría. |
-| **💳 Cajero** | `cajero.prueba` | `LovelyCaja2026!` | Apertura y cierre de caja, cobro de comandas, precuentas y ventas de mostrador. |
-| **🍽️ Mozo** | `mozo.prueba` | `LovelyMozo2026!` | Toma de pedidos por mesa, adición de extras y cambio de estados en salón. |
+| ** Administrador** | `admin.prueba` | `LovelyDemo2026!` | Acceso completo al sistema, reportes de utilidad, usuarios, productos, gastos y auditoría. |
+| ** Cajero** | `cajero.prueba` | `LovelyCaja2026!` | Apertura y cierre de caja, cobro de comandas, precuentas y ventas de mostrador. |
+| ** Mozo** | `mozo.prueba` | `LovelyMozo2026!` | Toma de pedidos por mesa, adición de extras y cambio de estados en salón. |
 
-> [!WARNING]
 > Estas credenciales son generadas exclusivamente con fines didácticos y de pruebas locales. En entornos de producción, las credenciales por defecto se omiten automáticamente.
-
----
-
-## 🧭 Roadmap y Futuras Mejoras
-
-- [ ] **Facturación Electrónica**: Integración con API de comprobantes electrónicos (Boletas, Facturas y Notas de Crédito - SUNAT / Perú).
-- [ ] **KDS de Cocina (Kitchen Display System)**: Pantalla táctil en tiempo real para el área de cocina / parrilla con alertas sonoras por comanda.
-- [ ] **Descuento Automático de Insumos por Receta**: Rebaja automática de stock de insumos (papas, pollos, salsas) al concretar cada venta.
-- [ ] **Gestión de Delivery y Pedidos Web**: Módulo de despacho para pedidos telefónicos o tomados por canal digital / WhatsApp.
-- [ ] **Exportación de Reportes**: Descarga de reportes financieros en formatos PDF y Excel (XLSX).
-
----
-
-## 👨‍💻 Contribución y Créditos
-
-Este proyecto fue desarrollado como solución integral para la modernización operativa y financiera del restaurante **Lovely Chicken**.
-
-¿Tienes sugerencias o encontraste un problema?
-1. Haz un fork del repositorio.
-2. Crea una rama para tu funcionalidad (`git checkout -b feature/nueva-mejora`).
-3. Confirma tus cambios (`git commit -m 'feat: agrega nueva mejora'`).
-4. Sube la rama (`git push origin feature/nueva-mejora`).
-5. Abre un **Pull Request**.
-
----
-
-<p align="center">
-  Hecho con ❤️ para <strong>Lovely Chicken</strong> 🍗
-</p>
