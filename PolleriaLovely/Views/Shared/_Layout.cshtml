@@ -62,9 +62,12 @@
                 @if (autenticado)
                 {
                     <span>@User.Identity!.Name (@rol)</span>
-                    <form asp-controller="Usuario" asp-action="Logout" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-outline-danger btn-sm">Cerrar sesión</button>
-                    </form>
+                    @if (!esAdmin)
+                    {
+                        <form asp-controller="Usuario" asp-action="Logout" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Cerrar sesión</button>
+                        </form>
+                    }
                 }
                 else
                 {
@@ -77,18 +80,25 @@
     @if (esAdmin)
     {
         <div class="app-body">
-            <aside id="menuLateral" class="sidebar collapse d-lg-block" aria-label="Menú del administrador">
-                <a class="@Cls(En("Productos"))" asp-controller="Productos" asp-action="Index">Productos</a>
-                <a class="@Cls(En("Categorias"))" asp-controller="Categorias" asp-action="Index">Categorías</a>
-                <a class="@Cls(En("Insumos"))" asp-controller="Insumos" asp-action="Index">Insumos</a>
-                <a class="@Cls(En("Proveedores"))" asp-controller="Proveedores" asp-action="Index">Proveedores</a>
-                <a class="@Cls(En("Ventas"))" asp-controller="Ventas" asp-action="Index">Ventas</a>
-                <a class="@Cls(En("Pedidos"))" asp-controller="Pedidos" asp-action="Index">Pedidos</a>
-                <a class="@Cls(En("Mesas"))" asp-controller="Mesas" asp-action="Index">Mesas</a>
-                <a class="@Cls(En("Caja"))" asp-controller="Caja" asp-action="Index">Caja</a>
-                <a class="@Cls(En("Gastos"))" asp-controller="Gastos" asp-action="Index">Gastos</a>
-                <a class="@Cls(En("Usuarios"))" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
-                <a class="@Cls(En("Reportes"))" asp-controller="Reportes" asp-action="Index">Reportes</a>
+                        <aside id="menuLateral" class="sidebar collapse d-lg-block" aria-label="Menú del administrador">
+                <div class="sidebar-inner">
+                    <nav class="sidebar-nav">
+                        <a class="@Cls(En("Productos"))" asp-controller="Productos" asp-action="Index">Productos</a>
+                        <a class="@Cls(En("Categorias"))" asp-controller="Categorias" asp-action="Index">Categorías</a>
+                        <a class="@Cls(En("Insumos"))" asp-controller="Insumos" asp-action="Index">Insumos</a>
+                        <a class="@Cls(En("Proveedores"))" asp-controller="Proveedores" asp-action="Index">Proveedores</a>
+                        <a class="@Cls(En("Ventas"))" asp-controller="Ventas" asp-action="Index">Ventas</a>
+                        <a class="@Cls(En("Pedidos"))" asp-controller="Pedidos" asp-action="Index">Pedidos</a>
+                        <a class="@Cls(En("Mesas"))" asp-controller="Mesas" asp-action="Index">Mesas</a>
+                        <a class="@Cls(En("Caja"))" asp-controller="Caja" asp-action="Index">Caja</a>
+                        <a class="@Cls(En("Gastos"))" asp-controller="Gastos" asp-action="Index">Gastos</a>
+                        <a class="@Cls(En("Usuarios"))" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                        <a class="@Cls(En("Reportes"))" asp-controller="Reportes" asp-action="Index">Reportes</a>
+                    </nav>
+                    <form asp-controller="Usuario" asp-action="Logout" method="post" class="sidebar-foot">
+                        <button type="submit" class="btn btn-logout">Cerrar sesión</button>
+                    </form>
+                </div>
             </aside>
             <div class="app-content">
                 <main role="main" class="pb-3">

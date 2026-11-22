@@ -1,8 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Panel de Administrador";
+
+    var modulos = new[]
+    {
+        (Nombre: "Productos",   Controlador: "Productos",   Icono: "▣",  Color: "icon-red",  Texto: "Crear, editar y consultar los productos de la pollería."),
+        (Nombre: "Categorías",  Controlador: "Categorias",  Icono: "◇",  Color: "icon-gold", Texto: "Gestionar las categorías de los productos."),
+        (Nombre: "Insumos",     Controlador: "Insumos",     Icono: "▤",  Color: "icon-navy", Texto: "Administrar insumos y su stock mínimo."),
+        (Nombre: "Proveedores", Controlador: "Proveedores", Icono: "⌂",  Color: "icon-red",  Texto: "Gestionar proveedores y sus datos de contacto."),
+        (Nombre: "Ventas",      Controlador: "Ventas",      Icono: "S/", Color: "icon-gold", Texto: "Consultar el historial de ventas y su detalle."),
+        (Nombre: "Pedidos",     Controlador: "Pedidos",     Icono: "≡",  Color: "icon-navy", Texto: "Consultar comandas y actualizar su estado de preparación."),
+        (Nombre: "Mesas",       Controlador: "Mesas",       Icono: "♙",  Color: "icon-red",  Texto: "Crear, editar y activar las mesas disponibles para atención."),
+        (Nombre: "Gastos",      Controlador: "Gastos",      Icono: "$",  Color: "icon-gold", Texto: "Registrar gastos y consultar la utilidad estimada del negocio."),
+        (Nombre: "Usuarios",    Controlador: "Usuarios",    Icono: "♙",  Color: "icon-red",  Texto: "Gestionar usuarios, roles y accesos al sistema."),
+        (Nombre: "Reportes",    Controlador: "Reportes",    Icono: "▥",  Color: "icon-gold", Texto: "Consultar ventas y pedidos por rango de fechas."),
+        (Nombre: "Caja",        Controlador: "Caja",        Icono: "▤",  Color: "icon-navy", Texto: "Consultar aperturas, cierres y diferencias de caja.")
+    };
 }
 
-<div class="admin-dashboard container py-4">
+<div class="admin-dashboard py-2">
     <section class="admin-hero">
         <div>
             <p class="dashboard-eyebrow">CENTRO DE CONTROL</p>
@@ -17,119 +32,22 @@
             <p class="dashboard-eyebrow">OPERACIÓN DIARIA</p>
             <h2>Módulos del sistema</h2>
         </div>
-        <span>11 accesos disponibles</span>
+        <span>@modulos.Length accesos disponibles</span>
     </div>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
-        <div class="col">
-            <div class="dashboard-card h-100">
-                <div class="card-body">
-                    <span class="dashboard-card-icon icon-red">▣</span>
-                    <h5 class="card-title">Productos</h5>
-                    <p class="card-text">Crear, editar y consultar los productos de la pollería.</p>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Productos" asp-action="Index">Ir a Productos</a>
+        @foreach (var m in modulos)
+        {
+            <div class="col">
+                <div class="dashboard-card h-100">
+                    <div class="card-body">
+                        <span class="dashboard-card-icon @m.Color">@m.Icono</span>
+                        <h5 class="card-title">@m.Nombre</h5>
+                        <p class="card-text">@m.Texto</p>
+                        <a class="btn btn-primary" asp-area="" asp-controller="@m.Controlador" asp-action="Index">Ir a @m.Nombre</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="dashboard-card h-100">
-                <div class="card-body">
-                    <span class="dashboard-card-icon icon-gold">◇</span>
-                    <h5 class="card-title">Categorías</h5>
-                    <p class="card-text">Gestionar las categorías de los productos.</p>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Categorias" asp-action="Index">Ir a Categorías</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="dashboard-card h-100">
-                <div class="card-body">
-                    <span class="dashboard-card-icon icon-navy">▤</span>
-                    <h5 class="card-title">Insumos</h5>
-                    <p class="card-text">Administrar insumos y su stock mínimo.</p>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Insumos" asp-action="Index">Ir a Insumos</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="dashboard-card h-100">
-                <div class="card-body">
-                    <span class="dashboard-card-icon icon-red">⌂</span>
-                    <h5 class="card-title">Proveedores</h5>
-                    <p class="card-text">Gestionar proveedores y sus datos de contacto.</p>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Proveedores" asp-action="Index">Ir a Proveedores</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="dashboard-card h-100">
-                <div class="card-body">
-                    <span class="dashboard-card-icon icon-gold">S/</span>
-                    <h5 class="card-title">Ventas</h5>
-                    <p class="card-text">Consultar el historial de ventas y su detalle.</p>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Ventas" asp-action="Index">Ir a Ventas</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="dashboard-card h-100">
-                <div class="card-body">
-                    <span class="dashboard-card-icon icon-navy">≡</span>
-                    <h5 class="card-title">Pedidos</h5>
-                    <p class="card-text">Consultar comandas y actualizar su estado de preparación.</p>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Pedidos" asp-action="Index">Ir a Pedidos</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="dashboard-card h-100">
-                <div class="card-body">
-                    <span class="dashboard-card-icon icon-red">♙</span>
-                    <h5 class="card-title">Mesas</h5>
-                    <p class="card-text">Crear, editar y activar las mesas disponibles para atención.</p>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Mesas" asp-action="Index">Ir a Mesas</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="dashboard-card h-100">
-                <div class="card-body">
-                    <span class="dashboard-card-icon icon-gold">$</span>
-                    <h5 class="card-title">Gastos</h5>
-                    <p class="card-text">Registrar gastos y consultar la utilidad estimada del negocio.</p>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Gastos" asp-action="Index">Ir a Gastos</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="dashboard-card h-100">
-                <div class="card-body">
-                    <span class="dashboard-card-icon icon-red">♙</span>
-                    <h5 class="card-title">Usuarios</h5>
-                    <p class="card-text">Gestionar usuarios, roles y accesos al sistema.</p>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Usuarios" asp-action="Index">Ir a Usuarios</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="dashboard-card h-100">
-                <div class="card-body">
-                    <span class="dashboard-card-icon icon-gold">▥</span>
-                    <h5 class="card-title">Reportes</h5>
-                    <p class="card-text">Consultar ventas y pedidos por rango de fechas.</p>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Reportes" asp-action="Index">Ir a Reportes</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="dashboard-card h-100">
-                <div class="card-body">
-                    <span class="dashboard-card-icon icon-navy">▤</span>
-                    <h5 class="card-title">Caja</h5>
-                    <p class="card-text">Consultar aperturas, cierres y diferencias de caja.</p>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Caja" asp-action="Index">Ir a Caja</a>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>

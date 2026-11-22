@@ -463,3 +463,162 @@ body {
         border-color: var(--lc-red);
         color: #fff;
     }
+
+    /* ===== Lovely Chicken: panel del administrador (paso 3) ===== */
+.module-grid { display:grid; gap:1rem; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); }
+.module-card { background:#fff; border:1px solid var(--lc-line); border-radius:.75rem; display:flex; flex-direction:column; padding:1.25rem; transition:border-color .2s; }
+.module-card:hover { border-color:var(--lc-red); }
+.module-card h2 { color:var(--lc-ink); font-size:1.1rem; font-weight:700; margin:0 0 .35rem; }
+.module-card p { color:var(--lc-muted); flex:1; font-size:.9rem; line-height:1.5; margin-bottom:1rem; }
+
+/* ===== Lovely Chicken: recolor del panel del administrador ===== */
+.admin-dashboard, .dashboard-section-heading h2, .dashboard-card .card-title {
+    color: #2b1b12;
+}
+
+.admin-hero {
+    background: linear-gradient(120deg, #2b1b12, #4a2c1c);
+    box-shadow: 0 .8rem 2rem rgba(43,27,18,.18);
+}
+
+    .admin-hero::after {
+        border-color: rgba(228,173,24,.3);
+    }
+
+    .admin-hero p:last-child {
+        color: rgba(255,248,239,.78);
+    }
+
+.admin-hero-mark {
+    background: #b83a1a;
+    border-color: rgba(255,255,255,.16);
+}
+
+.dashboard-section-heading .dashboard-eyebrow {
+    color: #b83a1a;
+}
+
+.dashboard-section-heading > span {
+    color: #6b5a4a;
+}
+
+.dashboard-card {
+    border-color: #e6d9c8;
+    box-shadow: none;
+}
+
+    .dashboard-card:hover {
+        border-color: rgba(184,58,26,.5);
+        box-shadow: 0 .5rem 1.2rem rgba(43,27,18,.08);
+    }
+
+    .dashboard-card .card-text {
+        color: #6b5a4a;
+    }
+
+    .dashboard-card .btn-primary {
+        background: #b83a1a;
+        border-color: #b83a1a;
+    }
+
+        .dashboard-card .btn-primary:hover {
+            background: #8f2c13;
+            border-color: #8f2c13;
+        }
+
+.icon-red {
+    background: #fbe6df;
+    color: #b83a1a;
+}
+
+.icon-gold {
+    background: #fbf0d6;
+    color: #8a6200;
+}
+
+.icon-navy {
+    background: #f1e6d8;
+    color: #2b1b12;
+}
+
+/* ===== Lovely Chicken: pie fijo y menú lateral a pantalla completa ===== */
+:root {
+    --lc-topbar-h: 60px;
+    --lc-footer-h: 44px;
+}
+
+/* Pie de página fijo (Administrador, Cajero y Mozo) */
+body:is(.admin-layout, .cajero-layout, .mozo-layout) {
+    margin-bottom: var(--lc-footer-h);
+}
+
+    body:is(.admin-layout, .cajero-layout, .mozo-layout) .footer {
+        background: var(--lc-cream);
+        border-top: 1px solid var(--lc-line);
+        bottom: 0;
+        height: var(--lc-footer-h);
+        left: 0;
+        line-height: var(--lc-footer-h);
+        position: fixed;
+        right: 0;
+        white-space: nowrap;
+        width: 100%;
+        z-index: 1020;
+    }
+
+        body:is(.admin-layout, .cajero-layout, .mozo-layout) .footer .container {
+            max-width: none;
+            padding: 0 1.25rem;
+        }
+
+        body:is(.admin-layout, .cajero-layout, .mozo-layout) .footer a {
+            color: var(--lc-red);
+        }
+        /* Pie de página centrado */
+        body:is(.admin-layout, .cajero-layout, .mozo-layout) .footer .container {
+            text-align: center;
+        }
+
+/* Menú lateral: ocupa el alto disponible y "Cerrar sesión" queda abajo */
+.sidebar-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sidebar-nav {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.sidebar-foot {
+    border-top: 1px solid rgba(255,255,255,.14);
+    flex: 0 0 auto;
+    margin: .75rem 0 0;
+    padding-top: .75rem;
+}
+
+.btn-logout {
+    background: var(--lc-red);
+    border: 0;
+    border-radius: .5rem;
+    color: #fff;
+    font-weight: 600;
+    min-height: 44px;
+    width: 100%;
+}
+
+    .btn-logout:hover, .btn-logout:focus {
+        background: var(--lc-red-dark);
+        color: #fff;
+    }
+
+@media (min-width: 992px) {
+    .sidebar {
+        height: calc(100vh - var(--lc-topbar-h) - var(--lc-footer-h));
+        overflow: hidden;
+        padding-bottom: 1rem;
+        top: var(--lc-topbar-h);
+    }
+}
