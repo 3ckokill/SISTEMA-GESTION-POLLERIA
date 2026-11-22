@@ -22,11 +22,11 @@ body {
   background: #f8fafc;
 }
 
-.login-layout { background: #111a2b; }
+.login-layout { background: #2b1b12; }
 .login-layout .container { max-width: none; padding: 0; }
 .login-layout main { padding-bottom: 0 !important; }
 .login-layout .navbar { margin-bottom: 0 !important; }
-.login-layout .footer { background: #111a2b; border-color: rgba(255,255,255,.12) !important; color: rgba(255,255,255,.68) !important; }
+.login-layout .footer { background: #2b1b12; border-color: rgba(255,255,255,.12) !important; color: rgba(255,255,255,.68) !important; }
 .login-layout .footer a { color: #e4ad18; }
 
 .form-card, .table-card { background: #fff; border: 1px solid #dbe3ec; border-radius: .75rem; box-shadow: 0 .25rem 1rem rgba(15, 23, 42, .05); padding: 1.5rem; }
@@ -49,17 +49,17 @@ body {
 
 /* Acceso Lovely Chicken */
 .login-page {
-  --login-ink: #18243b;
-  --login-brown: #b9232e;
-  --login-orange: #e4ad18;
-  align-items: center;
-  background: #111a2b;
-  display: flex;
-  justify-content: center;
-  min-height: calc(100vh - 175px);
-  overflow: hidden;
-  padding: 3rem 1rem;
-  position: relative;
+    --login-ink: #18243b;
+    --login-brown: #b9232e;
+    --login-orange: #e4ad18;
+    align-items: center;
+    background: #2b1b12;
+    display: flex;
+    justify-content: center;
+    min-height: calc(100vh - 175px);
+    overflow: hidden;
+    padding: 3rem 1rem;
+    position: relative;
 }
 
 .login-page::before {
