@@ -62,6 +62,10 @@ namespace PolleriaLovely.Controllers
             {
                 ModelState.AddModelError("", "Debe agregar al menos un producto al pedido.");
             }
+            else
+            {
+                ValidarLimitesPedido(modelo.Detalles);
+            }
 
             int idUsuario = 0;
             if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out idUsuario))
@@ -182,6 +186,10 @@ namespace PolleriaLovely.Controllers
             if (modelo.Detalles == null || modelo.Detalles.Count == 0)
             {
                 ModelState.AddModelError("", "Debe agregar al menos un producto.");
+            }
+            else
+            {
+                ValidarLimitesPedido(modelo.Detalles, pedido.DetallePedidos.Sum(d => d.Cantidad));
             }
 
             if (ModelState.IsValid && modelo.Detalles != null && modelo.Detalles.Count > 0)
@@ -500,6 +508,20 @@ namespace PolleriaLovely.Controllers
             EstadoPedido.CuentaSolicitada => "Cuenta solicitada",
             _ => estado.ToString()
         };
+
+        private void ValidarLimitesPedido(ICollection<LineaPedidoInput> detalles, int unidadesExistentes = 0)
+        {
+            if (detalles.Count > ReglasNegocio.MaxLineasPorPedido)
+            {
+                ModelState.AddModelError("", $"Un pedido no puede tener más de {ReglasNegocio.MaxLineasPorPedido} productos diferentes.");
+            }
+
+            var unidadesNuevas = detalles.Sum(d => (long)d.Cantidad);
+            if (unidadesExistentes + unidadesNuevas > ReglasNegocio.MaxUnidadesPorPedido)
+            {
+                ModelState.AddModelError("", $"Un pedido no puede superar {ReglasNegocio.MaxUnidadesPorPedido} unidades en total.");
+            }
+        }
 
         private async Task<bool> MesaTienePedidoEnCurso(int idMesa) =>
             await _context.Pedidos.AnyAsync(p =>

@@ -72,6 +72,10 @@ namespace PolleriaLovely.Controllers
             {
                 ModelState.AddModelError("", "Debe agregar al menos un producto a la venta.");
             }
+            else
+            {
+                ValidarLimitesVenta(modelo.Detalles);
+            }
 
             int idUsuario = 0;
             if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out idUsuario))
@@ -169,6 +173,19 @@ namespace PolleriaLovely.Controllers
             var valor = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!int.TryParse(valor, out var idUsuario)) return Task.FromResult<Caja?>(null);
             return _context.Cajas.FirstOrDefaultAsync(c => c.IdUsuario == idUsuario && c.FechaCierre == null);
+        }
+
+        private void ValidarLimitesVenta(ICollection<LineaVentaInput> detalles)
+        {
+            if (detalles.Count > ReglasNegocio.MaxLineasPorPedido)
+            {
+                ModelState.AddModelError("", $"Una venta no puede tener más de {ReglasNegocio.MaxLineasPorPedido} productos diferentes.");
+            }
+
+            if (detalles.Sum(d => (long)d.Cantidad) > ReglasNegocio.MaxUnidadesPorPedido)
+            {
+                ModelState.AddModelError("", $"Una venta no puede superar {ReglasNegocio.MaxUnidadesPorPedido} unidades en total.");
+            }
         }
 
         private async Task CargarProductos()

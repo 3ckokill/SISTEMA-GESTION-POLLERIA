@@ -22,7 +22,7 @@ namespace PolleriaLovely.Models
         [ValidateNever]
         public Producto? Producto { get; set; }
 
-        [Range(1, 999, ErrorMessage = "La cantidad debe estar entre 1 y 999.")]
+        [Range(1, ReglasNegocio.MaxCantidadPorLinea, ErrorMessage = "La cantidad debe estar entre 1 y 99.")]
         public int Cantidad { get; set; }
     }
 }

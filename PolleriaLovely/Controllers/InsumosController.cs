@@ -65,13 +65,13 @@ namespace PolleriaLovely.Controllers
             var textoCantidad = modelo.Cantidad?.Trim() ?? string.Empty;
             var normalizado = ValidarFormatoStock(textoCantidad);
             if (!decimal.TryParse(normalizado, NumberStyles.Number, CultureInfo.InvariantCulture, out var cantidad) ||
-                cantidad <= 0m || cantidad > 1000000m)
+                cantidad <= 0m || cantidad > ReglasNegocio.MaxStockInsumo)
             {
                 ModelState.AddModelError(nameof(modelo.Cantidad), "Ingrese una cantidad válida mayor que cero.");
             }
-            else if (insumo.Stock + cantidad > 1000000m)
+            else if (insumo.Stock + cantidad > ReglasNegocio.MaxStockInsumo)
             {
-                ModelState.AddModelError(nameof(modelo.Cantidad), "El stock resultante no puede superar 1,000,000.");
+                ModelState.AddModelError(nameof(modelo.Cantidad), "El stock resultante no puede superar 10,000.");
             }
 
             if (ModelState.IsValid)
@@ -202,7 +202,7 @@ namespace PolleriaLovely.Controllers
             ModelState.SetModelValue(nameof(Insumo.Stock), new ValueProviderResult(texto));
             var normalizado = ValidarFormatoStock(texto);
             if (decimal.TryParse(normalizado, NumberStyles.Number, CultureInfo.InvariantCulture, out var stock) &&
-                stock >= 0m && stock <= 1000000m)
+                stock >= 0m && stock <= ReglasNegocio.MaxStockInsumo)
             {
                 insumo.Stock = stock;
                 ModelState[nameof(Insumo.Stock)].ValidationState = ModelValidationState.Valid;
@@ -220,7 +220,7 @@ namespace PolleriaLovely.Controllers
             ModelState.SetModelValue(nameof(Insumo.StockMinimo), new ValueProviderResult(texto));
             var normalizado = ValidarFormatoStock(texto);
             if (decimal.TryParse(normalizado, NumberStyles.Number, CultureInfo.InvariantCulture, out var stockMinimo) &&
-                stockMinimo >= 0m && stockMinimo <= 1000000m)
+                stockMinimo >= 0m && stockMinimo <= ReglasNegocio.MaxStockInsumo)
             {
                 insumo.StockMinimo = stockMinimo;
                 ModelState[nameof(Insumo.StockMinimo)].ValidationState = ModelValidationState.Valid;

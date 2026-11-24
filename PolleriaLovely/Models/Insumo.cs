@@ -14,9 +14,9 @@ namespace PolleriaLovely.Models
         public string NombreInsumo { get; set; } = string.Empty;
         [Required(ErrorMessage = "La unidad de medida es obligatoria.")]
         public string UnidadMedida { get; set; } = string.Empty;
-        [Range(typeof(decimal), "0", "1000000", ErrorMessage = "El stock no puede ser negativo.")]
+        [Range(typeof(decimal), "0", "10000", ErrorMessage = "El stock debe estar entre 0 y 10,000.")]
         public decimal Stock { get; set; }
-        [Range(typeof(decimal), "0", "1000000", ErrorMessage = "El stock mínimo no puede ser negativo.")]
+        [Range(typeof(decimal), "0", "10000", ErrorMessage = "El stock mínimo debe estar entre 0 y 10,000.")]
         public decimal StockMinimo { get; set; }
         [Required]
         public bool Estado { get; set; }

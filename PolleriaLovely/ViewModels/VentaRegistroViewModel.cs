@@ -17,7 +17,7 @@ namespace PolleriaLovely.ViewModels
         [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar un producto.")]
         public int IdProducto { get; set; }
 
-        [Range(1, 999, ErrorMessage = "La cantidad debe estar entre 1 y 999.")]
+        [Range(1, ReglasNegocio.MaxCantidadPorLinea, ErrorMessage = "La cantidad debe estar entre 1 y 99.")]
         public int Cantidad { get; set; } = 1;
     }
 }

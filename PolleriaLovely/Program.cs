@@ -14,7 +14,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<BibliotecaDbContext>(options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("SecondDefaultConnection")));
+        builder.Configuration.GetConnectionString("ThirdDefaultConnection")));
 
 builder.Services.AddScoped<IPasswordHasher<Usuario>,
     PasswordHasher<Usuario>>();
