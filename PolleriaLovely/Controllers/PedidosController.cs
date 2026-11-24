@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PolleriaLovely.Data;
 using PolleriaLovely.Models;
+using PolleriaLovely.Services;
 using PolleriaLovely.ViewModels;
 using System.Security.Claims;
 
@@ -12,11 +13,13 @@ namespace PolleriaLovely.Controllers
     public class PedidosController : Controller
     {
         private readonly BibliotecaDbContext _context;
+        private readonly InventarioService _inventario;
         private const decimal MaximoDecimal = 99999999.99m;
 
-        public PedidosController(BibliotecaDbContext context)
+        public PedidosController(BibliotecaDbContext context, InventarioService inventario)
         {
             _context = context;
+            _inventario = inventario;
         }
 
         // GET: Pedidos — consulta (Cajero solo lee; Mozo y Administrador también operan).
@@ -450,10 +453,19 @@ namespace PolleriaLovely.Controllers
 
             venta.Total = total;
 
+            var consumo = await _inventario.PrepararConsumoAsync(
+                venta.DetalleVentas.Select(detalle => (detalle.IdProducto, detalle.Cantidad)));
+            if (!consumo.EsValido)
+            {
+                TempData["Error"] = consumo.Mensaje;
+                return RedirectToAction(nameof(Index));
+            }
+
             await using var transaccion = await _context.Database.BeginTransactionAsync();
             try
             {
                 _context.Ventas.Add(venta);
+                _inventario.AplicarConsumo(consumo);
                 await _context.SaveChangesAsync();
 
                 var afectados = await _context.Database.ExecuteSqlAsync(

@@ -3,8 +3,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PolleriaLovely.Data;
 using PolleriaLovely.Models;
+using PolleriaLovely.Services;
+using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+QuestPDF.Settings.License = LicenseType.Community;
 
 builder.Services.AddControllersWithViews();
 
@@ -14,6 +18,7 @@ builder.Services.AddDbContext<BibliotecaDbContext>(options =>
 
 builder.Services.AddScoped<IPasswordHasher<Usuario>,
     PasswordHasher<Usuario>>();
+builder.Services.AddScoped<InventarioService>();
 
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

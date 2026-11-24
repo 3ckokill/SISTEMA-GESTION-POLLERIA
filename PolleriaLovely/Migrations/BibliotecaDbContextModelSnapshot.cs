@@ -309,6 +309,33 @@ namespace PolleriaLovely.Migrations
                     b.ToTable("Productos");
                 });
 
+            modelBuilder.Entity("PolleriaLovely.Models.ProductoInsumo", b =>
+                {
+                    b.Property<int>("IdProductoInsumo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProductoInsumo"));
+
+                    b.Property<decimal>("Cantidad")
+                        .HasColumnType("decimal(10, 4)");
+
+                    b.Property<int>("IdInsumo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdProducto")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdProductoInsumo");
+
+                    b.HasIndex("IdInsumo");
+
+                    b.HasIndex("IdProducto", "IdInsumo")
+                        .IsUnique();
+
+                    b.ToTable("ProductoInsumos");
+                });
+
             modelBuilder.Entity("PolleriaLovely.Models.Rol", b =>
                 {
                     b.Property<int>("IdRol")
@@ -564,6 +591,25 @@ namespace PolleriaLovely.Migrations
                     b.Navigation("Categoria");
                 });
 
+            modelBuilder.Entity("PolleriaLovely.Models.ProductoInsumo", b =>
+                {
+                    b.HasOne("PolleriaLovely.Models.Insumo", "Insumo")
+                        .WithMany("Recetas")
+                        .HasForeignKey("IdInsumo")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PolleriaLovely.Models.Producto", "Producto")
+                        .WithMany("Receta")
+                        .HasForeignKey("IdProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Insumo");
+
+                    b.Navigation("Producto");
+                });
+
             modelBuilder.Entity("PolleriaLovely.Models.Usuario", b =>
                 {
                     b.HasOne("PolleriaLovely.Models.Rol", "Rol")
@@ -603,6 +649,11 @@ namespace PolleriaLovely.Migrations
                     b.Navigation("Productos");
                 });
 
+            modelBuilder.Entity("PolleriaLovely.Models.Insumo", b =>
+                {
+                    b.Navigation("Recetas");
+                });
+
             modelBuilder.Entity("PolleriaLovely.Models.Mesa", b =>
                 {
                     b.Navigation("Pedidos");
@@ -618,6 +669,8 @@ namespace PolleriaLovely.Migrations
                     b.Navigation("DetallePedidos");
 
                     b.Navigation("DetalleVentas");
+
+                    b.Navigation("Receta");
                 });
 
             modelBuilder.Entity("PolleriaLovely.Models.Rol", b =>

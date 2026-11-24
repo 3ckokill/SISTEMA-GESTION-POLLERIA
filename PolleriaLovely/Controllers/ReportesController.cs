@@ -2,8 +2,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PolleriaLovely.Data;
+using PolleriaLovely.Documents;
 using PolleriaLovely.Models;
 using PolleriaLovely.ViewModels;
+using System.Globalization;
+using System.Text;
+using QuestPDF.Fluent;
 
 namespace PolleriaLovely.Controllers
 {
@@ -56,6 +60,80 @@ namespace PolleriaLovely.Controllers
             }
 
             return View(modelo);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExportarCsv(DateTime? fechaInicio, DateTime? fechaFinal)
+        {
+            if (fechaInicio == null || fechaFinal == null || fechaFinal.Value.Date < fechaInicio.Value.Date)
+                return RedirectToAction(nameof(Index), new { fechaInicio, fechaFinal });
+
+            var modelo = new ReporteViewModel
+            {
+                FechaInicio = fechaInicio.Value.Date,
+                FechaFinal = fechaFinal.Value.Date,
+                ReporteGenerado = true
+            };
+            await CargarReporte(modelo);
+
+            var separador = ",";
+            var csv = new StringBuilder();
+            csv.AppendLine("REPORTE DE VENTAS Y GASTOS");
+            csv.AppendLine($"Periodo{separador}{modelo.FechaInicio:dd/MM/yyyy} - {modelo.FechaFinal:dd/MM/yyyy}");
+            csv.AppendLine();
+            csv.AppendLine("RESUMEN");
+            csv.AppendLine($"Total vendido{separador}{modelo.TotalVendido.ToString("0.00", CultureInfo.InvariantCulture)}");
+            csv.AppendLine($"Cantidad de ventas{separador}{modelo.CantidadVentas}");
+            csv.AppendLine($"Promedio por venta{separador}{modelo.PromedioVenta.ToString("0.00", CultureInfo.InvariantCulture)}");
+            csv.AppendLine($"Total gastado{separador}{modelo.TotalGastado.ToString("0.00", CultureInfo.InvariantCulture)}");
+            csv.AppendLine($"Utilidad estimada{separador}{modelo.UtilidadEstimada.ToString("0.00", CultureInfo.InvariantCulture)}");
+            csv.AppendLine();
+            csv.AppendLine("VENTAS POR METODO DE PAGO");
+            csv.AppendLine("Metodo,Cantidad de ventas,Total");
+            foreach (var item in modelo.VentasPorMetodoPago)
+                csv.AppendLine($"{Csv(item.NombreMetodo)},{item.CantidadVentas},{item.Total.ToString("0.00", CultureInfo.InvariantCulture)}");
+            csv.AppendLine();
+            csv.AppendLine("VENTAS POR CAJERO");
+            csv.AppendLine("Cajero,Cantidad de ventas,Total");
+            foreach (var item in modelo.VentasPorCajero)
+                csv.AppendLine($"{Csv(item.Cajero)},{item.CantidadVentas},{item.Total.ToString("0.00", CultureInfo.InvariantCulture)}");
+            csv.AppendLine();
+            csv.AppendLine("PRODUCTOS MAS VENDIDOS");
+            csv.AppendLine("Producto,Cantidad,Importe");
+            foreach (var item in modelo.ProductosMasVendidos)
+                csv.AppendLine($"{Csv(item.NombreProducto)},{item.Cantidad},{item.Importe.ToString("0.00", CultureInfo.InvariantCulture)}");
+            csv.AppendLine();
+            csv.AppendLine("VENTAS POR DIA");
+            csv.AppendLine("Fecha,Cantidad de ventas,Total");
+            foreach (var item in modelo.VentasPorDia)
+                csv.AppendLine($"{item.Fecha:dd/MM/yyyy},{item.CantidadVentas},{item.Total.ToString("0.00", CultureInfo.InvariantCulture)}");
+            csv.AppendLine();
+            csv.AppendLine("RESUMEN POR CAJA");
+            csv.AppendLine("Caja,Cajero,Ventas,Efectivo esperado,Contado,Diferencia");
+            foreach (var item in modelo.ResumenCajas)
+                csv.AppendLine($"{item.IdCaja},{Csv(item.Cajero)},{item.TotalVentas.ToString("0.00", CultureInfo.InvariantCulture)},{item.EfectivoEsperado.ToString("0.00", CultureInfo.InvariantCulture)},{(item.MontoContado?.ToString("0.00", CultureInfo.InvariantCulture) ?? "Pendiente")},{(item.Diferencia?.ToString("0.00", CultureInfo.InvariantCulture) ?? "Pendiente")}");
+
+            var bytes = Encoding.UTF8.GetPreamble().Concat(Encoding.UTF8.GetBytes(csv.ToString())).ToArray();
+            return File(bytes, "text/csv; charset=utf-8", $"reporte-{fechaInicio:yyyyMMdd}-{fechaFinal:yyyyMMdd}.csv");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DescargarPdf(DateTime? fechaInicio, DateTime? fechaFinal)
+        {
+            if (fechaInicio == null || fechaFinal == null || fechaFinal.Value.Date < fechaInicio.Value.Date)
+                return RedirectToAction(nameof(Index), new { fechaInicio, fechaFinal });
+
+            var modelo = new ReporteViewModel
+            {
+                FechaInicio = fechaInicio.Value.Date,
+                FechaFinal = fechaFinal.Value.Date,
+                ReporteGenerado = true
+            };
+            await CargarReporte(modelo);
+
+            var documento = new ReportePdfDocument(modelo);
+            var pdf = documento.GeneratePdf();
+            return File(pdf, "application/pdf", $"reporte-{fechaInicio:yyyyMMdd}-{fechaFinal:yyyyMMdd}.pdf");
         }
 
         private async Task CargarReporte(ReporteViewModel modelo)
@@ -183,5 +261,7 @@ namespace PolleriaLovely.Controllers
             MetodoPago.Otro => "Otro",
             _ => "No registrado"
         };
+
+        private static string Csv(string valor) => $"\"{valor.Replace("\"", "\"\"")}\"";
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PolleriaLovely.Data;
 using PolleriaLovely.Models;
+using PolleriaLovely.Services;
 using PolleriaLovely.ViewModels;
 using System.Security.Claims;
 
@@ -12,11 +13,13 @@ namespace PolleriaLovely.Controllers
     public class VentasController : Controller
     {
         private readonly BibliotecaDbContext _context;
+        private readonly InventarioService _inventario;
         private const decimal MaximoDecimal = 99999999.99m;
 
-        public VentasController(BibliotecaDbContext context)
+        public VentasController(BibliotecaDbContext context, InventarioService inventario)
         {
             _context = context;
+            _inventario = inventario;
         }
 
         // GET: Ventas — historial (solo Administrador)
@@ -136,12 +139,23 @@ namespace PolleriaLovely.Controllers
 
                 if (ModelState.IsValid && venta.DetalleVentas.Count > 0)
                 {
-                    venta.Total = total;
-                    _context.Ventas.Add(venta);
-                    await _context.SaveChangesAsync();
+                    var consumo = await _inventario.PrepararConsumoAsync(
+                        venta.DetalleVentas.Select(detalle => (detalle.IdProducto, detalle.Cantidad)));
+                    if (!consumo.EsValido)
+                        ModelState.AddModelError(string.Empty, consumo.Mensaje!);
 
-                    TempData["Mensaje"] = $"Venta #{venta.IdVenta} registrada correctamente: {venta.DetalleVentas.Count} producto(s), total S/ {venta.Total:N2}.";
-                    return RedirectToAction(nameof(Create));
+                    if (ModelState.IsValid)
+                    {
+                        venta.Total = total;
+                        await using var transaccion = await _context.Database.BeginTransactionAsync();
+                        _context.Ventas.Add(venta);
+                        _inventario.AplicarConsumo(consumo);
+                        await _context.SaveChangesAsync();
+                        await transaccion.CommitAsync();
+
+                        TempData["Mensaje"] = $"Venta #{venta.IdVenta} registrada correctamente: {venta.DetalleVentas.Count} producto(s), total S/ {venta.Total:N2}.";
+                        return RedirectToAction(nameof(Create));
+                    }
                 }
             }
 

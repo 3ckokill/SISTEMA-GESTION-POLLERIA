@@ -23,6 +23,7 @@ namespace PolleriaLovely.Data
         public DbSet<Mesa> Mesas { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<DetallePedido> DetallePedidos { get; set; }
+        public DbSet<ProductoInsumo> ProductoInsumos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -139,6 +140,23 @@ namespace PolleriaLovely.Data
                 .WithMany(p => p.DetallePedidos)
                 .HasForeignKey(d => d.IdProducto)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ProductoInsumo>()
+                .HasOne(pi => pi.Producto)
+                .WithMany(p => p.Receta)
+                .HasForeignKey(pi => pi.IdProducto)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<ProductoInsumo>()
+                .HasOne(pi => pi.Insumo)
+                .WithMany(i => i.Recetas)
+                .HasForeignKey(pi => pi.IdInsumo)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<ProductoInsumo>()
+                .HasIndex(pi => new { pi.IdProducto, pi.IdInsumo })
+                .IsUnique();
+            modelBuilder.Entity<ProductoInsumo>()
+                .Property(pi => pi.Cantidad)
+                .HasColumnType("decimal(10, 4)");
 
             modelBuilder.Entity<Pedido>()
                 .Property(p => p.Fecha)

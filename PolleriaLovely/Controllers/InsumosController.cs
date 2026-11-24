@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using PolleriaLovely.Models;
 using PolleriaLovely.Data;
+using PolleriaLovely.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Globalization;
 
@@ -32,6 +33,56 @@ namespace PolleriaLovely.Controllers
                 .FirstOrDefaultAsync(m => m.IdInsumo == id);
             if (insumo == null) return NotFound();
             return View(insumo);
+        }
+
+        public async Task<IActionResult> RegistrarEntrada(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var insumo = await _context.Insumos.AsNoTracking().FirstOrDefaultAsync(i => i.IdInsumo == id);
+            if (insumo == null) return NotFound();
+
+            return View(new RegistrarEntradaInsumoViewModel
+            {
+                IdInsumo = insumo.IdInsumo,
+                NombreInsumo = insumo.NombreInsumo,
+                UnidadMedida = insumo.UnidadMedida,
+                StockActual = insumo.Stock
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegistrarEntrada(RegistrarEntradaInsumoViewModel modelo)
+        {
+            var insumo = await _context.Insumos.FirstOrDefaultAsync(i => i.IdInsumo == modelo.IdInsumo);
+            if (insumo == null) return NotFound();
+
+            modelo.NombreInsumo = insumo.NombreInsumo;
+            modelo.UnidadMedida = insumo.UnidadMedida;
+            modelo.StockActual = insumo.Stock;
+
+            var textoCantidad = modelo.Cantidad?.Trim() ?? string.Empty;
+            var normalizado = ValidarFormatoStock(textoCantidad);
+            if (!decimal.TryParse(normalizado, NumberStyles.Number, CultureInfo.InvariantCulture, out var cantidad) ||
+                cantidad <= 0m || cantidad > 1000000m)
+            {
+                ModelState.AddModelError(nameof(modelo.Cantidad), "Ingrese una cantidad válida mayor que cero.");
+            }
+            else if (insumo.Stock + cantidad > 1000000m)
+            {
+                ModelState.AddModelError(nameof(modelo.Cantidad), "El stock resultante no puede superar 1,000,000.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                insumo.Stock += cantidad;
+                await _context.SaveChangesAsync();
+                TempData["Mensaje"] = $"Se registró una entrada de {cantidad:N2} {insumo.UnidadMedida}(s) para «{insumo.NombreInsumo}».";
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(modelo);
         }
 
         public async Task<IActionResult> Create()

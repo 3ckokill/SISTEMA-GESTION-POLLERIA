@@ -26,6 +26,8 @@ namespace PolleriaLovely.Models
         public int IdProveedor { get; set; }
         [ValidateNever]
         public Proveedor? Proveedor { get; set; }
+
+        public ICollection<ProductoInsumo> Recetas { get; set; } = new List<ProductoInsumo>();
     }
 }
 

@@ -28,6 +28,8 @@ namespace PolleriaLovely.Models
         public ICollection<DetalleVenta> DetalleVentas { get; set; } = new List<DetalleVenta>();
 
         public ICollection<DetallePedido> DetallePedidos { get; set; } = new List<DetallePedido>();
+
+        public ICollection<ProductoInsumo> Receta { get; set; } = new List<ProductoInsumo>();
     }
 }
 

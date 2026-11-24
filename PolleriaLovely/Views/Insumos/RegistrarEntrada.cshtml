@@ -1,0 +1,21 @@
+@model PolleriaLovely.ViewModels.RegistrarEntradaInsumoViewModel
+@{ ViewData["Title"] = "Registrar entrada"; }
+<div class="form-card">
+    <h1>Registrar entrada de insumo</h1>
+    <p class="text-muted">Esta operación suma la cantidad recibida al stock actual.</p>
+    <div class="alert alert-info">
+        <strong>@Model.NombreInsumo</strong> · Stock actual: <strong>@Model.StockActual.ToString("N2") @Model.UnidadMedida</strong>
+    </div>
+    <form asp-action="RegistrarEntrada" method="post">
+        <input asp-for="IdInsumo" type="hidden" />
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <div class="mb-4">
+            <label asp-for="Cantidad" class="form-label">Cantidad recibida (@Model.UnidadMedida)</label>
+            <input asp-for="Cantidad" class="form-control" type="text" inputmode="decimal" placeholder="Ej. 10 o 10,5" />
+            <span asp-validation-for="Cantidad" class="text-danger"></span>
+        </div>
+        <a asp-action="Index" class="btn btn-light">Cancelar</a>
+        <button type="submit" class="btn btn-success">Sumar al stock</button>
+    </form>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }
