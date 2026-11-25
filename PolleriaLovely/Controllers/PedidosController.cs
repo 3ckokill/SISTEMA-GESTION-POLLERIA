@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using PolleriaLovely.Data;
+using PolleriaLovely.Hubs;
 using PolleriaLovely.Models;
 using PolleriaLovely.Services;
 using PolleriaLovely.ViewModels;
@@ -14,12 +16,14 @@ namespace PolleriaLovely.Controllers
     {
         private readonly BibliotecaDbContext _context;
         private readonly InventarioService _inventario;
+        private readonly IHubContext<PedidosHub> _hubContext;
         private const decimal MaximoDecimal = 99999999.99m;
 
-        public PedidosController(BibliotecaDbContext context, InventarioService inventario)
+        public PedidosController(BibliotecaDbContext context, InventarioService inventario, IHubContext<PedidosHub> hubContext)
         {
             _context = context;
             _inventario = inventario;
+            _hubContext = hubContext;
         }
 
         // GET: Pedidos — consulta (Cajero solo lee; Mozo y Administrador también operan).
@@ -129,6 +133,7 @@ namespace PolleriaLovely.Controllers
                 {
                     _context.Pedidos.Add(pedido);
                     await _context.SaveChangesAsync();
+                    await NotificarCambioAsync($"Nuevo pedido #{pedido.IdPedido} registrado en la Mesa {mesaLibre?.Numero}.");
 
                     TempData["Mensaje"] = $"Pedido #{pedido.IdPedido} registrado en la Mesa {mesaLibre?.Numero} ({pedido.DetallePedidos.Count} producto(s)).";
                     return RedirectToAction(nameof(Create));
@@ -229,6 +234,7 @@ namespace PolleriaLovely.Controllers
                     }
 
                     await _context.SaveChangesAsync();
+                    await NotificarCambioAsync($"Se agregaron productos al Pedido #{pedido.IdPedido}.");
 
                     TempData["Mensaje"] = $"Se agregaron {agregados} producto(s) al Pedido #{pedido.IdPedido}.";
                     return RedirectToAction(nameof(Index));
@@ -286,6 +292,7 @@ namespace PolleriaLovely.Controllers
 
             pedido.Estado = estado;
             await _context.SaveChangesAsync();
+            await NotificarCambioAsync($"El Pedido #{pedido.IdPedido} cambió a «{NombreEstado(estado)}».");
 
             TempData["Mensaje"] = $"Pedido #{pedido.IdPedido} actualizado a «{NombreEstado(estado)}».";
             return RedirectToAction(nameof(Index));
@@ -494,6 +501,7 @@ namespace PolleriaLovely.Controllers
                 throw;
             }
 
+            await NotificarCambioAsync($"El Pedido #{pedido.IdPedido} fue cobrado.");
             TempData["Mensaje"] = $"Pedido #{pedido.IdPedido} cobrado. Venta #{venta.IdVenta} registrada: {venta.DetalleVentas.Count} producto(s), total S/ {venta.Total:N2}.";
             return RedirectToAction(nameof(Index));
         }
@@ -508,6 +516,13 @@ namespace PolleriaLovely.Controllers
             EstadoPedido.CuentaSolicitada => "Cuenta solicitada",
             _ => estado.ToString()
         };
+
+        private Task NotificarCambioAsync(string mensaje) =>
+            _hubContext.Clients.All.SendAsync("PedidoActualizado", new
+            {
+                mensaje,
+                fecha = DateTime.Now.ToString("O")
+            });
 
         private void ValidarLimitesPedido(ICollection<LineaPedidoInput> detalles, int unidadesExistentes = 0)
         {

@@ -22,7 +22,7 @@
     </section>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-muted small">Se actualiza automáticamente cada 5 segundos.</span>
+        <span class="text-muted small">Los nuevos pedidos aparecen automáticamente.</span>
         <button type="button" onclick="location.reload()" class="btn btn-outline-primary btn-sm">Actualizar ahora</button>
     </div>
 
@@ -101,9 +101,33 @@
 </div>
 
 @section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
     <script>
-        setTimeout(function () {
-            location.reload();
-        }, 5000);
+        (function () {
+            if (typeof signalR === 'undefined') return;
+
+            const conexion = new signalR.HubConnectionBuilder()
+                .withUrl('/hubs/pedidos')
+                .withAutomaticReconnect()
+                .build();
+            let actualizando = false;
+
+            conexion.on('PedidoActualizado', function (evento) {
+                if (actualizando) return;
+                actualizando = true;
+
+                const aviso = document.createElement('div');
+                aviso.className = 'alert alert-info shadow position-fixed top-0 end-0 m-3';
+                aviso.style.zIndex = '1080';
+                aviso.textContent = evento?.mensaje || 'Se actualizó un pedido.';
+                document.body.appendChild(aviso);
+
+                setTimeout(function () { location.reload(); }, 900);
+            });
+
+            conexion.start().catch(function (error) {
+                console.warn('No se pudo conectar a las actualizaciones en tiempo real.', error);
+            });
+        })();
     </script>
 }

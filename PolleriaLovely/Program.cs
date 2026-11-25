@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 QuestPDF.Settings.License = LicenseType.Community;
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<BibliotecaDbContext>(options =>
     options.UseSqlServer(
@@ -143,6 +144,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+app.MapHub<PolleriaLovely.Hubs.PedidosHub>("/hubs/pedidos");
 
 app.MapControllerRoute(
     name: "default",

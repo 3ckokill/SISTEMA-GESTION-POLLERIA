@@ -96,9 +96,33 @@
 @if (!Model.Any()) { <tr><td colspan="7" class="text-center py-5 text-muted">Aún no hay pedidos registrados.</td></tr> }</tbody></table></div></div>
 
 @section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
     <script>
-        setTimeout(function () {
-            location.reload();
-        }, 5000);
+        (function () {
+            if (typeof signalR === 'undefined') return;
+
+            const conexion = new signalR.HubConnectionBuilder()
+                .withUrl('/hubs/pedidos')
+                .withAutomaticReconnect()
+                .build();
+            let actualizando = false;
+
+            conexion.on('PedidoActualizado', function (evento) {
+                if (actualizando) return;
+                actualizando = true;
+
+                const aviso = document.createElement('div');
+                aviso.className = 'alert alert-info shadow position-fixed top-0 end-0 m-3';
+                aviso.style.zIndex = '1080';
+                aviso.textContent = evento?.mensaje || 'Se actualizó un pedido.';
+                document.body.appendChild(aviso);
+
+                setTimeout(function () { location.reload(); }, 900);
+            });
+
+            conexion.start().catch(function (error) {
+                console.warn('No se pudo conectar a las actualizaciones en tiempo real.', error);
+            });
+        })();
     </script>
 }

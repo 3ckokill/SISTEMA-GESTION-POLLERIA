@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using PolleriaLovely.Data;
+using PolleriaLovely.Hubs;
 using PolleriaLovely.Models;
 
 namespace PolleriaLovely.Controllers
@@ -10,10 +12,12 @@ namespace PolleriaLovely.Controllers
     public class CocinaController : Controller
     {
         private readonly BibliotecaDbContext _context;
+        private readonly IHubContext<PedidosHub> _hubContext;
 
-        public CocinaController(BibliotecaDbContext context)
+        public CocinaController(BibliotecaDbContext context, IHubContext<PedidosHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         // GET: Cocina — muestra los pedidos Pendientes y EnPreparacion
@@ -60,6 +64,11 @@ namespace PolleriaLovely.Controllers
             await _context.SaveChangesAsync();
 
             string textoEstado = nuevoEstado == EstadoPedido.EnPreparacion ? "En preparación" : "Listo";
+            await _hubContext.Clients.All.SendAsync("PedidoActualizado", new
+            {
+                mensaje = $"El Pedido #{pedido.IdPedido} cambió a «{textoEstado}».",
+                fecha = DateTime.Now.ToString("O")
+            });
             TempData["Mensaje"] = $"Pedido #{pedido.IdPedido} actualizado a «{textoEstado}».";
 
             return RedirectToAction(nameof(Index));
