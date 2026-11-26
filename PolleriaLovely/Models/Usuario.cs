@@ -36,6 +36,7 @@ namespace PolleriaLovely.Models
         [Required]
         public bool Estado { get; set; }
 
+        [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar un rol válido.")]
         public int IdRol { get; set; }
 
         [ValidateNever]

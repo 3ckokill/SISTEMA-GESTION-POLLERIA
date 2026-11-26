@@ -23,6 +23,7 @@ namespace PolleriaLovely.Models
         public decimal? Diferencia { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Debe identificar al usuario.")]
         public int IdUsuario { get; set; }
 
         [ValidateNever]

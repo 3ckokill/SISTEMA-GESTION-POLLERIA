@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-3">
                 <label class="form-label" for="Cantidad">Cantidad por unidad</label>
-                <input class="form-control" type="text" inputmode="decimal" id="Cantidad" name="Cantidad" placeholder="Ej. 0.25" required />
+                <input class="form-control" type="number" inputmode="decimal" id="Cantidad" name="Cantidad" min="0.0001" max="1000000" step="0.0001" placeholder="Ej. 0.25" required />
             </div>
             <div class="col-md-3"><button type="submit" class="btn btn-success">Agregar a la receta</button></div>
         </div>

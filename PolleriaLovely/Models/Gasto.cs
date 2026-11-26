@@ -30,6 +30,7 @@ namespace PolleriaLovely.Models
         public bool Anulado { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Debe identificar al usuario.")]
         public int IdUsuario { get; set; }
 
         [ValidateNever]

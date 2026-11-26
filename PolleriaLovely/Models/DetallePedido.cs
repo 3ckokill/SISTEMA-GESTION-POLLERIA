@@ -10,6 +10,7 @@ namespace PolleriaLovely.Models
         public int IdDetallePedido { get; set; }
 
         [Required(ErrorMessage = "Debe pertenecer a un pedido.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Debe pertenecer a un pedido válido.")]
         public int IdPedido { get; set; }
 
         [ValidateNever]

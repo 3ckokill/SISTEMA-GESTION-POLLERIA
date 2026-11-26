@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace PolleriaLovely.ViewModels
 {
@@ -26,10 +27,13 @@ namespace PolleriaLovely.ViewModels
 
     public class AgregarRecetaLineaViewModel
     {
+        [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar un producto válido.")]
         public int IdProducto { get; set; }
 
+        [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar un insumo válido.")]
         public int IdInsumo { get; set; }
 
+        [Required(ErrorMessage = "Ingrese la cantidad.")]
         public string Cantidad { get; set; } = string.Empty;
     }
 }

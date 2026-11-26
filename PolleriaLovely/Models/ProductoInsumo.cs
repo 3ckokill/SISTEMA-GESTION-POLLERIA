@@ -9,11 +9,13 @@ namespace PolleriaLovely.Models
         public int IdProductoInsumo { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar un producto válido.")]
         public int IdProducto { get; set; }
 
         public Producto Producto { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar un insumo válido.")]
         public int IdInsumo { get; set; }
 
         public Insumo Insumo { get; set; }

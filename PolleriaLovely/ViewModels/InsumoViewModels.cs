@@ -4,6 +4,7 @@ namespace PolleriaLovely.ViewModels
 {
     public class RegistrarEntradaInsumoViewModel
     {
+        [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar un insumo válido.")]
         public int IdInsumo { get; set; }
 
         public string NombreInsumo { get; set; } = string.Empty;

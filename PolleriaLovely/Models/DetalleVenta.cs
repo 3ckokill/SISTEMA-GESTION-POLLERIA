@@ -10,6 +10,7 @@ namespace PolleriaLovely.Models
         public int IdDetalleVenta { get; set; }
 
         [Required(ErrorMessage = "Debe pertenecer a una venta.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Debe pertenecer a una venta válida.")]
         public int IdVenta { get; set; }
 
         [ValidateNever]
