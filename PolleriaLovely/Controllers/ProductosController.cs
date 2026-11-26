@@ -111,14 +111,24 @@ namespace PolleriaLovely.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int? id)
         {
-            var producto = await _context.Productos
-                .Include(p => p.DetalleVentas)
-                .FirstOrDefaultAsync(m => m.IdProducto == id);
+            var producto = await _context.Productos.FindAsync(id);
             if (producto == null) return RedirectToAction(nameof(Index));
 
-            if (producto.DetalleVentas.Count > 0)
+            int ventas = await _context.DetalleVentas.CountAsync(d => d.IdProducto == producto.IdProducto);
+            int pedidos = await _context.DetallePedidos.CountAsync(d => d.IdProducto == producto.IdProducto);
+            if (ventas > 0 && pedidos > 0)
             {
-                TempData["Error"] = $"No se puede eliminar «{producto.NombreProducto}» porque tiene {producto.DetalleVentas.Count} venta(s) asociada(s).";
+                TempData["Error"] = $"No se puede eliminar «{producto.NombreProducto}» porque tiene {ventas} venta(s) y {pedidos} pedido(s) asociado(s).";
+                return RedirectToAction(nameof(Index));
+            }
+            if (ventas > 0)
+            {
+                TempData["Error"] = $"No se puede eliminar «{producto.NombreProducto}» porque tiene {ventas} venta(s) asociada(s).";
+                return RedirectToAction(nameof(Index));
+            }
+            if (pedidos > 0)
+            {
+                TempData["Error"] = $"No se puede eliminar «{producto.NombreProducto}» porque tiene {pedidos} pedido(s) asociado(s).";
                 return RedirectToAction(nameof(Index));
             }
 

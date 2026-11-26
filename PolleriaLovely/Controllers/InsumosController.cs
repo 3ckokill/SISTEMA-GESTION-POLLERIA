@@ -172,12 +172,18 @@ namespace PolleriaLovely.Controllers
         public async Task<IActionResult> DeleteConfirmed(int? id)
         {
             var insumo = await _context.Insumos.FindAsync(id);
-            if (insumo != null)
+            if (insumo == null) return RedirectToAction(nameof(Index));
+
+            int recetas = await _context.ProductoInsumos.CountAsync(pi => pi.IdInsumo == insumo.IdInsumo);
+            if (recetas > 0)
             {
-                _context.Insumos.Remove(insumo);
-                await _context.SaveChangesAsync();
-                TempData["Mensaje"] = "El insumo se eliminó correctamente.";
+                TempData["Error"] = $"No se puede eliminar «{insumo.NombreInsumo}» porque tiene {recetas} receta(s) asociada(s).";
+                return RedirectToAction(nameof(Index));
             }
+
+            _context.Insumos.Remove(insumo);
+            await _context.SaveChangesAsync();
+            TempData["Mensaje"] = "El insumo se eliminó correctamente.";
 
             return RedirectToAction(nameof(Index));
         }

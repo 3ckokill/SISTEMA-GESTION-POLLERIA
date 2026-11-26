@@ -154,6 +154,8 @@ namespace PolleriaLovely.Controllers
 
             int pedidos = await _context.Pedidos.CountAsync(p => p.IdUsuario == id);
             int ventas = await _context.Ventas.CountAsync(v => v.IdUsuario == id);
+            int cajas = await _context.Cajas.CountAsync(c => c.IdUsuario == id);
+            int gastos = await _context.Gastos.CountAsync(g => g.IdUsuario == id);
 
             string? motivo = null;
             if (UsuarioActualId() == id)
@@ -164,11 +166,13 @@ namespace PolleriaLovely.Controllers
             {
                 motivo = "No se puede eliminar al último administrador activo.";
             }
-            else if (pedidos > 0 || ventas > 0)
+            else if (pedidos > 0 || ventas > 0 || cajas > 0 || gastos > 0)
             {
                 var partes = new List<string>();
                 if (pedidos > 0) partes.Add($"{pedidos} pedido(s)");
                 if (ventas > 0) partes.Add($"{ventas} venta(s)");
+                if (cajas > 0) partes.Add($"{cajas} caja(s)");
+                if (gastos > 0) partes.Add($"{gastos} gasto(s)");
                 motivo =
                     $"Este usuario tiene {string.Join(" y ", partes)} asociado(s); no se puede eliminar. Use la desactivación.";
             }
@@ -200,11 +204,15 @@ namespace PolleriaLovely.Controllers
 
             int pedidos = await _context.Pedidos.CountAsync(p => p.IdUsuario == id);
             int ventas = await _context.Ventas.CountAsync(v => v.IdUsuario == id);
-            if (pedidos > 0 || ventas > 0)
+            int cajas = await _context.Cajas.CountAsync(c => c.IdUsuario == id);
+            int gastos = await _context.Gastos.CountAsync(g => g.IdUsuario == id);
+            if (pedidos > 0 || ventas > 0 || cajas > 0 || gastos > 0)
             {
                 var partes = new List<string>();
                 if (pedidos > 0) partes.Add($"{pedidos} pedido(s)");
                 if (ventas > 0) partes.Add($"{ventas} venta(s)");
+                if (cajas > 0) partes.Add($"{cajas} caja(s)");
+                if (gastos > 0) partes.Add($"{gastos} gasto(s)");
                 TempData["Error"] =
                     $"No se puede eliminar «{usuario.NombreUsuario}» porque tiene {string.Join(" y ", partes)} asociado(s). Use la desactivación.";
                 return RedirectToAction(nameof(Index));
