@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +6,7 @@ using PolleriaLovely.Data;
 using PolleriaLovely.Models;
 using PolleriaLovely.Services;
 using QuestPDF.Infrastructure;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +32,33 @@ builder.Services
         opciones.Cookie.HttpOnly = true;
         opciones.Cookie.IsEssential = true;
         opciones.SlidingExpiration = true;
+
+        // Si el usuario fue inhabilitado (o eliminado), se cierra su sesión
+        // en la siguiente petición, aunque su cookie siga vigente.
+        opciones.Events = new CookieAuthenticationEvents
+        {
+            OnValidatePrincipal = async contexto =>
+            {
+                var valor = contexto.Principal?.FindFirstValue(ClaimTypes.NameIdentifier);
+                bool activo = false;
+
+                if (int.TryParse(valor, out var idUsuario))
+                {
+                    var bd = contexto.HttpContext.RequestServices
+                        .GetRequiredService<BibliotecaDbContext>();
+                    activo = await bd.Usuarios
+                        .AsNoTracking()
+                        .AnyAsync(u => u.IdUsuario == idUsuario && u.Estado);
+                }
+
+                if (!activo)
+                {
+                    contexto.RejectPrincipal();
+                    await contexto.HttpContext.SignOutAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme);
+                }
+            }
+        };
     });
 
 var app = builder.Build();

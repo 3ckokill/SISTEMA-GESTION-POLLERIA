@@ -358,7 +358,7 @@ namespace PolleriaLovely.Controllers
         [Authorize(Roles = "Cajero")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Cobrar(int idPedido, MetodoPago metodoPago)
+        public async Task<IActionResult> Cobrar(int idPedido, MetodoPago metodoPago, string? nombreComprador)
         {
             var pedido = await _context.Pedidos
                 .Include(p => p.DetallePedidos)
@@ -401,6 +401,14 @@ namespace PolleriaLovely.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            var comprador = nombreComprador?.Trim() ?? string.Empty;
+            if (comprador.Length == 0 || comprador.Length > 100 ||
+                !System.Text.RegularExpressions.Regex.IsMatch(comprador, ReglasNegocio.PatronSoloLetras))
+            {
+                TempData["Error"] = "Ingrese el nombre del comprador (solo letras, máximo 100 caracteres).";
+                return RedirectToAction(nameof(Index));
+            }
+
             var caja = await _context.Cajas
                 .FirstOrDefaultAsync(c => c.IdUsuario == idUsuario && c.FechaCierre == null);
             if (caja == null)
@@ -418,6 +426,7 @@ namespace PolleriaLovely.Controllers
             {
                 Fecha = DateTime.Now,
                 IdUsuario = idUsuario,
+                NombreComprador = comprador,
                 MetodoPago = metodoPago,
                 IdCaja = caja.IdCaja
             };

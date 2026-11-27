@@ -435,6 +435,11 @@ namespace PolleriaLovely.Migrations
                     b.Property<int>("MetodoPago")
                         .HasColumnType("int");
 
+                    b.Property<string>("NombreComprador")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(10, 2)");
 

@@ -100,6 +100,7 @@ namespace PolleriaLovely.Controllers
                 {
                     Fecha = DateTime.Now,
                     IdUsuario = idUsuario,
+                    NombreComprador = modelo.NombreComprador.Trim(),
                     MetodoPago = modelo.MetodoPago,
                     IdCaja = caja!.IdCaja
                 };

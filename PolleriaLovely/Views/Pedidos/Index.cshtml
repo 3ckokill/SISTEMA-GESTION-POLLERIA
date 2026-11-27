@@ -1,11 +1,22 @@
 @model IEnumerable<PolleriaLovely.Models.Pedido>
-@{ ViewData["Title"] = "Pedidos";
-   var esAdmin = User.IsInRole("Administrador");
-   var esMozo = User.IsInRole("Mozo");
-   var puedeOperar = esAdmin || esMozo; }
-<div class="page-heading d-flex justify-content-between align-items-center mb-4"><div><h1>Pedidos</h1><p class="text-muted mb-0">Comandas registradas y su estado de preparación.</p></div>@if (esMozo) { <a asp-action="Create" class="btn btn-primary">Nuevo pedido</a> }</div>
-@if (TempData["Mensaje"] is string mensaje) { <div class="alert alert-success">@mensaje</div> }
-@if (TempData["Error"] is string error) { <div class="alert alert-warning">@error</div> }
+@{
+    ViewData["Title"] = "Pedidos";
+    var esAdmin = User.IsInRole("Administrador");
+    var esMozo = User.IsInRole("Mozo");
+    var puedeOperar = esAdmin || esMozo;
+}
+<div class="page-heading d-flex justify-content-between align-items-center mb-4"><div><h1>Pedidos</h1><p class="text-muted mb-0">Comandas registradas y su estado de preparación.</p></div>@if (esMozo) {
+    <a asp-action="Create" class="btn btn-primary">Nuevo pedido</a>
+}
+</div>
+@if (TempData["Mensaje"] is string mensaje)
+{
+    <div class="alert alert-success">@mensaje</div>
+}
+@if (TempData["Error"] is string error)
+{
+    <div class="alert alert-warning">@error</div>
+}
 @functions {
     string NombreEstado(PolleriaLovely.Models.EstadoPedido estado) => estado switch
     {
@@ -20,80 +31,92 @@
             or PolleriaLovely.Models.EstadoPedido.Entregado
             or PolleriaLovely.Models.EstadoPedido.CuentaSolicitada;
 }
-<div class="table-card"><div class="table-responsive"><table class="table align-middle mb-0"><thead><tr><th># Pedido</th><th>Mesa</th><th>Fecha</th><th>Mozo</th><th>Productos</th><th style="width:24%">Estado</th><th style="width:12%">Acciones</th></tr></thead><tbody>
-@foreach (var item in Model)
-{
-    var resumen = string.Join(", ", item.DetallePedidos.Select(d => $"{d.Cantidad}× {(d.Producto?.NombreProducto ?? $"Producto #{d.IdProducto}")}"));
-    var abierto = EstaAbierto(item.Estado);
-    <tr class="@(esAdmin && item.Estado == PolleriaLovely.Models.EstadoPedido.Cancelado ? "opacity-50" : "")">
-        <td class="fw-semibold">@item.IdPedido</td>
-        <td>Mesa @(item.Mesa?.Numero.ToString() ?? item.IdMesa.ToString())</td>
-        <td>@item.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
-        <td>@(item.Usuario?.NombreUsuario ?? "—")</td>
-        <td>@resumen</td>
-        <td>
-            @if (puedeOperar && abierto)
-            {
-                <form asp-action="ActualizarEstado" method="post" class="d-flex gap-1" onsubmit="if (this.estado.value === '4' && !confirm('¿Cancelar este pedido? No se puede deshacer.')) return false;">
-                    <input type="hidden" name="idPedido" value="@item.IdPedido" />
-                    <select name="estado" class="form-select form-select-sm">
-                        @foreach (PolleriaLovely.Models.EstadoPedido estado in Enum.GetValues(typeof(PolleriaLovely.Models.EstadoPedido)))
-                        {
-                            if (estado == PolleriaLovely.Models.EstadoPedido.Cobrado) { continue; }
-                            if (!esAdmin && estado == PolleriaLovely.Models.EstadoPedido.Cancelado) { continue; }
-                            <option value="@((int)estado)" selected="@(item.Estado == estado ? "selected" : null)">@NombreEstado(estado)</option>
-                        }
-                    </select>
-                    <button type="submit" class="btn btn-sm btn-outline-primary">Actualizar</button>
-                </form>
-            }
-            else
-            {
-                <span class="fw-semibold">@NombreEstado(item.Estado)</span>
-                @if (item.IdVenta != null)
+<div class="table-card">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead><tr><th># Pedido</th><th>Mesa</th><th>Fecha</th><th>Mozo</th><th>Productos</th><th style="width:24%">Estado</th><th style="width:12%">Acciones</th></tr></thead>
+            <tbody>
+                @foreach (var item in Model)
                 {
-                    <span class="text-muted d-block">Venta #@item.IdVenta</span>
+                    var resumen = string.Join(", ", item.DetallePedidos.Select(d => $"{d.Cantidad}× {(d.Producto?.NombreProducto ?? $"Producto #{d.IdProducto}")}"));
+                    var abierto = EstaAbierto(item.Estado);
+                    <tr class="@(esAdmin && item.Estado == PolleriaLovely.Models.EstadoPedido.Cancelado ? "opacity-50" : "")">
+                        <td class="fw-semibold">@item.IdPedido</td>
+                        <td>Mesa @(item.Mesa?.Numero.ToString() ?? item.IdMesa.ToString())</td>
+                        <td>@item.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@(item.Usuario?.NombreUsuario ?? "—")</td>
+                        <td>@resumen</td>
+                        <td>
+                            @if (puedeOperar && abierto)
+                            {
+                                <form asp-action="ActualizarEstado" method="post" class="d-flex gap-1" onsubmit="if (this.estado.value === '4' && !confirm('¿Cancelar este pedido? No se puede deshacer.')) return false;">
+                                    <input type="hidden" name="idPedido" value="@item.IdPedido" />
+                                    <select name="estado" class="form-select form-select-sm">
+                                        @foreach (PolleriaLovely.Models.EstadoPedido estado in Enum.GetValues(typeof(PolleriaLovely.Models.EstadoPedido)))
+                                        {
+                                            if (estado == PolleriaLovely.Models.EstadoPedido.Cobrado) { continue; }
+                                            if (!esAdmin && estado == PolleriaLovely.Models.EstadoPedido.Cancelado) { continue; }
+                                            <option value="@((int)estado)" selected="@(item.Estado == estado ? "selected" : null)">@NombreEstado(estado)</option>
+                                        }
+                                    </select>
+                                    <button type="submit" class="btn btn-sm btn-outline-primary">Actualizar</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="fw-semibold">@NombreEstado(item.Estado)</span>
+                                @if (item.IdVenta != null)
+                                {
+                                    <span class="text-muted d-block">Venta #@item.IdVenta</span>
+                                }
+                            }
+                        </td>
+                        <td>
+                            @if (puedeOperar && abierto)
+                            {
+                                <div class="d-flex gap-1 flex-wrap">
+                                    <a asp-action="Agregar" asp-route-id="@item.IdPedido" class="btn btn-sm btn-outline-success">+ Agregar</a>
+                                    @if (esMozo && item.Estado != PolleriaLovely.Models.EstadoPedido.CuentaSolicitada)
+                                    {
+                                        <form asp-action="ActualizarEstado" method="post" onsubmit="return confirm('¿Solicitar la cuenta del pedido #@item.IdPedido?');">
+                                            <input type="hidden" name="idPedido" value="@item.IdPedido" />
+                                            <input type="hidden" name="estado" value="@((int)PolleriaLovely.Models.EstadoPedido.CuentaSolicitada)" />
+                                            <button type="submit" class="btn btn-sm btn-outline-warning">Solicitar cuenta</button>
+                                        </form>
+                                    }
+                                </div>
+                            }
+                            else if (!puedeOperar)
+                            {
+                                @if (item.IdVenta == null && item.Estado == PolleriaLovely.Models.EstadoPedido.CuentaSolicitada)
+                                {
+                                    <a asp-action="Precuenta" asp-route-id="@item.IdPedido" class="btn btn-sm btn-outline-info">Ver precuenta</a>
+                                }
+                                else if (item.IdVenta == null && item.Estado != PolleriaLovely.Models.EstadoPedido.Cancelado && item.Estado != PolleriaLovely.Models.EstadoPedido.Cobrado)
+                                {
+                                    <form asp-action="Cobrar" method="post" onsubmit="return confirm('¿Cobrar el pedido #@item.IdPedido? Se creará la venta con los precios actuales del catálogo.');">
+                                        <input type="hidden" name="idPedido" value="@item.IdPedido" />
+                                        <input type="text" name="nombreComprador" class="form-control form-control-sm mb-1" placeholder="Nombre del comprador" aria-label="Nombre del comprador" required maxlength="100" pattern="@PolleriaLovely.Models.ReglasNegocio.PatronSoloLetras" title="Solo letras y espacios" autocomplete="off" />
+                                        <select name="metodoPago" class="form-select form-select-sm mb-1" aria-label="Método de pago"><option value="0">Método de pago</option><option value="1">Efectivo</option><option value="2">Tarjeta</option><option value="3">Yape/Plin</option><option value="4">Otro</option></select>
+                                        <button type="submit" class="btn btn-sm btn-success">Cobrar</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">—</span>
+                                }
+                            }
+                        </td>
+                    </tr>
                 }
-            }
-        </td>
-        <td>
-            @if (puedeOperar && abierto)
-            {
-                <div class="d-flex gap-1 flex-wrap">
-                    <a asp-action="Agregar" asp-route-id="@item.IdPedido" class="btn btn-sm btn-outline-success">+ Agregar</a>
-                    @if (esMozo && item.Estado != PolleriaLovely.Models.EstadoPedido.CuentaSolicitada)
-                    {
-                        <form asp-action="ActualizarEstado" method="post" onsubmit="return confirm('¿Solicitar la cuenta del pedido #@item.IdPedido?');">
-                            <input type="hidden" name="idPedido" value="@item.IdPedido" />
-                            <input type="hidden" name="estado" value="@((int)PolleriaLovely.Models.EstadoPedido.CuentaSolicitada)" />
-                            <button type="submit" class="btn btn-sm btn-outline-warning">Solicitar cuenta</button>
-                        </form>
-                    }
-                </div>
-            }
-            else if (!puedeOperar)
-            {
-                @if (item.IdVenta == null && item.Estado == PolleriaLovely.Models.EstadoPedido.CuentaSolicitada)
+                @if (!Model.Any())
                 {
-                    <a asp-action="Precuenta" asp-route-id="@item.IdPedido" class="btn btn-sm btn-outline-info">Ver precuenta</a>
+                    <tr><td colspan="7" class="text-center py-5 text-muted">Aún no hay pedidos registrados.</td></tr>
                 }
-                else if (item.IdVenta == null && item.Estado != PolleriaLovely.Models.EstadoPedido.Cancelado && item.Estado != PolleriaLovely.Models.EstadoPedido.Cobrado)
-                {
-                    <form asp-action="Cobrar" method="post" onsubmit="return confirm('¿Cobrar el pedido #@item.IdPedido? Se creará la venta con los precios actuales del catálogo.');">
-                        <input type="hidden" name="idPedido" value="@item.IdPedido" />
-                        <select name="metodoPago" class="form-select form-select-sm mb-1" aria-label="Método de pago"><option value="0">Método de pago</option><option value="1">Efectivo</option><option value="2">Tarjeta</option><option value="3">Yape/Plin</option><option value="4">Otro</option></select>
-                        <button type="submit" class="btn btn-sm btn-success">Cobrar</button>
-                    </form>
-                }
-                else
-                {
-                    <span class="text-muted">—</span>
-                }
-            }
-        </td>
-    </tr>
-}
-@if (!Model.Any()) { <tr><td colspan="7" class="text-center py-5 text-muted">Aún no hay pedidos registrados.</td></tr> }</tbody></table></div></div>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>

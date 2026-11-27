@@ -5,6 +5,11 @@ namespace PolleriaLovely.ViewModels
 {
     public class VentaRegistroViewModel
     {
+        [Required(ErrorMessage = "El nombre del comprador es obligatorio.")]
+        [StringLength(100, ErrorMessage = "El nombre del comprador no puede superar los 100 caracteres.")]
+        [RegularExpression(ReglasNegocio.PatronSoloLetras, ErrorMessage = "El nombre del comprador solo puede contener letras.")]
+        public string NombreComprador { get; set; } = string.Empty;
+
         [Required(ErrorMessage = "Debe seleccionar un método de pago.")]
         [Range(1, 4, ErrorMessage = "Debe seleccionar un método de pago válido.")]
         public MetodoPago MetodoPago { get; set; }

@@ -15,6 +15,11 @@ namespace PolleriaLovely.Models
         [Range(typeof(decimal), "0", "1000000", ErrorMessage = "El total no puede ser negativo.")]
         public decimal Total { get; set; }
 
+        [Required(ErrorMessage = "El nombre del comprador es obligatorio.")]
+        [StringLength(100, ErrorMessage = "El nombre del comprador no puede superar los 100 caracteres.")]
+        [RegularExpression(ReglasNegocio.PatronSoloLetras, ErrorMessage = "El nombre del comprador solo puede contener letras.")]
+        public string NombreComprador { get; set; } = string.Empty;
+
         [Required(ErrorMessage = "Debe seleccionar un usuario.")]
         [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar un usuario válido.")]
         public int IdUsuario { get; set; }
