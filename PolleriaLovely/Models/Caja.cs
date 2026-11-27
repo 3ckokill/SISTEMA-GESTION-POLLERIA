@@ -14,10 +14,12 @@ namespace PolleriaLovely.Models
 
         public DateTime? FechaCierre { get; set; }
 
-        [Range(typeof(decimal), "0", "1000000", ErrorMessage = "El monto inicial no puede ser negativo.")]
+        [Range(typeof(decimal), "1.00", "500.00", ErrorMessage = "El monto inicial no puede ser negativo.")]
+        [RegularExpression(@"^\d+([.,]\d{1,2})?$", ErrorMessage = "El monto inicial no puede tener más de 2 decimales.")]
         public decimal MontoInicial { get; set; }
 
-        [Range(typeof(decimal), "0", "1000000", ErrorMessage = "El monto contado no puede ser negativo.")]
+        [Range(typeof(decimal), "0.00", "100000.00", ErrorMessage = "El monto contado no puede ser negativo.")]
+        [RegularExpression(@"^\d+([.,]\d{1,2})?$", ErrorMessage = "El monto contado no puede tener más de 2 decimales.")]
         public decimal? MontoContado { get; set; }
 
         public decimal? Diferencia { get; set; }

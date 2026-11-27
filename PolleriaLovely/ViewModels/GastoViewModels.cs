@@ -15,7 +15,8 @@ namespace PolleriaLovely.ViewModels
         [Range(1, 6, ErrorMessage = "Debe seleccionar una categoría válida.")]
         public CategoriaGasto Categoria { get; set; }
 
-        [Range(typeof(decimal), "0.01", "1000000", ErrorMessage = "El monto debe ser mayor que cero.")]
+        [Range(typeof(decimal), "0.50", "100000.00", ErrorMessage = "El monto debe ser mayor que cero.")]
+        [RegularExpression(@"^\d+([.,]\d{1,2})?$", ErrorMessage = "El monto no puede tener más de 2 decimales.")]
         public decimal Monto { get; set; }
 
         [DataType(DataType.Date)]

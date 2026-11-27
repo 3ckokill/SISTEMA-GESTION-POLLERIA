@@ -11,13 +11,13 @@ namespace PolleriaLovely.Models
         public int IdProducto { get; set; }
         [Required(ErrorMessage = "El nombre del producto es obligatorio.")]
         [StringLength(100, ErrorMessage = "El nombre del producto no puede superar los 100 caracteres.")]
-        [RegularExpression(ReglasNegocio.PatronSoloLetras, ErrorMessage = "El nombre del producto solo puede contener letras.")]
+        [RegularExpression(ReglasNegocio.PatronAlfanumerico, ErrorMessage = "El nombre del producto solo puede contener letras, números y espacios.")]
         public string NombreProducto { get; set; } = string.Empty;
         [StringLength(200, ErrorMessage = "La descripción no puede superar los 200 caracteres.")]
-        [RegularExpression(ReglasNegocio.PatronDescripcion, ErrorMessage = "La descripción debe tener más de 10 caracteres (sin contar espacios al inicio o al final).")]
-
+        [RegularExpression(ReglasNegocio.PatronDescripcionAlfanumerica, ErrorMessage = "La descripción debe tener más de 10 caracteres validos.")]
         public string? Descripcion { get; set; }
-        [Range(typeof(decimal), "0.01", "1000000", ErrorMessage = "El precio debe ser mayor que cero.")]
+        [Range(typeof(decimal), "1.00", "1500.00", ErrorMessage = "El precio debe ser mayor de 1 y menor de 1500")]
+        [RegularExpression(@"^\d+([.,]\d{1,2})?$", ErrorMessage = "El monto no puede tener más de 2 decimales.")]
         public decimal Precio { get; set; }
 
         public bool Estado { get; set; }

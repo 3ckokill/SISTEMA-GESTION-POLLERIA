@@ -17,7 +17,8 @@ namespace PolleriaLovely.ViewModels
 
     public class CajaAperturaViewModel
     {
-        [Range(typeof(decimal), "0", "1000000", ErrorMessage = "El monto inicial no puede ser negativo.")]
+        [Range(typeof(decimal), "1.00", "500.00", ErrorMessage = "El monto inicial no puede ser negativo.")]
+        [RegularExpression(@"^\d+([.,]\d{1,2})?$", ErrorMessage = "El monto inicial no puede tener más de 2 decimales.")]
         public decimal MontoInicial { get; set; }
     }
 
@@ -29,7 +30,8 @@ namespace PolleriaLovely.ViewModels
         public decimal EfectivoEsperado { get; set; }
 
         [Required(ErrorMessage = "Debe ingresar el efectivo contado.")]
-        [Range(typeof(decimal), "0", "1000000", ErrorMessage = "El efectivo contado no puede ser negativo.")]
+        [Range(typeof(decimal), "0.10", "100000.00", ErrorMessage = "El efectivo contado no puede ser negativo.")]
+        [RegularExpression(@"^\d+([.,]\d{1,2})?$", ErrorMessage = "El efectivo contado no puede tener más de 2 decimales.")]
         public decimal? MontoContado { get; set; }
     }
 }
