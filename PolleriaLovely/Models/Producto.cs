@@ -14,6 +14,7 @@ namespace PolleriaLovely.Models
         [RegularExpression(ReglasNegocio.PatronSoloLetras, ErrorMessage = "El nombre del producto solo puede contener letras.")]
         public string NombreProducto { get; set; } = string.Empty;
         [StringLength(200, ErrorMessage = "La descripción no puede superar los 200 caracteres.")]
+        [RegularExpression(ReglasNegocio.PatronDescripcion, ErrorMessage = "La descripción debe tener más de 10 caracteres (sin contar espacios al inicio o al final).")]
 
         public string? Descripcion { get; set; }
         [Range(typeof(decimal), "0.01", "1000000", ErrorMessage = "El precio debe ser mayor que cero.")]

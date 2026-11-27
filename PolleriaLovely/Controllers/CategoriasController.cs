@@ -38,6 +38,7 @@ namespace PolleriaLovely.Controllers
             NormalizarErroresCategoria();
             if (ModelState.IsValid)
             {
+                categoria.Descripcion = categoria.Descripcion.Trim();
                 _context.Add(categoria);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -63,6 +64,7 @@ namespace PolleriaLovely.Controllers
             {
                 try
                 {
+                    categoria.Descripcion = categoria.Descripcion.Trim();
                     _context.Update(categoria);
                     await _context.SaveChangesAsync();
                 }

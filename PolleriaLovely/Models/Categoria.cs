@@ -15,6 +15,7 @@ namespace PolleriaLovely.Models
         public string NombreCategoria { get; set; } = string.Empty;
         [Required(ErrorMessage = "La descripción de la categoría es obligatoria.")]
         [StringLength(200, ErrorMessage = "La descripción no puede superar los 200 caracteres.")]
+        [RegularExpression(ReglasNegocio.PatronDescripcion, ErrorMessage = "La descripción debe tener más de 10 caracteres (sin contar espacios al inicio o al final).")]
 
         public string Descripcion { get; set; } = string.Empty;
         [Required]

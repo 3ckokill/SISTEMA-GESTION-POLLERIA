@@ -52,6 +52,7 @@ namespace PolleriaLovely.Controllers
             }
             if (ModelState.IsValid)
             {
+                producto.Descripcion = producto.Descripcion?.Trim();
                 _context.Add(producto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -85,6 +86,7 @@ namespace PolleriaLovely.Controllers
             {
                 try
                 {
+                    producto.Descripcion = producto.Descripcion?.Trim();
                     _context.Update(producto);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
