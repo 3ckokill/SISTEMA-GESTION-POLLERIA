@@ -58,6 +58,8 @@ namespace PolleriaLovely.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(GastoEdicionViewModel modelo)
         {
+            ValidarFecha(modelo.Fecha);
+
             if (ModelState.IsValid)
             {
                 var idUsuario = UsuarioActualId();
@@ -95,6 +97,9 @@ namespace PolleriaLovely.Controllers
         {
             var gasto = await _context.Gastos.FirstOrDefaultAsync(g => g.IdGasto == modelo.IdGasto);
             if (gasto == null || gasto.Anulado) return NotFound();
+
+            if (modelo.Fecha.Date != gasto.Fecha.Date)
+                ValidarFecha(modelo.Fecha);
 
             if (ModelState.IsValid)
             {
@@ -146,5 +151,21 @@ namespace PolleriaLovely.Controllers
             MetodoPago = gasto.MetodoPago,
             Observaciones = gasto.Observaciones
         };
+
+        private void ValidarFecha(DateTime fecha)
+        {
+            var hoy = DateTime.Today;
+
+            if (fecha.Date > hoy)
+            {
+                ModelState.AddModelError(nameof(GastoEdicionViewModel.Fecha),
+                    "La fecha no puede ser futura.");
+            }
+            else if (fecha.Date < hoy.AddDays(-1))
+            {
+                ModelState.AddModelError(nameof(GastoEdicionViewModel.Fecha),
+                    "Solo se pueden registrar gastos de hoy o del día anterior.");
+            }
+        }
     }
 }
