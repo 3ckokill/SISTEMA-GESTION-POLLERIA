@@ -11,6 +11,7 @@ namespace PolleriaLovely.Models
         public int IdProducto { get; set; }
         [Required(ErrorMessage = "El nombre del producto es obligatorio.")]
         [StringLength(100, ErrorMessage = "El nombre del producto no puede superar los 100 caracteres.")]
+        [RegularExpression(ReglasNegocio.PatronSoloLetras, ErrorMessage = "El nombre del producto solo puede contener letras.")]
         public string NombreProducto { get; set; } = string.Empty;
         [StringLength(200, ErrorMessage = "La descripción no puede superar los 200 caracteres.")]
 

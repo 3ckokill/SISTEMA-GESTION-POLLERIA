@@ -19,10 +19,12 @@ namespace PolleriaLovely.Models
 
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [StringLength(100, ErrorMessage = "El nombre no puede superar los 100 caracteres.")]
+        [RegularExpression(ReglasNegocio.PatronSoloLetras, ErrorMessage = "El nombre solo puede contener letras.")]
         public string Nombre { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El apellido es obligatorio.")]
         [StringLength(100, ErrorMessage = "El apellido no puede superar los 100 caracteres.")]
+        [RegularExpression(ReglasNegocio.PatronSoloLetras, ErrorMessage = "El apellido solo puede contener letras.")]
         public string Apellido { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El correo es obligatorio.")]

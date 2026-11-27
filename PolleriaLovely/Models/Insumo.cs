@@ -11,6 +11,7 @@ namespace PolleriaLovely.Models
         public int IdInsumo { get; set; }
         [Required(ErrorMessage = "El nombre del insumo es obligatorio.")]
         [StringLength(100, ErrorMessage = "El nombre del insumo no puede superar los 100 caracteres.")]
+        [RegularExpression(ReglasNegocio.PatronSoloLetras, ErrorMessage = "El nombre del insumo solo puede contener letras.")]
         public string NombreInsumo { get; set; } = string.Empty;
         [Required(ErrorMessage = "La unidad de medida es obligatoria.")]
         public string UnidadMedida { get; set; } = string.Empty;

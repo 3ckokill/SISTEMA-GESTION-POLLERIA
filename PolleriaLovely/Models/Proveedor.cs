@@ -10,6 +10,7 @@ public class Proveedor
     public int IdProveedor { get; set; }
     [Required(ErrorMessage = "El nombre del proveedor es obligatorio.")]
     [StringLength(100, ErrorMessage = "El nombre del proveedor no puede superar los 100 caracteres.")]
+    [RegularExpression(ReglasNegocio.PatronSoloLetras, ErrorMessage = "El nombre del proveedor solo puede contener letras.")]
     public string NombreProveedor { get; set; } = string.Empty;
     [Required(ErrorMessage = "El RUC es obligatorio.")]
     [StringLength(11, ErrorMessage = "El RUC no puede superar los 11 caracteres.")]
